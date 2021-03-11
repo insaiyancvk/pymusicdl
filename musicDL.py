@@ -1,17 +1,18 @@
 from __future__ import unicode_literals
+from typing import Counter
 import urllib.request, re, requests, pafy, os, time
 from bs4 import BeautifulSoup
 from pytube import Playlist
 from youtube_title_parse import get_artist_title
 
 def create_dir():
+    os.chdir(os.path.expanduser("~/Desktop"))
     try:
         os.chdir("musicDL downloads")
     except:
         os.mkdir("musicDL downloads")
         os.chdir("musicDL downloads")
 
-os.chdir(os.path.expanduser("~/Desktop"))
 create_dir()
 
 def get_url(s,n=7):
@@ -36,7 +37,7 @@ def download_song(url):
     try:
         v = pafy.new(url)
     except:
-        print("Some error occurred while downloading the song\n")
+        print("\nSome error occurred while downloading the song\n")
         return
     name = v.title
     audio = v.getbestaudio(preftype="m4a")
@@ -64,17 +65,21 @@ def get_playlist_url(plLink):
         pl_links.append(url)
     return pl_links
 
-ch = int(input("Enter 1 to download a song and 2 to download a playlist: "))
+def download_singles():
+    try:
+        os.chdir("singles")
+    except:
+        os.mkdir("singles")
+        os.chdir("singles")
 
-if ch == 1:
     print("(tip: give the name of song and the artist for better search results)")
     s = input("Enter the song name: ")
+    print(f"\nHere are the top 7 search results for {s}. Enter the serial number to download it.\n")
     s = s.replace(" ","+")
 
     # Get top 7 video URLs
     video_url = get_url(s)
-    print(f"Here are the top 10 search results for {s}. Enter the serial number to download it.\n")
-    j=1
+    j=0
     for i in video_url:
         t = pafy.new(i)
         print(f"{j} - {t.title}")
@@ -82,11 +87,17 @@ if ch == 1:
     c = int(input("\nEnter the serial number: "))
 
     download_song(video_url[c-1])
-    print("All the songs are downloaded in \"musicDL downloads\" folder on desktop")
+    print(f"\nYour song is downloaded in \"/musicDL downloads/singles\" folder on desktop\n")
 
-elif ch == 2:
+def download_playlist():
 
-    print("\n"," "*20,"*"*60)
+    try:
+        os.chdir("Playlists")
+    except:
+        os.mkdir("Playlists")
+        os.chdir("Playlists")
+    print()
+    print(" "*20,"*"*60)
     print(" "*20,"*"," "*56,"*")
     print(" "*20,"*","          ","MAKE SURE YOUR PLAYLIST IS PUBLIC","           ","*")
     print(" "*20,"*","     ","YOU CAN MAKE IT PRIVATE LATER AFTER DOWNLOADING","  ","*")
@@ -94,13 +105,40 @@ elif ch == 2:
     print(" "*20,"*"*60,"\n")
 
     plLink = input("Enter your YouTube playlist URL: ")
+    plName = input("Give a name to your playlist: ")
+
+    try:
+        os.chdir(plName)
+    except:
+        os.mkdir(plName)
+        os.chdir(plName)
+
     if "https://www" in plLink:
         plLink = plLink.replace("https://www","https://music")
     plLinks = get_playlist_url(plLink)
 
+    total_songs = len(plLinks)
     for i in plLinks:
         download_song(i)
-    print("All the songs are downloaded in \"musicDL downloads\" folder on desktop")
+    downloaded_songs = len(os.listdir())
+    if total_songs-downloaded_songs!=0:
+        print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
+    print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
+
+ch = int(input("\nEnter 1 to download a song \n2 to download a playlist: "))
+
+if ch == 1:
+    download_singles()
+
+elif ch == 2:
+    download_playlist()
     
 else:
     print("invalid option :(")
+
+#TODO 1: create playlist and singles directories in musicDL downloads foler ✔
+#TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
+#TODO 3: make functions for song and playlist downloading ✔
+#TODO 4: implement OOP
+#TODO 5: use a different file for storing all the defined functions 
+#TODO 6: Add spotify support
