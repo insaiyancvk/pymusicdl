@@ -1,5 +1,5 @@
 import os
-from modules.yt_downloader import yt_downloader
+from modules.yt_downloader import yt_downloader # type: ignore
 
 def create_dir():
     """
@@ -31,6 +31,8 @@ else:
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
 #TODO 3: make functions for song and playlist downloading ✔
 #TODO 4: implement OOP ✔
-#TODO 5: use a different file for storing all the defined functions 
+#TODO 5: use a different file for storing all the defined functions  ✔
 #TODO 6: Add spotify support
-#TODO 7: make seperate classes for yt and spotify modules
+#TODO 7: make seperate classes for yt and spotify modules ✔
+#TODO 8: use environment variables for storing API key and secret.
+#TODO 9: get dependencies folders into another folder and import from that. (aka beta test)
