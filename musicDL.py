@@ -1,5 +1,6 @@
 import os
 from modules.yt_downloader import yt_downloader # type: ignore
+from modules.spotify_downloader import spotify_downloader # type: ignore
 
 def create_dir():
     """
@@ -15,24 +16,29 @@ def create_dir():
 
 create_dir()
 
+if __name__ == "__main__":
 
-ch = int(input("\nEnter 1 to download a song \n2 to download a playlist: "))
-yt = yt_downloader()
-if ch == 1:
-    yt.download_singles()
+    ch = int(input("\nEnter 1 to download a song \n2 to download a YouTube Playlist\n3 to download a Spotify Playlist: "))
+    yt = yt_downloader()
+    spdl = spotify_downloader()
+    if ch == 1:
+        yt.download_singles()
 
-elif ch == 2:
-    yt.download_playlist()
-    
-else:
-    print("invalid option :(")
+    elif ch == 2:
+        yt.download_playlist()
+
+    elif ch == 3:
+        spdl.interface()
+
+    else:
+        print("invalid option :(")
 
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
 #TODO 3: make functions for song and playlist downloading ✔
 #TODO 4: implement OOP ✔
 #TODO 5: use a different file for storing all the defined functions  ✔
-#TODO 6: Add spotify support
+#TODO 6: Add spotify support ✔
 #TODO 7: make seperate classes for yt and spotify modules ✔
-#TODO 8: use environment variables for storing API key and secret.
+#TODO 8: use environment variables for storing API key and secret. {dropped}
 #TODO 9: get dependencies folders into another folder and import from that. (aka beta test)
