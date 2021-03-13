@@ -3,6 +3,7 @@ import urllib.request, re, requests, pafy, os, time
 from bs4 import BeautifulSoup
 from pytube import Playlist
 from youtube_title_parse import get_artist_title
+from urllib.parse import quote
 
 class yt_downloader():
     def get_url(self,s,n=7):
@@ -10,7 +11,7 @@ class yt_downloader():
         Give a video ID as an argument to this function. It returns top n (7 by default) video URLs.
         """
 
-        query = "https://www.youtube.com/results?search_query="+s
+        query = "https://www.youtube.com/results?search_query="+quote(s)
         baseurl = "https://www.youtube.com/watch?v="
         response = urllib.request.urlopen(query)
         html = response.read()
@@ -20,8 +21,8 @@ class yt_downloader():
             urls.append(baseurl+i)
         return urls
 
-    # Download the song based on URL
-    def download_song(sefl,url):
+    # Download the song
+    def download_song(self,url): 
         """
         Download the song by passing the video URL as a parameter
         """
@@ -60,7 +61,7 @@ class yt_downloader():
 
     def download_singles(self):
         """
-        Downloads songs based on youtube search. Takes a name as an input.
+        Downloads songs based on youtube search. Takes a string as an input.
         """
 
         try:
