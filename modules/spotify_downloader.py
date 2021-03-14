@@ -1,16 +1,45 @@
-import json, base64, time, os
-import spotipy 
-from spotipy.oauth2 import SpotifyClientCredentials
-from .common import common 
+import json, base64, time, os, requests
+
+try:
+    import spotipy 
+    from spotipy.oauth2 import SpotifyClientCredentials
+except ImportError:
+    print("Install spotipy library using 'pip install spotipy'")
+
+try:
+    from common import common 
+except ImportError:
+    from .common import common # type: ignore
 
 class spotify_downloader():
 
     ytd = common()
 
+    def get_json():
+        id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
+        destination = 'modules/sec.json'
+        URL = "https://docs.google.com/uc?export=download"
+        session = requests.Session()
+        response = session.get(URL, params = { 'id' : id }, stream = True)
+        token = None
+        for key, value in response.cookies.items():
+            if key.startswith('download_warning'):
+                token = value
+            else:
+                token = None
+        if token:
+            params = { 'id' : id, 'confirm' : token }
+            response = session.get(URL, params = params, stream = True)
+        CHUNK_SIZE = 32768
+        with open(destination, "wb") as f:
+            for chunk in response.iter_content(CHUNK_SIZE):
+                if chunk: # filter out keep-alive new chunks
+                    f.write(chunk)
+    get_json()
     def get_credentials():
         """ returns a token object after authentication. """
 
-        with open('musicdl/modules/sec.json') as f:
+        with open('modules/sec.json') as f:
             data = json.load(f)
         for key in data.keys():
             data[key] = base64.b64decode(data[key]).decode('utf8')
