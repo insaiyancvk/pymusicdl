@@ -1,5 +1,14 @@
-import pafy, time, os, urllib.request, re 
-from youtube_title_parse import get_artist_title 
+try:
+    import pafy
+except:
+    print("install 'pafy' library with 'pip install pafy'")
+
+import time, os, urllib.request, re 
+try:
+    from youtube_title_parse import get_artist_title 
+except:
+    print("install 'youtube_title_parse' using 'pip install youtube_title_parse'")
+
 from urllib.parse import quote
 
 class common():

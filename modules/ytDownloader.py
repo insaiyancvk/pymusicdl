@@ -1,6 +1,18 @@
-import pafy, os 
-from pytube import Playlist
-from .common import common
+import os
+
+try:
+    import pafy # type: ignore
+except:
+    print("Install 'pafy' library using 'pip install pafy'")
+
+try:
+    from pytube import Playlist
+except:
+    print("Install 'pytube' library using 'pip install pytube'")
+try:
+    from .common import common # type: ignore
+except:
+    from common import common
 
 class yt_downloader():
 
