@@ -93,7 +93,7 @@ cd music_downloader
 pip install -r requirements.txt
 ```
 
-## _Omedetou_ for making it till here. We're done with all the setup!
+## [_Omedetou_](https://translate.google.com/?sl=ja&tl=en&text=omedetou&op=translate) for making it till here. We're done with all the setup!
 ![PHEW](https://media.giphy.com/media/a3ANjL4bRwsO4/giphy.gif)
 
 ## Now comes the Good stuff:
