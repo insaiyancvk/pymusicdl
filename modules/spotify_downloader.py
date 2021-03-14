@@ -36,6 +36,7 @@ class spotify_downloader():
                 if chunk: # filter out keep-alive new chunks
                     f.write(chunk)
     get_json()
+    
     def get_credentials():
         """ returns a token object after authentication. """
 
@@ -122,6 +123,7 @@ class spotify_downloader():
 
     def interface(self):      
 
+        empty = {}
         plLink = input("Enter the Spotify playlist URL: ")
         plName = input("Give a name to your playlist: ")        
         plID = self.get_playlist_id(plLink)
@@ -148,3 +150,8 @@ class spotify_downloader():
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
+        with open('modules/sec.json','w') as outfile:
+            json.dump(empty, outfile)
+        with open('modules/sec.json') as f:
+            data = json.load(f)
+        print(data)
