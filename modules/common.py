@@ -1,5 +1,5 @@
-import pafy, time, os, urllib.request, re
-from youtube_title_parse import get_artist_title # needs work
+import pafy, time, os, urllib.request, re 
+from youtube_title_parse import get_artist_title 
 from urllib.parse import quote
 
 class common():

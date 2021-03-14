@@ -1,6 +1,6 @@
 import os
-from modules.ytDownloader import yt_downloader # type: ignore
-from modules.spotify_downloader import spotify_downloader #type: ignore
+from modules.ytDownloader import yt_downloader 
+from modules.spotify_downloader import spotify_downloader 
 
 def create_dir():
     """
@@ -41,4 +41,4 @@ if __name__ == "__main__":
 #TODO 6: Add spotify support ✔
 #TODO 7: make seperate classes for yt and spotify modules ✔
 #TODO 8: use environment variables for storing API key and secret. {dropped}
-#TODO 9: get dependencies folders into another folder and import from that. (aka beta test)
+#TODO 9: get dependencies folders into another folder and import from that. (aka beta test) {doesn't work}
