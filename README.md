@@ -17,6 +17,18 @@
 ## What should you do to get this app rolling?
     Follow the following steps carefully. The setup could be a bugger. But the reward is worth it.
 
+## Here are the Sections:
+* [Windows Setup](https://github.com/insaiyancvk/music_downloader#windows-setup)
+    * [prerequisites](https://github.com/insaiyancvk/music_downloader#get-the-stuff)
+    * [download source code](https://github.com/insaiyancvk/music_downloader#step-1-download-the-source-code-aka-cloning)
+    * [install libraries](https://github.com/insaiyancvk/music_downloader#step-2-install-whatever-libraries-are-required)
+* [Linux Setup](https://github.com/insaiyancvk/music_downloader#linux-setup)
+* [run the code](https://github.com/insaiyancvk/music_downloader#start-the-code)
+* [the options](https://github.com/insaiyancvk/music_downloader#so-there-are-3-options)
+    * [single song](https://github.com/insaiyancvk/music_downloader#1-single-song)
+    * [youtube playlist](https://github.com/insaiyancvk/music_downloader#2-youtube-playlist)
+    * [spotify playlist](https://github.com/insaiyancvk/music_downloader#3-spotify-playlist)
+
 ## Windows Setup
 ### Here's what you have to do if you're on Windows:
 
@@ -88,6 +100,8 @@ pip install -r requirements.txt
 RUNNING THE DAMN CODE AND DOWNLOADING ALL THE SONGS!
 
 ![VIBE](https://media.giphy.com/media/cM1R5YKZHgQX4gkd7B/giphy.gif)
+
+# Start the Code!
 
 Paste this command to run the main program
 
