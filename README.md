@@ -17,6 +17,13 @@
 ## What should you do to get this app rolling?
     Follow the following steps carefully. The setup could be a bugger. But the reward is worth it.
 
+## What libraries did I use in my code?
+Here are the libraries that I used:
+* `pytube`
+* `pafy`
+* `youtube_title_parse`
+*  `spotipy`
+
 ## Here are the Sections:
 * [Windows Setup](https://github.com/insaiyancvk/music_downloader#windows-setup)
     * [prerequisites](https://github.com/insaiyancvk/music_downloader#get-the-stuff)
@@ -182,3 +189,7 @@ py musicDL.py
 ## There you go! You learned how to download songs using my code!
 ## Now go ahead and _**V I B E**_ with all the songs you downloaded!
 ![VIBE](https://media.giphy.com/media/XZfc32rGwWllfn4FIB/giphy.gif)
+
+What next?
+* So I'm working on adding album support for spotify right now.
+* Will make an attempt to make a windows executable file (.exe) for this app.
