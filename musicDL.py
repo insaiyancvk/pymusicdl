@@ -42,3 +42,4 @@ if __name__ == "__main__":
 #TODO 7: make seperate classes for yt and spotify modules ✔
 #TODO 8: use environment variables for storing API key and secret. {dropped}
 #TODO 9: get dependencies folders into another folder and import from that. (aka beta test) {doesn't work}
+#TODO 10: secure the client ID and Secret. ✔

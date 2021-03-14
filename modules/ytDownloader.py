@@ -86,7 +86,13 @@ class yt_downloader():
 
         if "https://www" in plLink:
             plLink = plLink.replace("https://www","https://music")
-        plLinks = self.get_playlist_url(plLink)
+        
+        try:
+            plLinks = self.get_playlist_url(plLink)
+        except Exception as e:
+            print(f"Something went wrong. Maybe check your URL. Here's the reason from the compiler: {e}")
+            print("Exiting the program")
+            quit()
 
         total_songs = len(plLinks)
         for i in plLinks:

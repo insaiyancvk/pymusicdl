@@ -12,12 +12,12 @@ except ImportError:
     from .common import common # type: ignore
 
 class spotify_downloader():
-
+    destination = 'music_downloader/modules/idsec/sec.json'
     ytd = common()
 
     def get_json():
+        destination = 'music_downloader/modules/idsec/sec.json'
         id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
-        destination = 'modules/sec.json'
         URL = "https://docs.google.com/uc?export=download"
         session = requests.Session()
         response = session.get(URL, params = { 'id' : id }, stream = True)
@@ -40,8 +40,12 @@ class spotify_downloader():
     def get_credentials():
         """ returns a token object after authentication. """
 
-        with open('modules/sec.json') as f:
+        empty = {}
+        destination = 'music_downloader/modules/idsec/sec.json'
+        with open(destination, 'r') as f:
             data = json.load(f)
+        with open(destination,'w') as f:
+            json.dump(empty,f)
         for key in data.keys():
             data[key] = base64.b64decode(data[key]).decode('utf8')
         client_id = data['id']
@@ -56,6 +60,9 @@ class spotify_downloader():
         if "playlist/" in url:
             ind = url.index("playlist/")
             return url[ind+9:ind+31]
+        elif "playlist/" not in url:
+            print("Invalid URL. Make sure that it's a playlist URL. Exiting")
+            quit()
 
     def getTrackIDs(self, user, playlist_id):
         """ returns IDs of tracks in the playlist as a list given Playlist ID"""
@@ -123,7 +130,6 @@ class spotify_downloader():
 
     def interface(self):      
 
-        empty = {}
         plLink = input("Enter the Spotify playlist URL: ")
         plName = input("Give a name to your playlist: ")        
         plID = self.get_playlist_id(plLink)
@@ -132,7 +138,6 @@ class spotify_downloader():
         tracks = self.get_track_details(trackIDs)
         print("Successfully fetched all the track details")
         urls, not_fetched = self.get_yt_urls(tracks)
-
         #check for track URLs that were failed to be fetched
         if len(tracks)-len(urls)>0:
             print(f"\n{len(tracks)-len(urls)}/{len(tracks)} were not fetched")
@@ -150,8 +155,3 @@ class spotify_downloader():
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
-        with open('modules/sec.json','w') as outfile:
-            json.dump(empty, outfile)
-        with open('modules/sec.json') as f:
-            data = json.load(f)
-        print(data)
