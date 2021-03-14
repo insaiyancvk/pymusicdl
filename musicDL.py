@@ -1,6 +1,6 @@
 import os
-from modules.yt_downloader import yt_downloader # type: ignore
-from modules.spotify_downloader import spotify_downloader # type: ignore
+from modules.ytDownloader import yt_downloader # type: ignore
+from modules.spotify_downloader import spotify_downloader #type: ignore
 
 def create_dir():
     """

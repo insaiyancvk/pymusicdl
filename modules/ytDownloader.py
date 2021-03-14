@@ -1,53 +1,7 @@
-from __future__ import unicode_literals
-import urllib.request, re, requests, pafy, os, time
-from bs4 import BeautifulSoup
+import pafy, os
 from pytube import Playlist
-from youtube_title_parse import get_artist_title
-from urllib.parse import quote
-
+from .common import common
 class yt_downloader():
-    def get_url(self,s,n=7):
-        """
-        Give a video ID as an argument to this function. It returns top n (7 by default) video URLs.
-        """
-
-        query = "https://www.youtube.com/results?search_query="+quote(s)
-        baseurl = "https://www.youtube.com/watch?v="
-        response = urllib.request.urlopen(query)
-        html = response.read()
-        video_ids = re.findall(r"watch\?v=(\S{11})", html.decode())
-        urls = []
-        for i in video_ids[:n]:
-            urls.append(baseurl+i)
-        return urls
-
-    # Download the song
-    def download_song(self,url): 
-        """
-        Download the song by passing the video URL as a parameter
-        """
-
-        try:
-            v = pafy.new(url)
-        except:
-            print("\nSome error occurred while downloading the song\n")
-            return
-        name = v.title
-        audio = v.getbestaudio(preftype="m4a")
-        print(f"\ndownloading {name} as an audio file")
-        audio.download()
-        time.sleep(1)
-        try:
-            artist, title = get_artist_title(name)
-            dirs = os.listdir()
-            for i in dirs:
-                if name in i:
-                    ind1 = len(i) - 1 - i[::-1].index('.')
-                    ext = i[ind1:]
-                    os.rename(i,title+" - "+artist+ext)
-        except:
-            pass
-
     def get_playlist_url(self,plLink):
         """
         Returns all the song links of a playlist. Given the playlist URL.
@@ -64,6 +18,7 @@ class yt_downloader():
         Downloads songs based on youtube search. Takes a string as an input.
         """
 
+        cm = common()
         try:
             os.chdir("singles")
         except:
@@ -76,7 +31,7 @@ class yt_downloader():
         s = s.replace(" ","+")
 
         # Get top 7 video URLs
-        video_url = self.get_url(s)
+        video_url = cm.get_url(s)
         j=1
         for i in video_url:
             t = pafy.new(i)
@@ -84,7 +39,7 @@ class yt_downloader():
             j+=1
         c = int(input("\nEnter the serial number: "))
 
-        self.download_song(video_url[c-1])
+        cm.download_song(video_url[c-1])
         print(f"\nYour song is downloaded in \"/musicDL downloads/singles\" folder on desktop\n")
 
     def download_playlist(self):
@@ -120,7 +75,7 @@ class yt_downloader():
 
         total_songs = len(plLinks)
         for i in plLinks:
-            self.download_song(i)
+            cm.download_song(i)
         downloaded_songs = len(os.listdir())
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")

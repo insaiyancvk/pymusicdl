@@ -1,11 +1,11 @@
 import json, base64, time, os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from yt_downloader import yt_downloader # type: ignore     
+from .common import common 
 
 class spotify_downloader():
 
-    ytd = yt_downloader()
+    ytd = common()
 
     def get_credentials():
         """ returns a token object after authentication. """
