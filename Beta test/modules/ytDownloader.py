@@ -1,5 +1,6 @@
-import pafy, os #pafy needs work
-from pytube import Playlist # needs work
+import os
+from dependencies.pafy import *
+from dependencies.pytube import Playlist 
 from .common import common
 
 class yt_downloader():

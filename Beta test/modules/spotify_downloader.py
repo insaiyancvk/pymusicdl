@@ -1,16 +1,18 @@
-import json, base64, time, os
-import spotipy #needs work
+import json, base64, time, os, sys
+import dependencies.spotipy
+from dependencies.spotipy.oauth2 import SpotifyClientCredentials
+# import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from .common import common 
+from common import common 
 
 class spotify_downloader():
-
+    
     ytd = common()
 
     def get_credentials():
         """ returns a token object after authentication. """
-
-        with open('musicdl/modules/sec.json') as f:
+        
+        with open('modules/sec.json') as f:
             data = json.load(f)
         for key in data.keys():
             data[key] = base64.b64decode(data[key]).decode('utf8')
