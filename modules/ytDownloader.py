@@ -12,7 +12,7 @@ except:
 try:
     from .common import common # type: ignore
 except:
-    from common import common
+    from common import common # type: ignore
 
 class yt_downloader():
 

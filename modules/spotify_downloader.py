@@ -7,7 +7,7 @@ except ImportError:
     print("Install spotipy library using 'pip install spotipy'")
 
 try:
-    from common import common 
+    from common import common # type: ignore
 except ImportError:
     from .common import common # type: ignore
 
