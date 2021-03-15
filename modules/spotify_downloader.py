@@ -34,14 +34,12 @@ class spotify_downloader():
             for chunk in response.iter_content(CHUNK_SIZE):
                 if chunk: # filter out keep-alive new chunks
                     f.write(chunk)
-        print(f"{destination} sec.json is here")
     get_json()
     
     def get_credentials():
         """ returns a token object after authentication. """
 
         empty = {}
-        print(f"{destination} going to delete sec.json content from here")
         with open(destination, 'r') as f:
             data = json.load(f)
         with open(destination,'w') as f:
