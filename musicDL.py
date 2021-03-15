@@ -18,7 +18,8 @@ create_dir()
 
 def main():
 
-    ch = int(input("\nEnter 1 to download a song \n2 to download a YouTube Playlist\n3 to download a Spotify Playlist: "))
+    print(f"\nEnter 1 to download a song \n2 to download a YouTube Playlist\n3 to download a Spotify Playlist:")
+    ch = int(input())
     yt = yt_downloader()
     spdl = spotify_downloader()
     if ch == 1:
@@ -49,5 +50,8 @@ main()
 #TODO 8: use environment variables for storing API key and secret. {dropped}
 #TODO 9: get dependencies folders into another folder and import from that. (aka beta test) {doesn't work}
 #TODO 10: secure the client ID and Secret. ✔
-#TODO 11: release an executable file
-#TODO 12: Make GUI
+#TODO 11: add different colors to different commands (https://ozzmaker.com/add-colour-to-text-in-python/)
+#TODO 11: convert all the audio files to mp3 or flac based on user choice 
+#TODO 11: add thumbnails to the downloaded songs (https://www.geeksforgeeks.org/pafy-getting-thumbnail/)
+#TODO 12: release an executable file
+#TODO 13: Make GUI
