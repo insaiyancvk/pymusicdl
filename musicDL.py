@@ -16,7 +16,7 @@ def create_dir():
 
 create_dir()
 
-if __name__ == "__main__":
+def main():
 
     ch = int(input("\nEnter 1 to download a song \n2 to download a YouTube Playlist\n3 to download a Spotify Playlist: "))
     yt = yt_downloader()
@@ -32,7 +32,13 @@ if __name__ == "__main__":
 
     else:
         print("invalid option :(")
-
+    n = input("Do you want to continue? (Y/N): ")
+    if n.lower() == 'y':
+        main()
+    else:
+        print("\nSee you later!\n")
+        quit()
+main()
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
 #TODO 3: make functions for song and playlist downloading ✔

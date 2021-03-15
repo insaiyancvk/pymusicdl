@@ -39,7 +39,7 @@ class yt_downloader():
             os.mkdir("singles")
             os.chdir("singles")
 
-        print("(tip: give the name of song and the artist for better search results)")
+        print("\ntip:\n  * give the name of song and the artist for better search results)\n  * you could paste the video url itself if you're looking for a specific song.\n")
         s = input("Enter the song name: ")
         print(f"\nHere are the top 7 search results for {s} (sometimes it's less than 7 👉👈). Enter the serial number to download it.\n")
         s = s.replace(" ","+")
@@ -48,6 +48,9 @@ class yt_downloader():
         video_url = cm.get_url(s)
         j=1
         for i in video_url:
+            if len(video_url) == 0:
+                print("\nThere were no results :(\nmaybe try checking the spelling of the song\n")
+                quit()
             try:
                 t = pafy.new(i)
                 print(f"{j} - {t.title}  ({t.duration})")
