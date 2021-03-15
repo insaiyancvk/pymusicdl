@@ -15,7 +15,7 @@ destination = os.getcwd()+'/sec.json'
 class spotify_downloader():
     
     ytd = common()
-    def get_json():
+    def get_json(self):
         id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
         URL = "https://docs.google.com/uc?export=download"
         session = requests.Session()
@@ -34,9 +34,8 @@ class spotify_downloader():
             for chunk in response.iter_content(CHUNK_SIZE):
                 if chunk: # filter out keep-alive new chunks
                     f.write(chunk)
-    get_json()
     
-    def get_credentials():
+    def get_credentials(self):
         """ returns a token object after authentication. """
 
         empty = {}
@@ -50,7 +49,6 @@ class spotify_downloader():
         client_secret = data['secret']
         client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
         return spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    sp = get_credentials()
 
     def get_playlist_id(self,url):
         """ returns the playlist ID given the playlist URI """
@@ -128,6 +126,8 @@ class spotify_downloader():
 
     def interface(self):      
 
+        self.get_json()
+        sp = self.get_credentials()
         plLink = input("Enter the Spotify playlist URL: ")
         plName = input("Give a name to your playlist: ")        
         plID = self.get_playlist_id(plLink)
