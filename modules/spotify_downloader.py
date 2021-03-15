@@ -60,20 +60,20 @@ class spotify_downloader():
             print("Invalid URL. Make sure that it's a playlist URL. Exiting")
             quit()
 
-    def getTrackIDs(self, user, playlist_id):
+    def getTrackIDs(self,sp, user, playlist_id):
         """ returns IDs of tracks in the playlist as a list given Playlist ID"""
 
         ids = []
-        playlist = self.sp.user_playlist(user, playlist_id)
+        playlist = sp.user_playlist(user, playlist_id)
         for item in playlist['tracks']['items']:
             track = item['track']
             ids.append(track['id'])
         return ids
 
-    def getTrackFeatures(self,id):
+    def getTrackFeatures(self,sp,id):
         """ returns track name and artist name as a list"""
 
-        meta = self.sp.track(id)
+        meta = sp.track(id)
         name = meta['name']
         artist = meta['album']['artists'][0]['name']
         track = [name, artist]
@@ -107,13 +107,13 @@ class spotify_downloader():
                 not_fetched[key] = tracks[key]
         return urls, not_fetched
 
-    def get_track_details(self,trackIDs):
+    def get_track_details(self,sp,trackIDs):
         """ returns a dictionary of track name as key and artist name as value given the track ID """
 
         tracks = {}
         for i in trackIDs:
             time.sleep(.5)
-            temp = self.getTrackFeatures(i)
+            temp = self.getTrackFeatures(sp,i)
             tracks[temp[0]] = temp[1]
         return tracks
 
@@ -131,9 +131,9 @@ class spotify_downloader():
         plLink = input("Enter the Spotify playlist URL: ")
         plName = input("Give a name to your playlist: ")        
         plID = self.get_playlist_id(plLink)
-        trackIDs = self.getTrackIDs('',plID)
+        trackIDs = self.getTrackIDs(sp,'',plID)
         print("\nFetching the details all tracks (name, artist)")
-        tracks = self.get_track_details(trackIDs)
+        tracks = self.get_track_details(sp,trackIDs)
         print("Successfully fetched all the track details")
         urls, not_fetched = self.get_yt_urls(tracks)
         #check for track URLs that were failed to be fetched
