@@ -41,7 +41,7 @@ class yt_downloader():
 
         print("(tip: give the name of song and the artist for better search results)")
         s = input("Enter the song name: ")
-        print(f"\nHere are the top 7 search results for {s}. Enter the serial number to download it.\n")
+        print(f"\nHere are the top 7 search results for {s} (sometimes it's less than 7 👉👈). Enter the serial number to download it.\n")
         s = s.replace(" ","+")
 
         # Get top 7 video URLs
@@ -50,7 +50,7 @@ class yt_downloader():
         for i in video_url:
             try:
                 t = pafy.new(i)
-                print(f"{j} - {t.title}")
+                print(f"{j} - {t.title}  ({t.duration})")
                 j+=1
             except:
                 j+=1
