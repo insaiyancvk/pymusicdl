@@ -48,7 +48,7 @@ class common():
             print(f"\nSome error occurred while fetching the details of the song : {e}\n")
             return
         name = v.title
-        audio = v.getbestaudio(preftype="m4a")
+        audio = v.getbestaudio()
         print(f"\ndownloading {name} as an audio file")
         audio.download()
         time.sleep(1)
