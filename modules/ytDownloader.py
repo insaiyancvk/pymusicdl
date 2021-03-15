@@ -48,9 +48,13 @@ class yt_downloader():
         video_url = cm.get_url(s)
         j=1
         for i in video_url:
-            t = pafy.new(i)
-            print(f"{j} - {t.title}")
-            j+=1
+            try:
+                t = pafy.new(i)
+                print(f"{j} - {t.title}")
+                j+=1
+            except:
+                j+=1
+                continue
         c = int(input("\nEnter the serial number: "))
 
         cm.download_song(video_url[c-1])
