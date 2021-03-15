@@ -1,4 +1,5 @@
 # Hola! 
+Considering you reading this, I assume you're here to download some songs 😏 Well you are at the right place!
 ## What does this app do? 🤨
 #### Well this is a simple python app which uses different libraries to basically download music. It downloads:
 * Single songs.
@@ -185,6 +186,13 @@ py musicDL.py
 
 >**NOTE**: DO NOT DELETE/MOVE 'music_downloader' FOLDER FROM DESKTOP. If you delete it that then you'll have to clone the repository again and follow through this tutorial again 😕 If you move 'music_downloader' folder to some other folder then you've to navigate to wherever you moved the code to and run `py musicDL.py`
 
+## How to update the code when I change something?
+Run the following commands (in cmd ofc) for that
+```
+cd %USERPROFILE%/Desktop
+cd music_downloader
+git pull origin main
+```
 
 ## There you go! You learned how to download songs using my code!
 ## Now go ahead and _**V I B E**_ with all the songs you downloaded!
