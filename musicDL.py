@@ -49,3 +49,5 @@ main()
 #TODO 8: use environment variables for storing API key and secret. {dropped}
 #TODO 9: get dependencies folders into another folder and import from that. (aka beta test) {doesn't work}
 #TODO 10: secure the client ID and Secret. ✔
+#TODO 11: release an executable file
+#TODO 12: Make GUI
