@@ -11,12 +11,11 @@ try:
 except ImportError:
     from .common import common # type: ignore
 
+destination = os.getcwd()+'/sec.json'
 class spotify_downloader():
-    destination = 'music_downloader/modules/idsec/sec.json'
+    
     ytd = common()
-
     def get_json():
-        destination = 'music_downloader/modules/idsec/sec.json'
         id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
         URL = "https://docs.google.com/uc?export=download"
         session = requests.Session()
@@ -35,13 +34,14 @@ class spotify_downloader():
             for chunk in response.iter_content(CHUNK_SIZE):
                 if chunk: # filter out keep-alive new chunks
                     f.write(chunk)
+        print(f"{destination} sec.json is here")
     get_json()
     
     def get_credentials():
         """ returns a token object after authentication. """
 
         empty = {}
-        destination = 'music_downloader/modules/idsec/sec.json'
+        print(f"{destination} going to delete sec.json content from here")
         with open(destination, 'r') as f:
             data = json.load(f)
         with open(destination,'w') as f:
