@@ -36,6 +36,9 @@ Here are the libraries that I used:
     * [single song](https://github.com/insaiyancvk/music_downloader#1-single-song)
     * [youtube playlist](https://github.com/insaiyancvk/music_downloader#2-youtube-playlist)
     * [spotify playlist](https://github.com/insaiyancvk/music_downloader#3-spotify-playlist)
+* [Reuse the code](https://github.com/insaiyancvk/music_downloader#how-to-reuse-this-code)
+* [Update the code](https://github.com/insaiyancvk/music_downloader#how-to-update-the-code-when-i-change-something)
+* [***V I B E***](https://github.com/insaiyancvk/music_downloader#now-go-ahead-and-v-i-b-e-with-all-the-songs-you-downloaded)
 
 ## Windows Setup
 ### Here's what you have to do if you're on Windows:
