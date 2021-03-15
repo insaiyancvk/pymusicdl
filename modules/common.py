@@ -24,8 +24,16 @@ class common():
         html = response.read()
         video_ids = re.findall(r"watch\?v=(\S{11})", html.decode())
         urls = []
-        for i in video_ids[:n]:
-            urls.append(baseurl+i)
+        j = 0
+        for i in video_ids:
+            try:
+                pafy.new(baseurl+i)
+                urls.append(baseurl+i)
+                j+=1
+                if j==7:
+                    break
+            except:
+                continue
         return urls
 
     # Download the song
@@ -37,7 +45,7 @@ class common():
         try:
             v = pafy.new(url)
         except Exception as e:
-            print(f"\nSome error occurred while downloading the song : {e}\n")
+            print(f"\nSome error occurred while fetching the details of the song : {e}\n")
             return
         name = v.title
         audio = v.getbestaudio(preftype="m4a")
