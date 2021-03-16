@@ -50,17 +50,17 @@ class spotify_downloader():
         client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
         return spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-    def get_playlist_id(self,url):
-        """ returns the playlist ID given the playlist URI """
+    def get_id(self,url):
+        """ returns the playlist/album ID given the playlist URI """
 
         if "playlist" in url:
             ind = url.index("playlist")
             return url[ind+9:ind+31]
-        elif "playlist/" not in url:
-            print("Invalid URL. Make sure that it's a playlist URL. Exiting")
-            quit()
+        elif "album" in url:
+            ind = url.index("album")
+            return url[ind+6:ind+28]
 
-    def getTrackIDs(self,sp, user, playlist_id):
+    def get_PL_TrackIDs(self,sp, user, playlist_id):
         """ returns IDs of tracks in the playlist as a list given Playlist ID"""
 
         ids = []
@@ -116,6 +116,12 @@ class spotify_downloader():
             temp = self.getTrackFeatures(sp,i)
             tracks[temp[0]] = temp[1]
         return tracks
+    
+    def get_album_tracks(self, trackIDs):
+        tracks = {}
+        for i in range(len(trackIDs['items'])):
+            tracks[trackIDs['items'][i]['name']] = trackIDs['items'][i]['artists'][0]['name']
+        return tracks
 
     def download_PL(self,plName, urls):
         """ downloads all the audio of URLs """
@@ -126,15 +132,24 @@ class spotify_downloader():
 
     def interface(self):      
 
+        # urls = []
         self.get_json()
         sp = self.get_credentials()
-        plLink = input("Enter the Spotify playlist URL: ")
-        plName = input("Give a name to your playlist: ")        
-        plID = self.get_playlist_id(plLink)
-        trackIDs = self.getTrackIDs(sp,'',plID)
-        print("\nFetching the details all tracks (name, artist)")
-        tracks = self.get_track_details(sp,trackIDs)
-        print("Successfully fetched all the track details")
+        plLink = input("\nEnter the Spotify playlist/album URL: ")
+        # plName = input("\nGive a name to your playlist: ")    
+        plName = ''
+        if "playlist" in plLink:    
+            plID = self.get_id(plLink)
+            trackIDs = self.get_PL_TrackIDs(sp,'',plID)
+            print("\nFetching the details all tracks (name, artist)")
+            tracks = self.get_track_details(sp,trackIDs)
+            print("Successfully fetched all the track details")
+            quit()
+        elif "album" in plLink:
+            alID = self.get_id(plLink)
+            trackIDs = self.get_AL_TrackIDs(sp,'',alID)
+            tracks = self.get_album_tracks(trackIDs)
+        
         urls, not_fetched = self.get_yt_urls(tracks)
         #check for track URLs that were failed to be fetched
         if len(tracks)-len(urls)>0:
@@ -153,3 +168,5 @@ class spotify_downloader():
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
+s = spotify_downloader()
+s.interface()
