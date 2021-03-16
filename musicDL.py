@@ -18,7 +18,7 @@ create_dir()
 
 def main():
 
-    print(f"\nEnter 1 to download a song \n2 to download a YouTube Playlist\n3 to download a Spotify Playlist:")
+    print(f"\n\t\tEnter \n\n\t1 - download a song \n\t2 - download a YouTube Playlist\n\t3 - download a Spotify Playlist:",end=" ")
     ch = int(input())
     yt = yt_downloader()
     spdl = spotify_downloader()
