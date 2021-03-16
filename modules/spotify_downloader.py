@@ -53,8 +53,8 @@ class spotify_downloader():
     def get_playlist_id(self,url):
         """ returns the playlist ID given the playlist URI """
 
-        if "playlist/" in url:
-            ind = url.index("playlist/")
+        if "playlist" in url:
+            ind = url.index("playlist")
             return url[ind+9:ind+31]
         elif "playlist/" not in url:
             print("Invalid URL. Make sure that it's a playlist URL. Exiting")
