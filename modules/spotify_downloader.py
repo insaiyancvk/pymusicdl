@@ -13,7 +13,21 @@ except ImportError:
 
 destination = os.getcwd()+'/sec.json'
 class spotify_downloader():
-    
+
+    def create_PLdir(self,plName):
+        """ creates a playlist directory with the given name """
+
+        try:
+            os.chdir("Playlists")
+        except:
+            os.mkdir("Playlists")
+            os.chdir("Playlists")
+        try:
+            os.chdir(plName)
+        except:
+            os.mkdir(plName)
+            os.chdir(plName)
+
     ytd = common()
     def get_json(self):
         id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
@@ -60,39 +74,6 @@ class spotify_downloader():
             ind = url.index("album")
             return url[ind+6:ind+28]
 
-    def get_PL_TrackIDs(self,sp, user, playlist_id):
-        """ returns IDs of tracks in the playlist as a list given Playlist ID"""
-
-        ids = []
-        playlist = sp.user_playlist(user, playlist_id)
-        for item in playlist['tracks']['items']:
-            track = item['track']
-            ids.append(track['id'])
-        return ids
-
-    def getTrackFeatures(self,sp,id):
-        """ returns track name and artist name as a list"""
-
-        meta = sp.track(id)
-        name = meta['name']
-        artist = meta['album']['artists'][0]['name']
-        track = [name, artist]
-        return track
-
-    def create_PLdir(self,plName):
-        """ creates a playlist directory with the given name """
-
-        try:
-            os.chdir("Playlists")
-        except:
-            os.mkdir("Playlists")
-            os.chdir("Playlists")
-        try:
-            os.chdir(plName)
-        except:
-            os.mkdir(plName)
-            os.chdir(plName)
-
     def get_yt_urls(self,tracks):
         """ returns a list of urls that are fetched successfully and dictionary of urls that were failed to be fetched. """
 
@@ -107,20 +88,27 @@ class spotify_downloader():
                 not_fetched[key] = tracks[key]
         return urls, not_fetched
 
-    def get_track_details(self,sp,trackIDs):
-        """ returns a dictionary of track name as key and artist name as value given the track ID """
+    def get_playlist_tracks(self, sp, plID):
+        """ returns a dictionary of track name as key and artist name as value of a spotify playlist given the spotipy token credentials object and playlist id """
 
         tracks = {}
-        for i in trackIDs:
-            time.sleep(.5)
-            temp = self.getTrackFeatures(sp,i)
-            tracks[temp[0]] = temp[1]
+        playlist = {}
+        offset = 0
+        total = sp.playlist_tracks(plID)['total']
+        while total-offset>=0:
+            playlist = sp.playlist_tracks(plID,offset=offset)
+            for i in range(len(playlist['items'])):
+                tracks[playlist['items'][i]['track']['name']] = playlist['items'][i]['track']['artists'][0]['name']
+            offset +=100
         return tracks
-    
-    def get_album_tracks(self, trackIDs):
+
+    def get_album_tracks(self, sp, alID):
+        """ returns a dictionary of track name as key and artist name as value of a spotify album given the spotipy token credentials object and album id """
+
+        album = sp.album_tracks(alID)
         tracks = {}
-        for i in range(len(trackIDs['items'])):
-            tracks[trackIDs['items'][i]['name']] = trackIDs['items'][i]['artists'][0]['name']
+        for i in range(len(album['items'])):
+            tracks[album['items'][i]['name']] = album['items'][i]['artists'][0]['name']
         return tracks
 
     def download_PL(self,plName, urls):
@@ -132,31 +120,33 @@ class spotify_downloader():
 
     def interface(self):      
 
-        # urls = []
         self.get_json()
         sp = self.get_credentials()
         plLink = input("\nEnter the Spotify playlist/album URL: ")
-        # plName = input("\nGive a name to your playlist: ")    
-        plName = ''
+        plName = input("\nGive a name to your playlist: ")
         if "playlist" in plLink:    
             plID = self.get_id(plLink)
-            trackIDs = self.get_PL_TrackIDs(sp,'',plID)
             print("\nFetching the details all tracks (name, artist)")
-            tracks = self.get_track_details(sp,trackIDs)
+            tracks = self.get_playlist_tracks(sp, plID)
             print("Successfully fetched all the track details")
-            quit()
         elif "album" in plLink:
             alID = self.get_id(plLink)
-            trackIDs = self.get_AL_TrackIDs(sp,'',alID)
-            tracks = self.get_album_tracks(trackIDs)
-        
+            print("\nFetching the details all tracks (name, artist)")
+            tracks = self.get_album_tracks(sp,alID)
+            print("Successfully fetched all the track details\n")
+
+        print(f"\nFetching all the relevant URLs")
         urls, not_fetched = self.get_yt_urls(tracks)
+
         #check for track URLs that were failed to be fetched
+        flag = False
         if len(tracks)-len(urls)>0:
+            flag = True
             print(f"\n{len(tracks)-len(urls)}/{len(tracks)} were not fetched")
             print("\nHere is the list: ")
             for oh in not_fetched.keys():
                 print(f"{oh} - {not_fetched[oh]}")
+        print("Successfully fetched all the relevant URLs..." if flag==False else '')
         print("\nDownloading the songs\n")
 
         # download the tracks
@@ -168,5 +158,3 @@ class spotify_downloader():
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
-s = spotify_downloader()
-s.interface()
