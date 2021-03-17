@@ -55,3 +55,4 @@ main()
 #TODO 11: add thumbnails to the downloaded songs (https://www.geeksforgeeks.org/pafy-getting-thumbnail/)
 #TODO 12: release an executable file
 #TODO 13: Make GUI
+#TODO 14: Automatically add the exe file to Windows system variables.
