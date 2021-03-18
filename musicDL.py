@@ -4,38 +4,6 @@ from modules.spotify_downloader import spotify_downloader
 
 ffmpeg = os.getcwd()+"/ffmpeg.exe"
 
-def download_ffmpeg(id, destination):
-    URL = "https://docs.google.com/uc?export=download"
-
-    session = requests.Session()
-
-    response = session.get(URL, params = { 'id' : id }, stream = True)
-    token = get_confirm_token(response)
-
-    if token:
-        params = { 'id' : id, 'confirm' : token }
-        response = session.get(URL, params = params, stream = True)
-
-    save_response_content(response, destination)    
-
-def get_confirm_token(response):
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            return value
-    return None
-
-def save_response_content(response, destination):
-    CHUNK_SIZE = 32768
-
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(CHUNK_SIZE):
-            if chunk: # filter out keep-alive new chunks
-                f.write(chunk)
-
-if "ffmpeg.exe" not in os.listdir():
-    print("Downloading ffmpeg.exe ...")
-    download_ffmpeg("1uHoavD2ppUt-IzKiKgaqoEO7ezYysGI1",ffmpeg)
-
 def create_dir():
     """
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
@@ -54,8 +22,8 @@ def main():
 
     print(f"\nEnter \n\n1 - download a song \n2 - download a YouTube Playlist\n3 - download from Spotify:",end=" ")    
     ch = int(input())
-    yt = yt_downloader()
-    spdl = spotify_downloader()
+    yt = yt_downloader(ffmpeg)
+    spdl = spotify_downloader(ffmpeg)
     if ch == 1:
         yt.download_singles()
 
