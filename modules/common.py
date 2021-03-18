@@ -90,7 +90,3 @@ class common():
                         track_name = name[:ind1]+".mp3"
                         self.convert(i, track_name, v)
                         print("\"\033[92m Successfully Converted \033[97m")
-# ffmpeg = os.getcwd()+"/modules/ffmpeg.exe"
-# os.chdir(os.path.expanduser("~/Desktop/musicDL downloads/test"))
-# cm = common(ffmpeg, alburl='')
-# cm.download_song("https://www.youtube.com/watch?v=tk36ovCMsU8&list=TLPQMTgwMzIwMjGRbAjWbsP1Mw&index=12")
