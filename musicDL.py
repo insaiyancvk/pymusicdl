@@ -52,10 +52,10 @@ create_dir()
 
 def main():
 
-    print(f"\nEnter \n\n1 - download a song \n2 - download a YouTube Playlist\n3 - download a Spotify Playlist:",end=" ")
+    print(f"\nEnter \n\n1 - download a song \n2 - download a YouTube Playlist\n3 - download from Spotify:",end=" ")    
     ch = int(input())
-    yt = yt_downloader(ffmpeg)
-    spdl = spotify_downloader(ffmpeg)
+    yt = yt_downloader()
+    spdl = spotify_downloader()
     if ch == 1:
         yt.download_singles()
 

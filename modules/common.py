@@ -19,7 +19,7 @@ class common():
         self.alburl = alburl
         self.spo = spo
 
-    def get_url(self,s):
+    def get_url(self,s,n=7, spo=False):
         """
         Give a video ID as an argument to this function. It returns top n (7 by default) video URLs.
         """
@@ -30,17 +30,26 @@ class common():
         html = response.read()
         video_ids = re.findall(r"watch\?v=(\S{11})", html.decode())
         urls = []
-        j = 0
-        for i in video_ids:
-            try:
-                pafy.new(baseurl+i)
-                urls.append(baseurl+i)
-                j+=1
-                if j==7:
-                    break
-            except:
-                continue
-        return urls
+        if spo:
+            for i in video_ids:
+                try:
+                    pafy.new(baseurl+i)
+                    urls.append(baseurl+i)
+                    return urls
+                except:
+                    continue
+        else:
+            j = 0
+            for i in video_ids:
+                try:
+                    pafy.new(baseurl+i)
+                    urls.append(baseurl+i)
+                    j+=1
+                    if j==7:
+                        break
+                except:
+                    continue
+            return urls
 
     def convert(self, old, new, v):
         """ converts any file format to .mp3 with the help of ffmpeg """

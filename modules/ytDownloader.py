@@ -1,4 +1,4 @@
-import os
+import os, time
 
 try:
     import pafy # type: ignore
@@ -97,13 +97,15 @@ class yt_downloader():
         if "https://www" in plLink:
             plLink = plLink.replace("https://www","https://music")
         
+        start_time = time.time()
         try:
             plLinks = self.get_playlist_url(plLink)
         except Exception as e:
             print(f"Something went wrong. Maybe check your URL. Here's the reason from the compiler: {e}")
             print("Exiting the program")
             quit()
-
+        end_time = time.time()
+        print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
         total_songs = len(plLinks)
         for i in plLinks:
             cm.download_song(i)

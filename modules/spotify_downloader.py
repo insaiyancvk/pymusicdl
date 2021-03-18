@@ -1,4 +1,4 @@
-import json, base64, os, requests
+import json, base64, os, requests, time
 
 try:
     import spotipy 
@@ -81,16 +81,15 @@ class spotify_downloader():
     def get_yt_urls(self,tracks):
         """ returns a list of urls that are fetched successfully and dictionary of urls that were failed to be fetched. """
 
-        not_fetched = {}
         urls = []
         for key in tracks.keys():
             try:
                 got_url = (key+"+"+tracks[key]).replace(' ','+')
-                urls.append(self.ytd.get_url(got_url)[0])
+                print(f"Fetching the details of {key} - {tracks[key]}")
+                urls.append(self.ytd.get_url(got_url,spo=False)[0])
             except Exception as e:
                 print(f"\nCould not fetch the link for \"{key} {tracks[key]}\" because: {e}\nmaybe download it as a single")
-                not_fetched[key] = tracks[key]
-        return urls, not_fetched
+        return urls
 
     def get_playlist_tracks(self, sp, plID):
         """ returns a dictionary of track name as key and artist name as value of a spotify playlist given the spotipy token credentials object and playlist id """
@@ -130,27 +129,16 @@ class spotify_downloader():
         plName = input("\nGive a name to your playlist: ")
         if "playlist" in plLink:    
             plID = self.get_id(plLink)
-            print("\nFetching the details all tracks (name, artist)")
             tracks = self.get_playlist_tracks(sp, plID)
-            print("Successfully fetched all the track details")
         elif "album" in plLink:
             alID = self.get_id(plLink)
-            print("\nFetching the details all tracks (name, artist)")
             tracks = self.get_album_tracks(sp,alID)
-            print("Successfully fetched all the track details\n")
 
+        start_time = time.time()
         print(f"\nFetching all the relevant URLs")
-        urls, not_fetched = self.get_yt_urls(tracks)
-
-        #check for track URLs that were failed to be fetched
-        flag = False
-        if len(tracks)-len(urls)>0:
-            flag = True
-            print(f"\n{len(tracks)-len(urls)}/{len(tracks)} were not fetched")
-            print("\nHere is the list: ")
-            for oh in not_fetched.keys():
-                print(f"{oh} - {not_fetched[oh]}")
-        print("Successfully fetched all the relevant URLs..." if flag==False else '')
+        urls = self.get_yt_urls(tracks)
+        end_time = time.time()
+        print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
         print("\nDownloading the songs\n")
 
         # download the tracks
