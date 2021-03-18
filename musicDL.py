@@ -2,11 +2,13 @@ import os
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
+ffmpeg = os.getcwd()+"/modules/ffmpeg.exe"
+
 def create_dir():
     """
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
     """
-
+    
     os.chdir(os.path.expanduser("~/Desktop"))
     try:
         os.chdir("musicDL downloads")
@@ -16,11 +18,12 @@ def create_dir():
 
 create_dir()
 
-if __name__ == "__main__":
+def main():
 
-    ch = int(input("\nEnter 1 to download a song \n2 to download a YouTube Playlist\n3 to download a Spotify Playlist: "))
-    yt = yt_downloader()
-    spdl = spotify_downloader()
+    print(f"\nEnter \n\n1 - download a song \n2 - download a YouTube Playlist\n3 - download a Spotify Playlist:",end=" ")
+    ch = int(input())
+    yt = yt_downloader(ffmpeg)
+    spdl = spotify_downloader(ffmpeg)
     if ch == 1:
         yt.download_singles()
 
@@ -32,7 +35,13 @@ if __name__ == "__main__":
 
     else:
         print("invalid option :(")
-
+    n = input("Do you want to continue? (Y/N): ")
+    if n.lower() == 'y':
+        main()
+    else:
+        print("\nSee you later!\n")
+        quit()
+main()
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
 #TODO 3: make functions for song and playlist downloading ✔
@@ -43,3 +52,9 @@ if __name__ == "__main__":
 #TODO 8: use environment variables for storing API key and secret. {dropped}
 #TODO 9: get dependencies folders into another folder and import from that. (aka beta test) {doesn't work}
 #TODO 10: secure the client ID and Secret. ✔
+#TODO 11: add different colors to different commands (https://ozzmaker.com/add-colour-to-text-in-python/)
+#TODO 11: convert all the audio files to mp3 or flac based on user choice 
+#TODO 11: add thumbnails to the downloaded songs (https://www.geeksforgeeks.org/pafy-getting-thumbnail/)
+#TODO 12: release an executable file
+#TODO 13: Make GUI
+#TODO 14: Automatically add the exe file to Windows system variables.
