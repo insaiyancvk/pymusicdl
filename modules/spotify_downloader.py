@@ -1,4 +1,4 @@
-import json, base64, time, os, requests
+import json, base64, os, requests, time
 
 try:
     import spotipy 
@@ -14,6 +14,10 @@ except ImportError:
 destination = os.getcwd()+'/sec.json'
 class spotify_downloader():
 
+    def __init__(self, ffmpeg):
+        self.ffmpeg = ffmpeg
+        self.ytd = common(ffmpeg, alburl='')
+    
     def create_PLdir(self,plName):
         """ creates a playlist directory with the given name """
 
@@ -28,7 +32,7 @@ class spotify_downloader():
             os.mkdir(plName)
             os.chdir(plName)
 
-    ytd = common()
+    
     def get_json(self):
         id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
         URL = "https://docs.google.com/uc?export=download"

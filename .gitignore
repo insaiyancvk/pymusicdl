@@ -3,7 +3,7 @@ setup.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-
+ffmpeg.exe
 # C extensions
 *.so
 

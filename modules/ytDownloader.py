@@ -16,6 +16,9 @@ except:
 
 class yt_downloader():
 
+    def __init__(self, ffmpeg):
+        self.ffmpeg = ffmpeg
+
     def get_playlist_url(self,plLink):
         """
         Returns all the song links of a playlist. Given the playlist URL.
@@ -32,7 +35,7 @@ class yt_downloader():
         Downloads songs based on youtube search. Takes a string as an input.
         """
 
-        cm = common()
+        cm = common(self.ffmpeg, alburl='')
         try:
             os.chdir("singles")
         except:
@@ -41,7 +44,7 @@ class yt_downloader():
 
         print("\ntip:\n  * give the name of song and the artist for better search results)\n  * you could paste the video url itself if you're looking for a specific song.\n")
         s = input("Enter the song name: ")
-        print(f"\nHere are the top 7 search results for {s} (sometimes it's less than 7 👉👈). Enter the serial number to download it.\n")
+        print(f"\nHere are the top 7 search results for {s}. Enter the serial number to download it.\n")
         s = s.replace(" ","+")
 
         # Get top 7 video URLs
@@ -68,7 +71,7 @@ class yt_downloader():
         Downloads a playlist of songs given the URL
         """
 
-        cm = common()
+        cm = common(self.ffmpeg, alburl='')
         try:
             os.chdir("Playlists")
         except:
