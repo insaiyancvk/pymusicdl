@@ -1,4 +1,4 @@
-import os, requests
+import os
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 

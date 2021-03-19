@@ -4,7 +4,6 @@ except:
     print("install 'pafy' library with 'pip install pafy'")
 
 import os, urllib.request, re
-from subprocess import Popen, PIPE
 try:
     from youtube_title_parse import get_artist_title 
 except:
