@@ -80,7 +80,7 @@ class common():
             return
         name = v.title
         audio = v.getbestaudio()
-        print(f"\n\033[96mdownloading {name} as an audio file\033[97m")
+        print(f"\ndownloading {name} as an audio file")
         audio.download()
         dirs = os.listdir()
         try:
@@ -89,7 +89,7 @@ class common():
                 if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:
                     track_name = title+" - "+artist+".mp3"
                     track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                    print(f"\033[92m Converting \"{i}\" to \"{track_name}\" \033[97m")
+                    print(f" Converting \"{i}\" to \"{track_name}\" ")
                     self.convert(i, track_name, albart)
             for i in os.listdir():
                 if "_" in i:
@@ -101,9 +101,9 @@ class common():
                     ext = i[ind1:]
                     if ext in i:
                         track_name = name[:ind1]+".mp3"
-                        print(f"\033[92m Converting \"{i}\" to \"{track_name}\" \033[97m")
+                        print(f" Converting \"{i}\" to \"{track_name}\" ")
                         self.convert(i, track_name, albart)
-                        print("\033[92m Successfully Converted \033[97m")
+                        print(" Successfully Converted ")
             for i in os.listdir():
                 if "_" in i:
                     os.rename(i,i.replace("_"," "))

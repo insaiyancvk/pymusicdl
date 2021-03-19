@@ -85,7 +85,7 @@ class spotify_downloader():
         for key in tracks.keys():
             try:
                 got_url = (key+"+"+tracks[key]).replace(' ','+')
-                print(f"\033[96Fetching the details of {key} - {tracks[key]}\033[97m")
+                print(f"Fetching the details of {key} - {tracks[key]}")
                 urls.append(self.ytd.get_url(got_url)[0])
             except Exception as e:
                 print(f"\nCould not fetch the link for \"{key} {tracks[key]}\" because: {e}\nmaybe download it as a single")
