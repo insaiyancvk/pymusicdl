@@ -27,16 +27,15 @@ Here are the libraries that I used:
 
 ## Here are the Sections:
 * [Windows Setup](https://github.com/insaiyancvk/music_downloader#windows-setup)
-    * [prerequisites](https://github.com/insaiyancvk/music_downloader#get-the-stuff)
-    * [download source code](https://github.com/insaiyancvk/music_downloader#step-1-download-the-source-code-aka-cloning)
-    * [install libraries](https://github.com/insaiyancvk/music_downloader#step-2-install-whatever-libraries-are-required)
-* [Linux Setup](https://github.com/insaiyancvk/music_downloader#linux-setup)
-* [run the code](https://github.com/insaiyancvk/music_downloader#start-the-code)
+    * [download executable file](https://github.com/insaiyancvk/music_downloader#get-the-stuff)
+    * [install `setup.exe`](https://github.com/insaiyancvk/music_downloader#step-1-install-setupexe)
+    * [run `musicDL.exe`](https://github.com/insaiyancvk/music_downloader#step-2-check-musicdlexe-inside-setup-folder)
+* [Dev Setup](https://github.com/insaiyancvk/music_downloader#setup-for-devs)
+* [run the software](https://github.com/insaiyancvk/music_downloader#start-the-code)
 * [the options](https://github.com/insaiyancvk/music_downloader#so-there-are-3-options)
     * [single song](https://github.com/insaiyancvk/music_downloader#1-single-song)
     * [youtube playlist](https://github.com/insaiyancvk/music_downloader#2-youtube-playlist)
     * [spotify playlist](https://github.com/insaiyancvk/music_downloader#3-spotify-playlist)
-* [Reuse the code](https://github.com/insaiyancvk/music_downloader#how-to-reuse-this-code)
 * [Update the code](https://github.com/insaiyancvk/music_downloader#how-to-update-the-code-when-i-change-something)
 * [***V I B E***](https://github.com/insaiyancvk/music_downloader#now-go-ahead-and-v-i-b-e-with-all-the-songs-you-downloaded)
 
@@ -45,7 +44,7 @@ Here are the libraries that I used:
 
 #### Get the stuff:
 
-* Get the executable file from [here]()
+* Get the executable file (`setup.exe`) from [here](https://github.com/insaiyancvk/music_downloader/releases/tag/v2.0.0)
 
 
 ### Now comes the real CoDiNg stuff
@@ -127,6 +126,7 @@ This is what happens if your playlist is private:
 ![](images/privatepl.png)
 
 Check this pic for making a playlist public:
+
 ![](images/publicpl.png)
 
 ### 3. Spotify Playlist
@@ -148,6 +148,7 @@ PS: I listened to 'Unravel' after downloading this playlist 😆
 Wondering if you should copy the playlist/album URL or URI? well I added support for both of them!
 
  Here's where you can find it:
+
 ![](images/url.png)
 
 This image shows for playlist, but it's similar for albums too!
