@@ -88,7 +88,7 @@ RUNNING THE DAMN CODE AND DOWNLOADING ALL THEM SONGS!
 ### So there are 3 options:
 1. Download a single song
 2. Download a Youtube Playlist
-3. Download a Spotify Playlist
+3. Download from Spotify
 
 ## Let me show how each of these options will look like:
 ### 1. Single song
@@ -152,16 +152,6 @@ Wondering if you should copy the playlist/album URL or URI? well I added support
 
 This image shows for playlist, but it's similar for albums too!
 
-## How to reuse this code?
-So Command Prompt is the place where you run this code. (you can try IDLE,VS Code,PyCharm etc)
-So here are the commands you have to follow:
-```
-cd %USERPROFILE%/Desktop
-cd music_downloader
-py musicDL.py
-```
-
-
 ## How to update the code when I change something?
 Check If I released a new version at my repo!
 
@@ -172,3 +162,4 @@ Check If I released a new version at my repo!
 What next?
 * So I'm working on adding album support for spotify right now. ✔
 * Will make an attempt to make a windows executable file (.exe) for this app. ✔
+* Probably GUI
