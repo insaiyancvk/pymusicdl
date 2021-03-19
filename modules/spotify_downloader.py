@@ -1,4 +1,4 @@
-import json, base64, os, requests, time
+import json, base64, os, requests, time, urllib.request
 
 try:
     import spotipy 
@@ -16,7 +16,7 @@ class spotify_downloader():
 
     def __init__(self, ffmpeg):
         self.ffmpeg = ffmpeg
-        self.ytd = common(ffmpeg, alburl='')
+        self.ytd =  common(ffmpeg, spo=True)
     
     def create_PLdir(self,plName):
         """ creates a playlist directory with the given name """
@@ -86,7 +86,7 @@ class spotify_downloader():
             try:
                 got_url = (key+"+"+tracks[key]).replace(' ','+')
                 print(f"Fetching the details of {key} - {tracks[key]}")
-                urls.append(self.ytd.get_url(got_url,spo=False)[0])
+                urls.append(self.ytd.get_url(got_url)[0])
             except Exception as e:
                 print(f"\nCould not fetch the link for \"{key} {tracks[key]}\" because: {e}\nmaybe download it as a single")
         return urls
@@ -94,6 +94,7 @@ class spotify_downloader():
     def get_playlist_tracks(self, sp, plID):
         """ returns a dictionary of track name as key and artist name as value of a spotify playlist given the spotipy token credentials object and playlist id """
 
+        alburl = []
         tracks = {}
         playlist = {}
         offset = 0
@@ -102,38 +103,41 @@ class spotify_downloader():
             playlist = sp.playlist_tracks(plID,offset=offset)
             for i in range(len(playlist['items'])):
                 tracks[playlist['items'][i]['track']['name']] = playlist['items'][i]['track']['artists'][0]['name']
+                alburl.append(playlist['items'][i]['track']['album']['images'][1]['url'])
             offset +=100
-        return tracks
+        return tracks, alburl
 
     def get_album_tracks(self, sp, alID):
         """ returns a dictionary of track name as key and artist name as value of a spotify album given the spotipy token credentials object and album id """
 
         album = sp.album_tracks(alID)
         tracks = {}
+        alburl = []
+        print()
         for i in range(len(album['items'])):
             tracks[album['items'][i]['name']] = album['items'][i]['artists'][0]['name']
-        return tracks
+            alburl.append(sp.track(album['items'][i]['id'])['album']['images'][1]['url'])
+        return tracks, alburl
 
-    def download_PL(self,plName, urls):
+    def download_PL(self,plName, urls, alburl):
         """ downloads all the audio of URLs """
 
         self.create_PLdir(plName)
-        for i in urls:
-            self.ytd.download_song(i)
+        for i,j in zip(urls, alburl):
+            self.ytd.download_song(i,j)
 
     def interface(self):      
-
+        
         self.get_json()
         sp = self.get_credentials()
         plLink = input("\nEnter the Spotify playlist/album URL: ")
         plName = input("\nGive a name to your playlist: ")
         if "playlist" in plLink:    
             plID = self.get_id(plLink)
-            tracks = self.get_playlist_tracks(sp, plID)
+            tracks,alburls = self.get_playlist_tracks(sp, plID)
         elif "album" in plLink:
             alID = self.get_id(plLink)
-            tracks = self.get_album_tracks(sp,alID)
-
+            tracks, alburls = self.get_album_tracks(sp,alID)
         start_time = time.time()
         print(f"\nFetching all the relevant URLs")
         urls = self.get_yt_urls(tracks)
@@ -142,7 +146,7 @@ class spotify_downloader():
         print("\nDownloading the songs\n")
 
         # download the tracks
-        self.download_PL(plName, urls)
+        self.download_PL(plName, urls, alburls)
 
         # check if all the songs are downloaded
         total_songs = len(urls)
@@ -150,3 +154,5 @@ class spotify_downloader():
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
+# sp = spotify_downloader(ffmpeg = os.getcwd()+"/ffmpeg.exe", )
+# sp.interface()

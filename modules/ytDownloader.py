@@ -35,7 +35,7 @@ class yt_downloader():
         Downloads songs based on youtube search. Takes a string as an input.
         """
 
-        cm = common(self.ffmpeg, alburl='')
+        cm = common(self.ffmpeg)
         try:
             os.chdir("singles")
         except:
@@ -63,7 +63,7 @@ class yt_downloader():
                 continue
         c = int(input("\nEnter the serial number: "))
 
-        cm.download_song(video_url[c-1])
+        cm.download_song(video_url[c-1],'')
         print(f"\nYour song is downloaded in \"/musicDL downloads/singles\" folder on desktop\n")
 
     def download_playlist(self):
@@ -71,7 +71,7 @@ class yt_downloader():
         Downloads a playlist of songs given the URL
         """
 
-        cm = common(self.ffmpeg, alburl='')
+        cm = common(self.ffmpeg)
         try:
             os.chdir("Playlists")
         except:
@@ -108,7 +108,7 @@ class yt_downloader():
         print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
         total_songs = len(plLinks)
         for i in plLinks:
-            cm.download_song(i)
+            cm.download_song(i,"")
         downloaded_songs = len(os.listdir())
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
