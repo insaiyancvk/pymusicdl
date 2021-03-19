@@ -20,8 +20,8 @@ create_dir()
 
 def main():
 
-    print(f"\nEnter \n\n1 - download a song \n2 - download a YouTube Playlist\n3 - download from Spotify:",end=" ")    
-    ch = int(input())
+    print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
+    ch = int(input("\n  Enter the serial number: "))
     yt = yt_downloader(ffmpeg)
     spdl = spotify_downloader(ffmpeg)
     if ch == 1:

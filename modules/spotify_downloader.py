@@ -158,4 +158,7 @@ class spotify_downloader():
         downloaded_songs = len(os.listdir())
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
-        print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
+        print("\t","="*100)
+        print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n\n")
+        print("\t","="*100)
+        print("\n")
