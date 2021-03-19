@@ -95,6 +95,7 @@ class spotify_downloader():
         """ returns a dictionary of track name as key and artist name as value of a spotify playlist given the spotipy token credentials object and playlist id """
 
         alburl = []
+        together = {}
         tracks = {}
         playlist = {}
         offset = 0
@@ -102,9 +103,11 @@ class spotify_downloader():
         while total-offset>=0:
             playlist = sp.playlist_tracks(plID,offset=offset)
             for i in range(len(playlist['items'])):
-                tracks[playlist['items'][i]['track']['name']] = playlist['items'][i]['track']['artists'][0]['name']
-                alburl.append(playlist['items'][i]['track']['album']['images'][1]['url'])
+                together[playlist['items'][i]['track']['name']] = [playlist['items'][i]['track']['artists'][0]['name'],playlist['items'][i]['track']['album']['images'][1]['url']]
             offset +=100
+        for key in together.keys():
+            tracks[key] = together[key][0]
+            alburl.append(together[key][1])
         return tracks, alburl
 
     def get_album_tracks(self, sp, alID):
@@ -113,7 +116,6 @@ class spotify_downloader():
         album = sp.album_tracks(alID)
         tracks = {}
         alburl = []
-        print()
         for i in range(len(album['items'])):
             tracks[album['items'][i]['name']] = album['items'][i]['artists'][0]['name']
             alburl.append(sp.track(album['items'][i]['id'])['album']['images'][1]['url'])
@@ -138,6 +140,9 @@ class spotify_downloader():
         elif "album" in plLink:
             alID = self.get_id(plLink)
             tracks, alburls = self.get_album_tracks(sp,alID)
+        else: 
+            print("Invalid link, exiting")
+            exit()
         start_time = time.time()
         print(f"\nFetching all the relevant URLs")
         urls = self.get_yt_urls(tracks)
@@ -154,5 +159,3 @@ class spotify_downloader():
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print(f"\nYour playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
-# sp = spotify_downloader(ffmpeg = os.getcwd()+"/ffmpeg.exe", )
-# sp.interface()

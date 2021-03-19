@@ -2,7 +2,7 @@ import os
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
-ffmpeg = os.getcwd()+"/ffmpeg.exe"
+ffmpeg = str(os.getcwd())+"/ffmpeg.exe"
 
 def create_dir():
     """
@@ -52,9 +52,9 @@ main()
 #TODO 8: use environment variables for storing API key and secret. {dropped}
 #TODO 9: get dependencies folders into another folder and import from that. (aka beta test) {doesn't work}
 #TODO 10: secure the client ID and Secret. ✔
-#TODO 11: add different colors to different commands (https://ozzmaker.com/add-colour-to-text-in-python/)
-#TODO 11: convert all the audio files to mp3 or flac based on user choice 
-#TODO 11: add thumbnails to the downloaded songs (https://www.geeksforgeeks.org/pafy-getting-thumbnail/)
-#TODO 12: release an executable file
+#TODO 11: add different colors to different commands (https://ozzmaker.com/add-colour-to-text-in-python/) {just few, not all}
+#TODO 11: convert all the audio files to mp3 or flac based on user choice {mp3 ✔ }{flac dropped}
+#TODO 11: add thumbnails to the downloaded songs (https://www.geeksforgeeks.org/pafy-getting-thumbnail/) ✔
+#TODO 12: release an executable file ✔
 #TODO 13: Make GUI
 #TODO 14: Automatically add the exe file to Windows system variables.
