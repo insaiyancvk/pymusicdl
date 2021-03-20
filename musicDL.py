@@ -16,10 +16,9 @@ def create_dir():
         os.mkdir("musicDL downloads")
         os.chdir("musicDL downloads")
 
-create_dir()
-
 def main():
-
+    
+    create_dir()
     print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
     ch = int(input("\n  Enter the serial number: "))
     yt = yt_downloader(ffmpeg)
@@ -43,7 +42,8 @@ def main():
             pass
 
     else:
-        print("invalid option :(")
+        print("\ninvalid option :(\n")
+        main()
     n = input("Do you want to continue? (Y/N): ")
     if n.lower() == 'y':
         main()
