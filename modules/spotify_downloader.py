@@ -31,7 +31,10 @@ class spotify_downloader():
         except:
             os.mkdir(plName)
             os.chdir(plName)
-
+    def back_dir(self):
+        os.chdir("..")
+        os.chdir("..")
+        pass
     
     def get_json(self):
         id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
@@ -121,16 +124,17 @@ class spotify_downloader():
             alburl.append(sp.track(album['items'][i]['id'])['album']['images'][1]['url'])
         return tracks, alburl
 
-    def download_PL(self,plName, urls, alburl):
+    def download_PL(self,plName, urls, alburl, sponame):
         """ downloads all the audio of URLs """
 
         self.create_PLdir(plName)
-        for i,j in zip(urls, alburl):
-            self.ytd.download_song(i,j)
+        for i,j,k in zip(urls, alburl, sponame):
+            self.ytd.download_song(i, j, k)
 
     def interface(self):      
         
         self.get_json()
+        sponame = []
         sp = self.get_credentials()
         plLink = input("\nEnter the Spotify playlist/album URL: ")
         plName = input("\nGive a name to your playlist: ")
@@ -150,8 +154,11 @@ class spotify_downloader():
         print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
         print("\nDownloading the songs\n")
 
+        for i in tracks.keys():
+            sponame.append(tracks[i]+" - "+i)
+
         # download the tracks
-        self.download_PL(plName, urls, alburls)
+        self.download_PL(plName, urls, alburls, sponame)
 
         # check if all the songs are downloaded
         total_songs = len(urls)
@@ -162,3 +169,5 @@ class spotify_downloader():
         print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n\n")
         print("\t","="*100)
         print("\n")
+
+        self.back_dir()
