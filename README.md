@@ -24,6 +24,7 @@ Here are the libraries that I used:
 * `pafy`
 * `youtube_title_parse`
 *  `spotipy`
+* `pyinstaller` (for converting .py to .exe)
 
 ## Here are the Sections:
 * [Windows Setup](https://github.com/insaiyancvk/music_downloader#windows-setup)
@@ -44,7 +45,7 @@ Here are the libraries that I used:
 
 #### Get the stuff:
 
-* Get the executable file (`setup.exe`) from [here](https://github.com/insaiyancvk/music_downloader/releases/tag/v2.0.0)
+* Get the executable file (`setup.exe`) from [here](https://github.com/insaiyancvk/music_downloader/releases/tag/v2.0.1)
 
 
 ### Now comes the real CoDiNg stuff
