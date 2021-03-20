@@ -68,7 +68,7 @@ class common():
             os.remove(old)
 
     # Download the song
-    def download_song(self,url, albart): 
+    def download_song(self,url, albart, sponame): 
         """
         Download the song by passing the video URL as a parameter
         """
@@ -84,7 +84,13 @@ class common():
         audio.download()
         dirs = os.listdir()
         try:
-            artist, title = get_artist_title(name)
+            if self.spo:
+                print("SPO IS TRUE")
+                artist, title = get_artist_title(sponame)    
+                print(f"ARTIST: {artist} TITLE: {title}")
+            else:
+                print("HERE FOR NO REASON")
+                artist, title = get_artist_title(name)
             for i in dirs:
                 if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:
                     track_name = title+" - "+artist+".mp3"
