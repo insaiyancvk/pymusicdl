@@ -154,7 +154,9 @@ Wondering if you should copy the playlist/album URL or URI? well I added support
 This image shows for playlist, but it's similar for albums too!
 
 ## How to update the code when I change something?
-Check If I released a new version at my repo!
+- Check If I released a new version at my repo!
+- If you want to install a new release, just delete "setup" folder that was created and delete "setup.exe" too. So it's basically uninstalling, reinstalling .
+- Even if it's just a patch release please consider updating it.
 
 ## There you go! You learned how to download songs using my code!
 ## Now go ahead and _**V I B E**_ with all the songs you downloaded!
@@ -164,3 +166,4 @@ What next?
 * So I'm working on adding album support for spotify right now. ✔
 * Will make an attempt to make a windows executable file (.exe) for this app. ✔
 * Probably GUI
+* Work on a smoother way of updating the file.
