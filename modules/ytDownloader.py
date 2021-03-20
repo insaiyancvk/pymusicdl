@@ -68,7 +68,7 @@ class yt_downloader():
         print(f"\n\n\t    Your song is downloaded in \"/musicDL downloads/singles\" folder on desktop\n")
         print("\t","="*100)
         print("\n")
-        os.chdir("..")
+        
     
     def download_playlist(self):
         """
@@ -120,4 +120,5 @@ class yt_downloader():
         print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
         print("\t","="*100)
         print("\n")
-        os.chdir("../..")
+        
+        

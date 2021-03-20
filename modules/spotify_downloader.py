@@ -31,10 +31,7 @@ class spotify_downloader():
         except:
             os.mkdir(plName)
             os.chdir(plName)
-    def back_dir(self):
-        os.chdir("..")
-        os.chdir("..")
-        pass
+        
     
     def get_json(self):
         id = '1SFCB1mjcNz3U5X0HZTy4j5kpoMdemKWH'
@@ -169,5 +166,3 @@ class spotify_downloader():
         print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n\n")
         print("\t","="*100)
         print("\n")
-
-        self.back_dir()
