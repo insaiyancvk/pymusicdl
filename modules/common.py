@@ -85,11 +85,8 @@ class common():
         dirs = os.listdir()
         try:
             if self.spo:
-                print("SPO IS TRUE")
-                artist, title = get_artist_title(sponame)    
-                print(f"ARTIST: {artist} TITLE: {title}")
+                artist, title = get_artist_title(sponame)   
             else:
-                print("HERE FOR NO REASON")
                 artist, title = get_artist_title(name)
             for i in dirs:
                 if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:
