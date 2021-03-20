@@ -25,13 +25,22 @@ def main():
     yt = yt_downloader(ffmpeg)
     spdl = spotify_downloader(ffmpeg)
     if ch == 1:
-        yt.download_singles()
+        try:
+            yt.download_singles()
+        except:
+            pass
 
     elif ch == 2:
-        yt.download_playlist()
+        try:
+            yt.download_playlist()
+        except:
+            pass
 
     elif ch == 3:
-        spdl.interface()
+        try:
+            spdl.interface()
+        except:
+            pass
 
     else:
         print("invalid option :(")
@@ -40,7 +49,6 @@ def main():
         main()
     else:
         print("\nSee you later!\n")
-        quit()
 main()
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
