@@ -24,6 +24,7 @@ Here are the libraries that I used:
 * `pafy`
 * `youtube_title_parse`
 *  `spotipy`
+* `pyinstaller` (for converting .py to .exe)
 
 ## Here are the Sections:
 * [Windows Setup](https://github.com/insaiyancvk/music_downloader#windows-setup)
