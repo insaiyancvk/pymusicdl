@@ -96,7 +96,10 @@ class common():
                     self.convert(i, track_name, albart)
             for i in os.listdir():
                 if "_" in i:
-                    os.rename(i,i.replace("_"," "))
+                    try:
+                        os.rename(i,i.replace("_"," "))
+                    except FileExistsError:
+                        os.rename(i,i.replace("_","  "))
         except TypeError:
             for i in dirs:
                 if name in i:
