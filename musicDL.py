@@ -1,4 +1,4 @@
-import os
+import os, time
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
@@ -26,19 +26,25 @@ def main():
     if ch == 1:
         try:
             yt.download_singles()
-        except:
+        except Exception as e:
+            print("\n\nLook like something went wrong :(\n{e}\n\n")
+            print("Take a screenshort and raise an issue in github or send a screenshot to the devs\n")
             pass
 
     elif ch == 2:
         try:
             yt.download_playlist()
-        except:
+        except Exception as e:
+            print("\n\nLook like something went wrong :(\n{e}\n\n")
+            print("Take a screenshort and raise an issue in github or send a screenshot to the devs\n")
             pass
 
     elif ch == 3:
         try:
             spdl.interface()
-        except:
+        except Exception as e:
+            print("\n\nLook like something went wrong :(\n{e}\n\n")
+            print("Take a screenshort and raise an issue in github or send a screenshot to the devs\n")
             pass
 
     else:
@@ -49,6 +55,7 @@ def main():
         main()
     else:
         print("\nSee you later!\n")
+        time.sleep(3)
 main()
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
