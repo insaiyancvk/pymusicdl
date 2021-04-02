@@ -1,4 +1,4 @@
-import json, base64, os, requests, time
+import json, base64, os, requests, time, sys
 
 try:
     import spotipy 
@@ -149,7 +149,7 @@ class spotify_downloader():
             tracks, alburls = self.get_album_tracks(sp,alID)
         else: 
             print("Invalid link, exiting")
-            exit()
+            return
         start_time = time.time()
         print(f"\nFetching all the relevant URLs")
         urls = self.get_yt_urls(tracks)

@@ -27,24 +27,24 @@ def main():
         try:
             yt.download_singles()
         except Exception as e:
-            print("\n\nLook like something went wrong :(\n{e}\n\n")
-            print("Take a screenshort and raise an issue in github or send a screenshot to the devs\n")
+            print(f"\n\nLook like something went wrong :(\n{e}\n\n")
+            print("Take a screenshort and raise an issue in github or send it to the devs\n")
             pass
 
     elif ch == 2:
         try:
             yt.download_playlist()
         except Exception as e:
-            print("\n\nLook like something went wrong :(\n{e}\n\n")
-            print("Take a screenshort and raise an issue in github or send a screenshot to the devs\n")
+            print(f"\n\nLook like something went wrong :(\n{e}\n\n")
+            print("Take a screenshort and raise an issue in github or send it to the devs\n")
             pass
 
     elif ch == 3:
         try:
             spdl.interface()
         except Exception as e:
-            print("\n\nLook like something went wrong :(\n{e}\n\n")
-            print("Take a screenshort and raise an issue in github or send a screenshot to the devs\n")
+            print(f"\n\nLook like something went wrong :(\n{e}\n\n")
+            print("Take a screenshort and raise an issue in github or send it to the devs\n")
             pass
 
     else:

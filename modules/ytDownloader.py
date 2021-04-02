@@ -1,4 +1,4 @@
-import os, time
+import os, time, sys
 
 try:
     import pafy # type: ignore
@@ -107,7 +107,7 @@ class yt_downloader():
         except Exception as e:
             print(f"Something went wrong. Maybe check your URL. Here's the reason from the compiler: {e}")
             print("Exiting the program")
-            quit()
+            return
         end_time = time.time()
         print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
         total_songs = len(plLinks)
