@@ -54,16 +54,13 @@ class common():
         """ converts any file format to .mp3 with the help of ffmpeg """
         
         if self.spo:
-            # os.system(self.ffmpeg+' -hide_banner -loglevel quiet -i \"'+old+'\" -b:a 320k \"w'+new+"\"")
             subprocess.call([self.ffmpeg,'-hide_banner','-loglevel', 'quiet','-i',old,'-b:a', '320k','w'+new])
             os.remove(old)
             urllib.request.urlretrieve(alburl, "thumb.png")
-            # os.system(self.ffmpeg+' -hide_banner -loglevel quiet -i "w'+new+'" -i thumb.png -map 0:0 -map 1:0 -codec copy -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "'+new+'"')
             subprocess.call([self.ffmpeg,'-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new])
             os.remove("w"+new)
             os.remove("thumb.png")
         else:
-            # os.system(self.ffmpeg+' -hide_banner -loglevel quiet -i \"'+old+'\" -b:a 320k \"'+new+"\"")
             subprocess.call([self.ffmpeg,'-hide_banner','-loglevel','quiet','-i',old,'-b:a', '320k',new])
             os.remove(old)
 
