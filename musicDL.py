@@ -3,7 +3,7 @@ from modules.ytDownloader import yt_downloader
 from modules.spotify_downloader import spotify_downloader 
 
 ffmpeg = str(os.getcwd())+"/ffmpeg.exe"
-
+cwd = os.getcwd()
 def create_dir():
     """
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
