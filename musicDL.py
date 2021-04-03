@@ -1,9 +1,8 @@
-import os, time
+import os, time, subprocess, requests, json
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
 ffmpeg = str(os.getcwd())+"/ffmpeg.exe"
-cwd = os.getcwd()
 def create_dir():
     """
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
@@ -17,7 +16,37 @@ def create_dir():
         os.chdir("musicDL downloads")
 
 def main():
-    
+    if 'updater' in str(os.getcwd()):
+        cwd = str(os.getcwd()).replace('\\updater','\\')
+    else:
+        cwd = os.getcwd()+'\\'
+    version = {}
+    with open(cwd+'version.json', 'r') as f:
+        version = json.load(f)
+        f.close()
+    cver = version['version']
+
+    basegiturl = 'https://api.github.com'
+    headers = {"Accept": "application/vnd.github.v3+json"}
+
+    req = requests.get(basegiturl+'/repos/insaiyancvk/music_downloader/releases',headers = headers).json()
+
+    checkver = req[0]['tag_name']
+
+    if cver!=checkver:
+        j=0
+        for i in range(len(req[0]['assets'])):
+            if 'update' in req[0]['assets'][i]['name']:
+                j=i
+        print(f"\n\t***** New update {checkver} avaliable! *****\n")
+        choice = input("Would you like to update? (Y/N): ")
+        if choice.lower() == 'y':
+            subprocess.call(['updater/updater.exe'])
+        else:
+            print("\nRestart musicDL for downloading the updates :) ")
+    else:
+        print(f"\nYour software is running {cver}")
+
     create_dir()
     print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
     ch = int(input("\n  Enter the serial number: "))
