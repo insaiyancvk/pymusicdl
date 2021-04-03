@@ -1,8 +1,6 @@
 import json, requests
+import os
 from zipfile import ZipFile
-from urllib.request import urlopen
-from io import BytesIO
-
 
 version = {}
 with open('version.json', 'r') as f:
@@ -23,20 +21,32 @@ if cver!=checkver:
             j=i
     print("New update found!")
     print(req[0]['assets'][j]['browser_download_url'])
-    print("Downloading the new update as 'update.zip'")
-    url = req[0]['assets'][0]['browser_download_url']
+    print("Getting the redirected download link of the update file")
+    # git = requests.get(req[0]['assets'][j]['browser_download_url'], timeout=1, allow_redirects = True)
+
+    # url = git.url
     filename = 'update/update.zip'
-    print("Downloading")
-    zipresp = urlopen(url)
-    print("create new file")
-    tempzip = open(filename,'wb')
-    print("write zip file contents")
-    tempzip.write(zipresp.read())
-    tempzip.close()
-    zf = ZipFile(filename)
-    print('\n\nExtracting all files in "update.zip" \n\n')
-    zf.extractall(path='/update/')
-    zf.close()
-    print("All files Extracted")
+    print("Downloading the new update as 'update.zip'")
+    
+    # r = requests.get(url, stream=True)
+    # handle = open(filename, 'wb')
+    # for chunk in r.iter_content(chunk_size=512):
+    #     if chunk:
+    #         handle.write(chunk)
+    # handle.close
+    with ZipFile(filename,'r') as zip:
+        zip.extractall('/update')
+    with ZipFile(filename,'r') as zip:
+        a = zip.namelist()
+    topdir = []
+    for i in a:
+        if '/' in i:
+            if i[:i.find('/')] not in topdir:
+                topdir.append(i[:i.find('/')])
+        else:
+            topdir.append(i)
+    existing = os.listdir("C:\\Users\\Asus\\Desktop\\setup\\Music Downloader")
+    common = list(set(topdir).intersection(existing))
+    print(len(common))
 else:
     print("Your software is up to date")
