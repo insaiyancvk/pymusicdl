@@ -1,4 +1,4 @@
-import os, time, subprocess, requests, json, sys
+import os, time, subprocess, requests, json, sys, signal
 from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
@@ -87,6 +87,7 @@ def main():
 
     else:
         print("\ninvalid option :(\n")
+        time.sleep(3)
         main()
     n = input("Do you want to continue? (Y/N): ")
     if n.lower() == 'y':
@@ -94,8 +95,12 @@ def main():
     else:
         print("\nSee you later!\n")
         time.sleep(3)
-cwd = str(os.getcwd())
-main()
+        signal.CTRL_C_EVENT
+        signal.CTRL_C_EVENT
+
+if __name__ == '__main__':
+    main()
+    signal.CTRL_C_EVENT
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
 #TODO 3: make functions for song and playlist downloading ✔
