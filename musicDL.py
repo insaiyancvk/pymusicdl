@@ -1,8 +1,10 @@
 import os, time, subprocess, requests, json
+from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
 ffmpeg = str(os.getcwd())+"/ffmpeg.exe"
+cwd = str(os.getcwd())
 def create_dir():
     """
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
@@ -19,7 +21,7 @@ def main():
     if 'updater' in str(os.getcwd()):
         cwd = str(os.getcwd()).replace('\\updater','\\')
     else:
-        cwd = os.getcwd()+'\\'
+        cwd = str(os.getcwd())+'\\'
     version = {}
     with open(cwd+'version.json', 'r') as f:
         version = json.load(f)
@@ -46,7 +48,8 @@ def main():
             print("\nRestart musicDL for downloading the updates :) ")
     else:
         print(f"\nYour software is running {cver}")
-
+    if 'deleteme' in os.listdir(cwd):
+        send2trash('deleteme')
     create_dir()
     print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
     ch = int(input("\n  Enter the serial number: "))
@@ -82,6 +85,7 @@ def main():
     n = input("Do you want to continue? (Y/N): ")
     if n.lower() == 'y':
         main()
+        os.chdir(cwd)
     else:
         print("\nSee you later!\n")
         time.sleep(3)

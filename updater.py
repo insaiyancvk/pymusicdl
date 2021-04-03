@@ -1,6 +1,7 @@
 from io import BytesIO
 import json, requests
 import stat,time
+from send2trash import send2trash
 import os, shutil, sys, subprocess
 from zipfile import ZipFile
 
@@ -45,36 +46,47 @@ for i in a:
 ignore = ['libcrypto-1_1.dll', 'libssl-1_1.dll', 'select.pyd', 'unicodedata.pyd', '_bz2.pyd', '_hashlib.pyd', '_lzma.pyd', '_queue.pyd', '_socket.pyd', '_ssl.pyd']
 existing = os.listdir(cwd)
 common = list(set(topdir).intersection(existing))
-if 'deleteme' not in os.listdir(cwd):
-    os.mkdir(cwd+'deleteme')
+print("\nChecking if 'deleteme' directory exists\n")
+if 'deleteme' in os.listdir(cwd):
+    print("\n'deleteme' dir found, deleting it.\n")
+    send2trash('deleteme')
 
+    # if sys.platform == 'win32':
+    #     os.system(f'rmdir /S /Q deleteme')
+    #     if 'deleteme' in os.listdir(cwd):
+    #         print("Please delete 'deleteme' folder in the main folder ")
+    #         print("Launching file explorer\n")
+    #         time.sleep(3)
+    #         subprocess.call(['explorer',cwd])
+
+if 'deleteme' not in os.listdir():
+    print("\ncreating 'deleteme'\n")
+    os.mkdir('deleteme')
+
+print("\nMoving files to 'deleteme'\n")
 for file in common:
     if file not in ignore:
-        shutil.move(cwd+file,cwd+'deleteme')
+        shutil.move(file,'deleteme')
 
+print("\nExtracting updated files from 'update.zip'\n")
 for i in a:
     if i not in os.listdir(cwd):
         f.extract(i,cwd)
 
-if 'deleteme' in os.listdir(cwd):
-    if sys.platform == 'win32':
-        os.system(f'rmdir /S /Q {cwd+"deleteme"}')
-        if 'deleteme' in os.listdir(cwd):
-            try:
-                os.chmod(f'{cwd+"deleteme"}',0o777)
-                shutil.rmtree(f'{cwd+"deleteme"}', stat.S_IWUSR)
-            except:
-                pass
-if 'deleteme' in os.listdir(cwd):
-    print("Please delete 'deleteme folder' in the main folder ")
-    print("Launching file explorer\n")
-    time.sleep(3)
-    subprocess.call([f'explorer {cwd}'])
+# if 'deleteme' in os.listdir(cwd):
+#     print("\nDeleting 'deleteme' dir\n")
+#     send2trash('deleteme')
+
+    # if sys.platform == 'win32':
+    #     os.system(f'rmdir /S /Q deleteme')
+
 version['version'] = checkver
+print("\nUpdating version\n")
 with open(cwd+'version.json', 'w') as f:
     json.dump(version, f)
     f.close()
 with open(cwd+'version.json', 'r') as f:
     print(f"Your software has been updated to {json.load(f)['version']}")
     f.close()
+print("\nRedirecting to main program\n")
 subprocess.call([cwd+'musicDL.exe'])
