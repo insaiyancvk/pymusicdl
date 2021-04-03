@@ -36,10 +36,6 @@ def main():
     checkver = req[0]['tag_name']
 
     if cver!=checkver:
-        j=0
-        for i in range(len(req[0]['assets'])):
-            if 'update' in req[0]['assets'][i]['name']:
-                j=i
         print(f"\n\t***** New update {checkver} avaliable! *****\n")
         choice = input("Would you like to update? (Y/N): ")
         if choice.lower() == 'y':
@@ -48,8 +44,11 @@ def main():
             print("\nRestart musicDL for downloading the updates :) ")
     else:
         print(f"\nYour software is running {cver}")
-    if 'deleteme' in os.listdir(cwd):
-        send2trash('deleteme')
+    try:
+        if 'deleteme' in os.listdir(cwd):
+            send2trash('deleteme')
+    except:
+        pass
     create_dir()
     print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
     ch = int(input("\n  Enter the serial number: "))
