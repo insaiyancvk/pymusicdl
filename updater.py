@@ -1,8 +1,7 @@
 from io import BytesIO
 import json, requests
-import stat,time
 from send2trash import send2trash
-import os, shutil, sys, subprocess
+import os, shutil, subprocess
 from zipfile import ZipFile
 
 if 'updater' in str(os.getcwd()):
@@ -51,14 +50,6 @@ if 'deleteme' in os.listdir(cwd):
     print("\n'deleteme' dir found, deleting it.\n")
     send2trash('deleteme')
 
-    # if sys.platform == 'win32':
-    #     os.system(f'rmdir /S /Q deleteme')
-    #     if 'deleteme' in os.listdir(cwd):
-    #         print("Please delete 'deleteme' folder in the main folder ")
-    #         print("Launching file explorer\n")
-    #         time.sleep(3)
-    #         subprocess.call(['explorer',cwd])
-
 if 'deleteme' not in os.listdir():
     print("\ncreating 'deleteme'\n")
     os.mkdir('deleteme')
@@ -72,13 +63,6 @@ print("\nExtracting updated files from 'update.zip'\n")
 for i in a:
     if i not in os.listdir(cwd):
         f.extract(i,cwd)
-
-# if 'deleteme' in os.listdir(cwd):
-#     print("\nDeleting 'deleteme' dir\n")
-#     send2trash('deleteme')
-
-    # if sys.platform == 'win32':
-    #     os.system(f'rmdir /S /Q deleteme')
 
 version['version'] = checkver
 print("\nUpdating version\n")
