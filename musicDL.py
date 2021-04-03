@@ -1,10 +1,10 @@
-import os, time, subprocess, requests, json
+import os, time, subprocess, requests, json, sys
 from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
 ffmpeg = str(os.getcwd())+"/ffmpeg.exe"
-cwd = str(os.getcwd())
+
 def create_dir():
     """
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
@@ -18,6 +18,8 @@ def create_dir():
         os.chdir("musicDL downloads")
 
 def main():
+    path = sys.argv[0]
+    os.chdir(path[:path.rindex('\\')]+'\\')
     if 'updater' in str(os.getcwd()):
         cwd = str(os.getcwd()).replace('\\updater','\\')
     else:
@@ -50,8 +52,13 @@ def main():
     except:
         pass
     create_dir()
+    print()
     print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
-    ch = int(input("\n  Enter the serial number: "))
+    try:
+        ch = int(input("\n  Enter the serial number: "))
+    except ValueError:
+        print("Invalid input, try 1/2/3\n")
+        main()
     yt = yt_downloader(ffmpeg)
     spdl = spotify_downloader(ffmpeg)
     if ch == 1:
@@ -84,10 +91,10 @@ def main():
     n = input("Do you want to continue? (Y/N): ")
     if n.lower() == 'y':
         main()
-        os.chdir(cwd)
     else:
         print("\nSee you later!\n")
         time.sleep(3)
+cwd = str(os.getcwd())
 main()
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
 #TODO 2: Ask user to give a name to the playlist and download the music to that folder ✔
