@@ -58,7 +58,7 @@ jk, just run the file that you downloaded.
 
 ## Step 2: Check `musicDL.exe` inside 'setup' folder
 
-![](images/cmd3.png)
+![](images/dirs.png)
 ![](images/cmd4.png)
 
 > **Note:** Never seperate whatever is inside setup folder. Because they're BFFs 💘 (jk, musicDL.exe uses ffmpeg.exe for converting the codec and adding album art) (if you want the app on desktop, you can just create a shortcut and put it on desktop)
