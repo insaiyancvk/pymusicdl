@@ -79,7 +79,7 @@ Just  `git pull origin main`  inside "music_downloader" for updating your local 
 ## Now comes the Good stuff:
 RUNNING THE DAMN CODE AND DOWNLOADING ALL THEM SONGS!
 
-![VIBE](https://media.giphy.com/media/cM1R5YKZHgQX4gkd7B/giphy.gif)
+![VIBE](https://media.giphy.com/media/iKH3eRQQ1gUebMncdL/giphy.gif)
 
 # Start the Code!
 
