@@ -16,7 +16,7 @@ Considering you reading this, I assume you're here to download some songs 😏 W
 #### You don't have to know anything technical about programming or whatever. Just know how to install stuff and how to open stuff lol.
 
 ## What should you do to get this app rolling?
-> Follow the steps. The setup is [ez](https://www.google.com/search?q=ez+meaning&oq=ez+meaning&aqs=chrome..69i57.1754j0j1&sourceid=chrome&ie=UTF-8). And running the app is also ez.
+> Follow the steps. The setup is [ez](https://www.abbreviations.com/images/50767_EZ.png). And running the app is also ez.
 
 ## What libraries did I use in my code?
 Here are the libraries that I used:
@@ -45,7 +45,7 @@ Here are the libraries that I used:
 
 #### Get the stuff:
 
-* Get the executable file (`setup.exe`) from [here](https://github.com/insaiyancvk/music_downloader/releases/tag/v2.0.1)
+* Get the executable file (`Music.Downloader.exe`) from [here](https://github.com/insaiyancvk/music_downloader/releases/tag/v2.1.0)
 
 
 ### Now comes the real CoDiNg stuff
