@@ -1,4 +1,4 @@
-import os, time, subprocess, requests, json, sys, signal
+import os, time, subprocess, requests, json, sys, signal, shutil
 from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
@@ -18,18 +18,12 @@ def create_dir():
         os.chdir("musicDL downloads")
 
 def main():
-    path = sys.argv[0]
-    os.chdir(path[:path.rindex('\\')]+'\\')
-    if 'updater' in str(os.getcwd()):
-        cwd = str(os.getcwd()).replace('\\updater','\\')
-    else:
-        cwd = str(os.getcwd())+'\\'
+    os.chdir(path)
     version = {}
-    with open(cwd+'version.json', 'r') as f:
+    with open(path+'version.json', 'r') as f:
         version = json.load(f)
         f.close()
     cver = version['version']
-
     basegiturl = 'https://api.github.com'
     headers = {"Accept": "application/vnd.github.v3+json"}
 
@@ -41,16 +35,21 @@ def main():
         print(f"\n\t***** New update {checkver} avaliable! *****\n")
         choice = input("Would you like to update? (Y/N): ")
         if choice.lower() == 'y':
+            print("Initiating the updater")
             subprocess.call(['updater/updater.exe'])
         else:
             print("\nRestart musicDL for downloading the updates :) ")
     else:
         print(f"\nYour software is running {cver}")
     try:
-        if 'deleteme' in os.listdir(cwd):
-            send2trash('deleteme')
-    except:
-        pass
+        if 'deleteme' in os.listdir(path):
+            shutil.rmtree("deleteme")
+    except PermissionError:
+        try:
+            if 'deleteme' in os.listdir(path):
+                send2trash('deleteme')
+        except:
+            pass
     create_dir()
     print()
     print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
@@ -96,9 +95,12 @@ def main():
         print("\nSee you later!\n")
         time.sleep(3)
         signal.CTRL_C_EVENT
-        signal.CTRL_C_EVENT
+        print("\n\t** Note: If the app still doesn't exit, click \"ctrl+c\" **\n")
 
 if __name__ == '__main__':
+    global path
+    path = os.getcwd()+'\\'
+    print("Note that you can always quit the program using \"ctrl+c\" shortcut ")
     main()
     signal.CTRL_C_EVENT
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔
