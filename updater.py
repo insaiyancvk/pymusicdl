@@ -1,5 +1,5 @@
 from io import BytesIO
-import json, requests
+import json, requests, urllib, time
 from send2trash import send2trash
 import os, shutil, subprocess
 from zipfile import ZipFile
@@ -28,13 +28,28 @@ j=0
 for i in range(len(req[0]['assets'])):
     if 'update' in req[0]['assets'][i]['name']:
         j=i
-git = requests.get(req[0]['assets'][j]['browser_download_url'], allow_redirects = True)
-url = git.url
+u = urllib.request.urlopen(req[0]['assets'][j]['browser_download_url'])
+url = u.geturl()
+print("\t\t***** This step could take a while depending on your internet speed *****\n")
 print("Getting details from the redirected link\n")    
-r = requests.get(url, stream=True)
-f = ZipFile(BytesIO(r.content))
-a = f.namelist()
+start_time = time.time()
+r = requests.get(
+    url,
+    # headers={'User-Agent': 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36'},
+    stream=True,
+    timeout = 10
+).content
+# r = urllib.request.urlopen(urllib.request.Request(
+#     url
+#     # headers={'User-Agent': 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36'}
+# )).read()
+end_time = time.time()
+print(f"Time taken to retrieve content of the new update: %.2f secs\n"%(end_time-start_time))
+print("Content of 'update.zip' retrieved\n")
+print("Reading the zip file\n")
+f = ZipFile(BytesIO(r))
 
+a = f.namelist()
 topdir = []
 for i in a:
     if '/' in i:
@@ -42,6 +57,8 @@ for i in a:
             topdir.append(i[:i.find('/')])
     else:
         topdir.append(i)
+# print(topdir)
+# quit()
 ignore = ['libcrypto-1_1.dll', 'libssl-1_1.dll', 'select.pyd', 'unicodedata.pyd', '_bz2.pyd', '_hashlib.pyd', '_lzma.pyd', '_queue.pyd', '_socket.pyd', '_ssl.pyd']
 existing = os.listdir(cwd)
 common = list(set(topdir).intersection(existing))
