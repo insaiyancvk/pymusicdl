@@ -45,7 +45,7 @@ Here are the libraries that I used:
 
 #### Get the stuff:
 
-* Get the executable file (`setup.exe`) from [here](https://github.com/insaiyancvk/music_downloader/releases/tag/v2.0.1)
+* Get the executable file (`Music.Downloader.exe`) from [here](https://github.com/insaiyancvk/music_downloader/releases/tag/v2.1.0)
 
 
 ### Now comes the real CoDiNg stuff
