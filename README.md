@@ -61,7 +61,7 @@ jk, just run the file that you downloaded.
 ![](images/dirs.png)
 ![](images/cmd4.png)
 
-> **Note:** Never seperate whatever is inside setup folder. Because they're BFFs 💘 (jk, musicDL.exe uses ffmpeg.exe for converting the codec and adding album art) (if you want the app on desktop, you can just create a shortcut and put it on desktop)
+> **Note:** Never seperate whatever is inside `Music Downloader` folder. Because they're BFFs 💘 (jk, all the files depend on each other, so if you delete/move any of them then you'll mess up all the dependencies) (if you want the app on desktop, you can just create a shortcut and put it on desktop)
 
 ## Setup for devs
 
