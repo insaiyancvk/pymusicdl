@@ -96,7 +96,10 @@ class common():
                     try:
                         os.rename(i,i.replace("_"," "))
                     except FileExistsError:
-                        os.rename(i,i.replace("_","  "))
+                        try:
+                            os.rename(i,i.replace("_","  "))
+                        except FileExistsError:
+                            pass
         except TypeError:
             for i in dirs:
                 if name in i:
