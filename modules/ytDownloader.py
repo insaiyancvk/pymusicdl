@@ -1,5 +1,5 @@
-import os, time, sys
-
+import os, time
+from youtube_title_parse import get_artist_title
 try:
     import pafy # type: ignore
 except:
@@ -68,7 +68,21 @@ class yt_downloader():
         print("\t","="*100)
         print(f"\n\n\t    Your song is downloaded in \"/musicDL downloads/singles\" folder on desktop\n")
         print("\t","="*100)
-        print("\n")
+        print("\n\n")
+        op = input("Enter:\n  1 - open the folder where the song is downloaded\n  2 - open the song that's downloaded\n  3 - exit : ")
+        if op == '1':
+            os.startfile(".")
+        elif op == '2':
+            file = pafy.new(video_url[c-1]).title
+            a,t = get_artist_title(file)
+            if file+".mp3" in os.listdir():
+                os.startfile(file+".mp3")
+            elif t+" - "+a+".mp3" in os.listdir():
+                os.startfile(t+" - "+a+".mp3")
+            else:
+                os.startfile(".")
+        else:
+            return
         
     
     def download_playlist(self):
@@ -121,4 +135,9 @@ class yt_downloader():
         print("\t","="*100)
         print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
         print("\t","="*100)
-        print("\n")
+        print("\n\n")
+        op = input("Would you like to open the the playlist? (Y/N) ")
+        if op.lower() == "y":
+            os.startfile(".")
+        else:
+            return
