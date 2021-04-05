@@ -172,4 +172,9 @@ class spotify_downloader():
         print("\t","="*100)
         print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n\n")
         print("\t","="*100)
-        print("\n")
+        print("\n\n")
+        op = input("Would you like to open the the playlist? (Y/N) ")
+        if op.lower() == "y":
+            os.startfile(".")
+        else:
+            return
