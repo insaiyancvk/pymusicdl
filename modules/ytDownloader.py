@@ -1,4 +1,4 @@
-import os, time
+import os, time, glob
 from youtube_title_parse import get_artist_title
 try:
     import pafy # type: ignore
@@ -80,7 +80,9 @@ class yt_downloader():
             elif t+" - "+a+".mp3" in os.listdir():
                 os.startfile(t+" - "+a+".mp3")
             else:
-                os.startfile(".")
+                files = glob.glob("./*")
+                song = max(files, key = os.path.getctime)
+                os.startfile(song)
         else:
             return
         
