@@ -3,8 +3,8 @@ try:
 except:
     print("install 'pafy' library with 'pip install pafy'")
 
-import os, urllib.request, re
-import subprocess
+import os, urllib.request, re, subprocess
+from rich.console import Console
 try:
     from youtube_title_parse import get_artist_title 
 except:
@@ -61,6 +61,7 @@ class common():
             os.remove("w"+new)
             os.remove("thumb.png")
         else:
+            print("Upscaling the bitrate to 320 kbps")
             subprocess.call([self.ffmpeg,'-hide_banner','-loglevel','quiet','-i',old,'-b:a', '320k',new])
             os.remove(old)
 
@@ -77,7 +78,7 @@ class common():
             return
         name = v.title
         audio = v.getbestaudio()
-        print(f"\nDownloading {name} as an audio file")
+        Console().print(f"\n[bold green]Downloading {name}[/bold green]")
         audio.download()
         dirs = os.listdir()
         try:
@@ -89,7 +90,7 @@ class common():
                 if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:
                     track_name = title+" - "+artist+".mp3"
                     track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                    print(f" Converting \"{i}\" to \"{track_name}\" ")
+                    print(f" Converting the audio format to mp3 ")
                     self.convert(i, track_name, albart)
             for i in os.listdir():
                 if "_" in i:
@@ -107,7 +108,7 @@ class common():
                     ext = i[ind1:]
                     if ext in i:
                         track_name = name[:ind1]+".mp3"
-                        print(f" Converting \"{i}\" to \"{track_name}\" ")
+                        print(f" Converting the audio format to mp3 ")
                         self.convert(i, track_name, albart)
                         print(" Successfully Converted ")
             for i in os.listdir():

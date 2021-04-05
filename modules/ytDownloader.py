@@ -4,7 +4,7 @@ try:
     import pafy # type: ignore
 except:
     print("Install 'pafy' library using 'pip install pafy'")
-
+from rich.console import Console
 try:
     from pytube import Playlist
 except:
@@ -42,7 +42,7 @@ class yt_downloader():
             os.mkdir("singles")
             os.chdir("singles")
 
-        print("\ntip:\n  * give the name of song and the artist for better search results)\n  * you could paste the video url itself if you're looking for a specific song.\n")
+        Console().print("\ntip:\n  [bold white]* give the name of song and the artist for better search results)\n  * you could paste the video url itself if you're looking for a specific song.[/bold white]\n")
         s = input("Enter the song name: ")
         print(f"\nHere are the top 7 search results for {s}. Enter the serial number to download it.\n")
         s = s.replace(" ","+")
@@ -66,7 +66,7 @@ class yt_downloader():
         cm.download_song(video_url[c-1],'','')
         print("\n\n")
         print("\t","="*100)
-        print(f"\n\n\t    Your song is downloaded in \"/musicDL downloads/singles\" folder on desktop\n")
+        Console().print(f"\n\n\t    Your song is downloaded in \"[bold]/musicDL downloads/singles[/bold]\" folder on desktop\n")
         print("\t","="*100)
         print("\n\n")
         op = input("Enter:\n  1 - open the folder where the song is downloaded\n  2 - open the song that's downloaded\n  3 - exit : ")
@@ -101,8 +101,8 @@ class yt_downloader():
         print()
         print(" "*20,"*"*60)
         print(" "*20,"*"," "*56,"*")
-        print(" "*20,"*","          ","MAKE SURE YOUR PLAYLIST IS PUBLIC","           ","*")
-        print(" "*20,"*","     ","YOU CAN MAKE IT PRIVATE LATER AFTER DOWNLOADING","  ","*")
+        Console().print(" "*20,"*","          ","[bold red]MAKE SURE YOUR PLAYLIST IS PUBLIC[/bold red]","           ","*")
+        Console().print(" "*20,"*","     ","[bold red]YOU CAN MAKE IT PRIVATE LATER AFTER DOWNLOADING[/bold red]","  ","*")
         print(" "*20,"*"," "*56,"*")
         print(" "*20,"*"*60,"\n")
 
@@ -135,7 +135,7 @@ class yt_downloader():
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print("\n\n")
         print("\t","="*100)
-        print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n")
+        Console().print(f"\n\n\t     Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop \n")
         print("\t","="*100)
         print("\n\n")
         op = input("Would you like to open the the playlist? (Y/N) ")

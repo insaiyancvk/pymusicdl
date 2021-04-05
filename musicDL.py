@@ -1,4 +1,5 @@
-import os, time, subprocess, requests, json, sys, signal, shutil
+import os, time, subprocess, requests, json, signal, shutil
+from rich.console import Console
 from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
@@ -32,15 +33,15 @@ def main():
     checkver = req[0]['tag_name']
 
     if cver!=checkver:
-        print(f"\n\t***** New update {checkver} avaliable! *****\n")
+        Console().rule(f"\n\t[bold green]***** New update [cyan]{checkver}[/cyan] avaliable! *****[/bold green]\n",align="center",style="black")
         choice = input("Would you like to update? (Y/N): ")
         if choice.lower() == 'y':
-            print("Initiating the updater")
+            Console().print("[bold]Initiating the updater[/bold]")
             subprocess.call(['updater/updater.exe'])
         else:
             print("\nRestart musicDL for downloading the updates :) ")
     else:
-        print(f"\nYour software is running {cver}")
+        Console().rule(f"\n[green]Your software is running on [cyan] {cver} [/cyan][/green]\n",align="center",style="black")
     try:
         if 'deleteme' in os.listdir(path):
             shutil.rmtree("deleteme")
@@ -56,7 +57,7 @@ def main():
     try:
         ch = int(input("\n  Enter the serial number: "))
     except ValueError:
-        print("Invalid input, try 1/2/3\n")
+        Console().rule("[red]Invalid input, try 1/2/3[/red]\n",align="left",style="black")
         main()
     yt = yt_downloader(ffmpeg)
     spdl = spotify_downloader(ffmpeg)
@@ -64,7 +65,7 @@ def main():
         try:
             yt.download_singles()
         except Exception as e:
-            print(f"\n\nLook like something went wrong :(\n{e}\n\n")
+            print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
             print("Take a screenshort and raise an issue in github or send it to the devs\n")
             pass
 
@@ -72,7 +73,7 @@ def main():
         try:
             yt.download_playlist()
         except Exception as e:
-            print(f"\n\nLook like something went wrong :(\n{e}\n\n")
+            print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
             print("Take a screenshort and raise an issue in github or send it to the devs\n")
             pass
 
@@ -80,7 +81,7 @@ def main():
         try:
             spdl.interface()
         except Exception as e:
-            print(f"\n\nLook like something went wrong :(\n{e}\n\n")
+            print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
             print("Take a screenshort and raise an issue in github or send it to the devs\n")
             pass
 
@@ -95,12 +96,12 @@ def main():
         print("\nSee you later!\n")
         time.sleep(3)
         signal.CTRL_C_EVENT
-        print("\n\t** Note: If the app still doesn't exit, click \"ctrl+c\" **\n")
+        Console().print("\n\t** Note: If the app still doesn't [bold]exit, click \"ctrl+c\"[/bold] **\n")
 
 if __name__ == '__main__':
     global path
     path = os.getcwd()+'\\'
-    print("Note that you can always quit the program using \"ctrl+c\" shortcut ")
+    Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
     main()
     signal.CTRL_C_EVENT
 #TODO 1: create playlist and singles directories in musicDL downloads foler ✔

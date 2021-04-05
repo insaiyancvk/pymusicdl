@@ -1,5 +1,5 @@
 import json, base64, os, requests, time, sys
-
+from rich.console import Console
 try:
     import spotipy 
     from spotipy.oauth2 import SpotifyClientCredentials
@@ -151,11 +151,11 @@ class spotify_downloader():
             print("Invalid link, exiting")
             return
         start_time = time.time()
-        print(f"\nFetching all the relevant URLs")
+        Console().print(f"\n[bold]Fetching all the relevant URLs[/bold]")
         urls = self.get_yt_urls(tracks)
         end_time = time.time()
         print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
-        print("\nDownloading the songs\n")
+        Console().print("\n[green]Downloading the songs[/green]\n")
 
         for i in tracks.keys():
             sponame.append(tracks[i]+" - "+i)
@@ -170,7 +170,7 @@ class spotify_downloader():
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
         print("\n\n")
         print("\t","="*100)
-        print(f"\n\n\t    Your playlist is downloaded in \"/musicDL downloads/Playlists/{plName}\" folder on desktop\n\n")
+        Console().print(f"\n\n\t    Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop\n\n")
         print("\t","="*100)
         print("\n\n")
         op = input("Would you like to open the the playlist? (Y/N) ")
