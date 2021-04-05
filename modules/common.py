@@ -77,7 +77,7 @@ class common():
             return
         name = v.title
         audio = v.getbestaudio()
-        print(f"\ndownloading {name} as an audio file")
+        print(f"\nDownloading {name} as an audio file")
         audio.download()
         dirs = os.listdir()
         try:
