@@ -167,4 +167,4 @@ What next?
 * So I'm working on adding album support for spotify right now. ✔
 * Will make an attempt to make a windows executable file (.exe) for this app. ✔
 * Probably GUI
-* Work on a smoother way of updating the file.
+* Work on a smoother way of updating the file. ✔
