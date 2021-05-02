@@ -1,4 +1,4 @@
-import os, subprocess, requests, json, signal, shutil, sys
+import os, subprocess, requests, json, shutil, sys
 from rich.console import Console
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
