@@ -9,7 +9,17 @@ pip install pymusicdl
 ```
 
 ## Usage:
+On Linux:
+
 ```python
+#!/usr/bin/python3
+from pymusicdl.musicDL import main
+
+main()
+```
+On Windows:
+```python
+
 from pymusicdl.musicDL import main
 
 main()
@@ -19,9 +29,13 @@ main()
 
 * Make a `musicdl.py` file and add the above code.
 
-* If you are on linux you can place that file in `~/.local/bin` and run `python3 musicdl.py` in terminal
-
-* And if you are on windows you can place the file in `C:/Program Files/Python3.x/Scripts` and run `py musicdl.py` in command prompt
+* For **Linux** run the following commands:
+```    
+    mv musicdl.py ~/.local/bin
+    chmod +x musicdl.py
+    musicdl.py
+```
+* For **Windows** you can place the file in `C:/Program Files/Python3.x/Scripts` and run `py musicdl.py` in command prompt
 
 ## Updating the package:
 ```
