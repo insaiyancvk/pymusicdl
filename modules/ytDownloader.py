@@ -16,9 +16,6 @@ except:
 
 class yt_downloader():
 
-    def __init__(self, ffmpeg):
-        self.ffmpeg = ffmpeg
-
     def get_playlist_url(self,plLink):
         """
         Returns all the song links of a playlist. Given the playlist URL.
@@ -35,7 +32,7 @@ class yt_downloader():
         Downloads songs based on youtube search. Takes a string as an input.
         """
 
-        cm = common(self.ffmpeg)
+        cm = common()
         try:
             os.chdir("singles")
         except:
@@ -112,7 +109,7 @@ class yt_downloader():
         Downloads a playlist of songs given the URL
         """
 
-        cm = common(self.ffmpeg)
+        cm = common()
         try:
             os.chdir("Playlists")
         except:

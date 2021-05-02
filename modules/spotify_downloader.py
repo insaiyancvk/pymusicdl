@@ -14,9 +14,8 @@ except ImportError:
 destination = os.getcwd()+'/sec.json'
 class spotify_downloader():
 
-    def __init__(self, ffmpeg):
-        self.ffmpeg = ffmpeg
-        self.ytd =  common(ffmpeg, spo=True)
+    def __init__(self):
+        self.ytd =  common(spo=True)
     
     def create_PLdir(self,plName):
         """ creates a playlist directory with the given name """
