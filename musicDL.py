@@ -1,26 +1,23 @@
-import os, subprocess, requests, json, signal, shutil
+import os, subprocess, requests, json, signal, shutil, sys
 from rich.console import Console
-from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
-ffmpeg=""
 def check_ffmpeg():
     ffmpeg_available = True
     try:
         if sys.platform=='linux' or os.name=='posix':
             subprocess.check_output(['which', 'ffmpeg']) 
-            ffmpeg = "ffmpeg"
             
-        elif sys.platform=='win32' or os.name=='nt':
+        if sys.platform=='win32' or os.name=='nt':
             subprocess.check_output(['where', 'ffmpeg'])
-            ffmpeg="ffmpeg.exe"
+            print(subprocess.check_output(['where', 'ffmpeg']))
 
     except Exception as e:
-        print(e, e.output)
+        print(e)
         ffmpeg_available = False
     return ffmpeg_available
-print(ffmpeg)
+    
 def create_dir():
     """
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
@@ -47,15 +44,15 @@ def main():
         except ValueError:
             Console().rule("[red]Invalid input, try 1/2/3[/red]\n",align="left",style="black")
             main()
-        yt = yt_downloader(ffmpeg)
-        spdl = spotify_downloader(ffmpeg)
+        yt = yt_downloader()
+        spdl = spotify_downloader()
         if ch == 1:
-            try:
-                yt.download_singles()
-            except Exception as e:
-                print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
-                print("Take a screenshort and raise an issue in github or send it to the devs\n")
-                pass
+            # try:
+            yt.download_singles()
+            # except Exception as e:
+            #     print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
+            #     print("Take a screenshort and raise an issue in github or send it to the devs\n")
+            #     pass
 
         elif ch == 2:
             try:
