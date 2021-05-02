@@ -1,2 +1,5 @@
 musicdl
 __pycache__/
+build/
+dist/
+pymusicdl.egg-info/
