@@ -1,1 +1,1 @@
-from pymusicdl.musicDL import main
+from . import *
