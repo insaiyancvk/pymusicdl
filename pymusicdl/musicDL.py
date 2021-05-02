@@ -1,7 +1,7 @@
 import os, subprocess, requests, json, shutil, sys
 from rich.console import Console
-from modules.ytDownloader import yt_downloader 
-from modules.spotify_downloader import spotify_downloader 
+from .modules.ytDownloader import yt_downloader 
+from .modules.spotify_downloader import spotify_downloader 
 
 def check_ffmpeg():
     ffmpeg_available = True
@@ -29,6 +29,7 @@ def create_dir():
         os.mkdir("musicDL downloads")
         os.chdir("musicDL downloads")
 
+path = os.getcwd()+'/'
 def main():
     
     if check_ffmpeg():
@@ -83,9 +84,3 @@ def main():
             print("You can download FFMPEG.exe from insaiyancvk/pymusicdl repository and add it to your path")
         elif sys.platform=='linux' or os.name=='posix':
             print("Use \n\tsudo apt install ffmpeg\nif you're on debian")
-
-if __name__ == '__main__':
-    global path
-    path = os.getcwd()+'/'
-    Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
-    main()
