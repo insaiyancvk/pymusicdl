@@ -1,4 +1,4 @@
-import json, base64, os, requests, time, sys
+import json, base64, os, requests, time, sys, subprocess
 from rich.console import Console
 try:
     import spotipy 
@@ -175,6 +175,9 @@ class spotify_downloader():
         print("\n\n")
         op = input("Would you like to open the the playlist? (Y/N) ")
         if op.lower() == "y":
-            os.startfile(".")
+            if sys.platform=='win32' or os.name=='nt':
+                os.startfile(".")
+            elif sys.platform=='linux' or os.name=='posix':
+                subprocess.call(['xdg-open','.'])
         else:
             return

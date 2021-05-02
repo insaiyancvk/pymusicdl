@@ -1,4 +1,4 @@
-import os, time, glob
+import os, time, glob, sys, subprocess
 from youtube_title_parse import get_artist_title
 try:
     import pafy # type: ignore
@@ -70,19 +70,39 @@ class yt_downloader():
         print("\t","="*100)
         print("\n\n")
         op = input("Enter:\n  1 - open the folder where the song is downloaded\n  2 - open the song that's downloaded\n  3 - exit : ")
+        
         if op == '1':
-            os.startfile(".")
+            if sys.platform=='win32' or os.name=='nt':
+                os.startfile(".")
+            elif sys.platform=='linux' or os.name=='posix':
+                subprocess.call(['xdg-open','.'])
+
         elif op == '2':
             file = pafy.new(video_url[c-1]).title
             a,t = get_artist_title(file)
+
             if file+".mp3" in os.listdir():
-                os.startfile(file+".mp3")
+
+                if sys.platform=='win32' or os.name=='nt':
+                    os.startfile(file+".mp3")
+
+                elif sys.platform=='linux' or os.name=='posix':
+                    subprocess.call(['xdg-open',file+".mp3"])
+                
             elif t+" - "+a+".mp3" in os.listdir():
-                os.startfile(t+" - "+a+".mp3")
+                if sys.platform=='win32' or os.name=='nt':
+                    os.startfile(t+" - "+a+".mp3")
+
+                elif sys.platform=='linux' or os.name=='posix':
+                    subprocess.call(['xdg-open',t+" - "+a+".mp3"])
+                
             else:
                 files = glob.glob("./*")
                 song = max(files, key = os.path.getctime)
-                os.startfile(song)
+                if sys.platform=='win32' or os.name=='nt':
+                    os.startfile(song)
+                elif sys.platform=='linux' or os.name=='posix':
+                    subprocess.call(['xdg-open',song])
         else:
             return
         
@@ -140,6 +160,9 @@ class yt_downloader():
         print("\n\n")
         op = input("Would you like to open the the playlist? (Y/N) ")
         if op.lower() == "y":
-            os.startfile(".")
+            if sys.platform=='win32' or os.name=='nt':
+                os.startfile(".")
+            elif sys.platform=='linux' or os.name=='posix':
+                subprocess.call(['xdg-open','.'])
         else:
             return
