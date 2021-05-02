@@ -4,6 +4,5 @@ requests
 rich
 spotipy
 urllib3
-urllib
 youtube-dl
 youtube-title-parse
