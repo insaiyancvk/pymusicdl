@@ -4,7 +4,7 @@ from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
 
-ffmpeg = str(os.getcwd())+"/ffmpeg.exe"
+ffmpeg = "ffmpeg"
 
 def create_dir():
     """
@@ -20,37 +20,9 @@ def create_dir():
 
 def main():
     os.chdir(path)
-    version = {}
-    with open(path+'version.json', 'r') as f:
-        version = json.load(f)
-        f.close()
-    cver = version['version']
-    basegiturl = 'https://api.github.com'
-    headers = {"Accept": "application/vnd.github.v3+json"}
-
-    req = requests.get(basegiturl+'/repos/insaiyancvk/music_downloader/releases',headers = headers).json()
-
-    checkver = req[0]['tag_name']
-
-    if cver!=checkver:
-        Console().rule(f"\n\t[bold green]***** New update [cyan]{checkver}[/cyan] avaliable! *****[/bold green]\n",align="center",style="black")
-        choice = input("Would you like to update? (Y/N): ")
-        if choice.lower() == 'y':
-            Console().print("[bold]Initiating the updater[/bold]")
-            subprocess.call(['updater/updater.exe'])
-        else:
-            print("\nRestart musicDL for downloading the updates :) ")
-    else:
-        Console().rule(f"\n[green]Your software is running on [cyan] {cver} [/cyan][/green]\n",align="center",style="black")
-    try:
-        if 'deleteme' in os.listdir(path):
-            shutil.rmtree("deleteme")
-    except PermissionError:
-        try:
-            if 'deleteme' in os.listdir(path):
-                send2trash('deleteme')
-        except:
-            pass
+    
+    # Console().rule(f"\n[green]Your software is running on [cyan] {cver} [/cyan][/green]\n",align="center",style="black")
+    
     create_dir()
     print()
     print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
