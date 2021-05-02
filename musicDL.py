@@ -80,7 +80,7 @@ def main():
     else:
         print("Please install FFMPEG and add it to your environment variable")  
         if sys.platform=='win32' or os.name=='nt':
-            print("You can download FFMPEG.exe from insaiyancvk/music_downloader repository and add it to your path")
+            print("You can download FFMPEG.exe from insaiyancvk/pymusicdl repository and add it to your path")
         elif sys.platform=='linux' or os.name=='posix':
             print("Use \n\tsudo apt install ffmpeg\nif you're on debian")
 

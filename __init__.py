@@ -1,1 +1,1 @@
-from music_downloader.musicDL import main
+from pymusicdl.musicDL import main

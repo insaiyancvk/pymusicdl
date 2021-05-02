@@ -26,7 +26,7 @@ Here are the main libraries that I used:
 
 ## Here are the Sections:
 * [Setup]()
-* [***V I B E***](https://github.com/insaiyancvk/music_downloader#now-go-ahead-and-v-i-b-e-with-all-the-songs-you-downloaded)
+* [***V I B E***](https://github.com/insaiyancvk/pymusicdl#now-go-ahead-and-v-i-b-e-with-all-the-songs-you-downloaded)
 
 ## Setup
 1. Download [`pip`](https://bootstrap.pypa.io/get-pip.py) if you haven't.
