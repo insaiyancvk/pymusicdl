@@ -31,7 +31,7 @@ def create_dir():
 
 path = os.getcwd()+'/'
 def main():
-    
+    Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
     if check_ffmpeg():
 
         os.chdir(path)
