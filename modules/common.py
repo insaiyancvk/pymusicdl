@@ -3,7 +3,7 @@ try:
 except:
     print("install 'pafy' library with 'pip install pafy'")
 
-import os, urllib.request, re, subprocess
+import os, urllib.request, re, subprocess, sys
 from rich.console import Console
 try:
     from youtube_title_parse import get_artist_title 
@@ -14,8 +14,7 @@ from urllib.parse import quote
 
 class common():
     
-    def __init__(self, ffmpeg, spo=False):
-        self.ffmpeg = ffmpeg
+    def __init__(self, spo=False):
         self.spo = spo
 
     def get_url(self,s):
@@ -54,15 +53,15 @@ class common():
         """ converts any file format to .mp3 with the help of ffmpeg """
         
         if self.spo:
-            subprocess.call([self.ffmpeg,'-hide_banner','-loglevel', 'quiet','-i',old,'-b:a', '320k','w'+new])
+            subprocess.call(['ffmpeg','-hide_banner','-loglevel', 'quiet','-i',old,'-b:a', '320k','w'+new])
             os.remove(old)
             urllib.request.urlretrieve(alburl, "thumb.png")
-            subprocess.call([self.ffmpeg,'-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new])
+            subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new])
             os.remove("w"+new)
             os.remove("thumb.png")
         else:
             print("Upscaling the bitrate to 320 kbps")
-            subprocess.call([self.ffmpeg,'-hide_banner','-loglevel','quiet','-i',old,'-b:a', '320k',new])
+            subprocess.call(["ffmpeg",'-hide_banner','-loglevel','quiet','-i',old,'-b:a', '320k',new])
             os.remove(old)
 
     # Download the song
@@ -87,11 +86,18 @@ class common():
             else:
                 artist, title = get_artist_title(name)
             for i in dirs:
-                if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:
-                    track_name = title+" - "+artist+".mp3"
-                    track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                    print(f" Converting the audio format to mp3 ")
-                    self.convert(i, track_name, albart)
+                if sys.platform=='win32' or os.name=='nt':
+                    if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:
+                        track_name = title+" - "+artist+".mp3"
+                        track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
+                        print(f" Converting the audio format to mp3 ")
+                        self.convert(i, track_name, albart)
+                elif sys.platform=='linux' or os.name=='posix':
+                    if name in i:
+                        track_name = title+" - "+artist+".mp3"
+                        track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
+                        print(f" Converting the audio format to mp3 ")
+                        self.convert(i, track_name, albart)
             for i in os.listdir():
                 if "_" in i:
                     try:
