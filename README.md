@@ -163,6 +163,10 @@ This image shows for playlist, but it's similar for albums too!
 ## Now go ahead and _**V I B E**_ with all the songs you downloaded!
 ![VIBE](https://media.giphy.com/media/XZfc32rGwWllfn4FIB/giphy.gif)
 
+## Trojan false positive detection by windows defender:
+So it's observed that windows security defender is removing some DLL files for some reason.
+You can check "pure-python" [branch](https://github.com/insaiyancvk/pymusicdl/tree/pure-python) which is OS independent.
+
 What next?
 * So I'm working on adding album support for spotify right now. ✔
 * Will make an attempt to make a windows executable file (.exe) for this app. ✔
