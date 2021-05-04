@@ -13,7 +13,6 @@ def check_ffmpeg():
             subprocess.check_output(['where', 'ffmpeg'])
 
     except Exception as e:
-        print(e)
         ffmpeg_available = False
     return ffmpeg_available
     
