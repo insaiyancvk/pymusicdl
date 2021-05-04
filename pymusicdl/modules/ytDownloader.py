@@ -56,7 +56,33 @@ class yt_downloader():
                 j+=1
                 continue
         c = int(input("\nEnter the serial number: "))
-        cm.download_song(video_url[c-1],'','')
+        
+        Console().print(Columns([Panel(f"\nDownload size: [green]{int((pafy.new(video_url[c-1]).getbestaudio().get_filesize()/1048576)*100)/100} MB[/green]\n")]))
+        print()
+        
+        print("\nWould you like an mp3 or flac conversion?\n")
+        Console().rule("[bold]**** Here's a quick comparison on both codec ****[bold]", style="black", align="center")
+        print("\n")
+
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Avaliable Codec")
+        table.add_column("Bit-rate")
+        table.add_column("File Size")
+        table.add_column("Opinion")
+        table.add_row(
+            "mp3", "320kbps (fixed)","~7.3MB for 3min song","Standard codec with normal experience"
+        )
+        table.add_row()
+        table.add_row(
+            "flac", "usually >800kbps (1713kbps while testing, 5x of mp3)","~39MB for 3min song","Takes fair amount of disk space but gives amazing experience"
+        )
+        Console().print(table)
+        Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
+
+        print('\nIf you are confused on what to select, select mp3 (which is default)')
+        z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
+
+        cm.download_song(video_url[c-1],'','',z)
         print("\n\n")
         Console().print(Columns([Panel(f"\n    Your song is downloaded in \"[bold]/musicDL downloads/singles[/bold]\" folder on desktop    \n")]))
         print("\n\n")
@@ -139,6 +165,7 @@ class yt_downloader():
         for i in plLinks:
             data += pafy.new(i).getbestaudio().get_filesize()
         data = int((data/1048576)*100)/100
+        
         Console().print(Columns([Panel(f"\nDownload size: [green]{data} MB[/green]\n")]))
         print()
         
