@@ -1,18 +1,15 @@
-import os, time, glob, sys, subprocess
+import os, time, glob, sys, subprocess, pafy
+from pytube import Playlist
 from youtube_title_parse import get_artist_title
-try:
-    import pafy # type: ignore
-except:
-    print("Install 'pafy' library using 'pip install pafy'")
 from rich.console import Console
+from rich.columns import Columns
+from rich.table import Table
+from rich.panel import Panel
+
 try:
-    from pytube import Playlist
+    from common import common
 except:
-    print("Install 'pytube' library using 'pip install pytube'")
-try:
-    from .common import common # type: ignore
-except:
-    from common import common # type: ignore
+    from .common import common
 
 class yt_downloader():
 
@@ -39,7 +36,7 @@ class yt_downloader():
             os.mkdir("singles")
             os.chdir("singles")
 
-        Console().print("\ntip:\n  [bold white]* give the name of song and the artist for better search results)\n  * you could paste the video url itself if you're looking for a specific song.[/bold white]\n")
+        Console().print(Columns([Panel("\ntip:\n  [bold white]* give the name of song and the artist for better search results)\n  * you could paste the youtube video url itself if you're looking for a specific song.[/bold white]\n")]))
         s = input("Enter the song name: ")
         print(f"\nHere are the top 7 search results for {s}. Enter the serial number to download it.\n")
         s = s.replace(" ","+")
@@ -59,15 +56,11 @@ class yt_downloader():
                 j+=1
                 continue
         c = int(input("\nEnter the serial number: "))
-
         cm.download_song(video_url[c-1],'','')
         print("\n\n")
-        print("\t","="*100)
-        Console().print(f"\n\n\t    Your song is downloaded in \"[bold]/musicDL downloads/singles[/bold]\" folder on desktop\n")
-        print("\t","="*100)
+        Console().print(Columns([Panel(f"\n    Your song is downloaded in \"[bold]/musicDL downloads/singles[/bold]\" folder on desktop    \n")]))
         print("\n\n")
         op = input("Enter:\n  1 - open the folder where the song is downloaded\n  2 - open the song that's downloaded\n  3 - exit : ")
-        
         if op == '1':
             if sys.platform=='win32' or os.name=='nt':
                 os.startfile(".")
@@ -115,13 +108,9 @@ class yt_downloader():
         except:
             os.mkdir("Playlists")
             os.chdir("Playlists")
+
         print()
-        print(" "*20,"*"*60)
-        print(" "*20,"*"," "*56,"*")
-        Console().print(" "*20,"*","          ","[bold red]MAKE SURE YOUR PLAYLIST IS PUBLIC[/bold red]","           ","*")
-        Console().print(" "*20,"*","     ","[bold red]YOU CAN MAKE IT PRIVATE LATER AFTER DOWNLOADING[/bold red]","  ","*")
-        print(" "*20,"*"," "*56,"*")
-        print(" "*20,"*"*60,"\n")
+        Console().print(Columns([Panel(f"\n       [bold red]MAKE SURE YOUR PLAYLIST IS PUBLIC[/bold red]\n  [bold red]YOU CAN MAKE IT PRIVATE AFTER DOWNLOADING[/bold red]     \n")]))
 
         plLink = input("Enter your YouTube playlist URL: ")
         plName = input("Give a name to your playlist: ")
@@ -143,18 +132,56 @@ class yt_downloader():
             print("Exiting the program")
             return
         end_time = time.time()
-        print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
+        print(f"\nTime taken to fetch the URLs from Youtube: %.2f secs"%(end_time-start_time))
+
+        data = 0.0
+        print("\nCalculating total download size...\n")
+        for i in plLinks:
+            data += pafy.new(i).getbestaudio().get_filesize()
+        data = int((data/1048576)*100)/100
+        Console().print(Columns([Panel(f"\nDownload size: [green]{data} MB[/green]\n")]))
+        print()
+        
+        print("\nWould you like an mp3 or flac conversion?\n")
+        Console().rule("[bold]**** Here's a quick comparison on both codec ****[bold]", style="black", align="center")
+        print("\n")
+
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Avaliable Codec")
+        table.add_column("Bit-rate")
+        table.add_column("File Size")
+        table.add_column("Opinion")
+        table.add_row(
+            "mp3", "320kbps (fixed)","~7.3MB for 3min song","Standard codec with normal experience"
+        )
+        table.add_row()
+        table.add_row(
+            "flac", "usually >800kbps (1713kbps while testing, 5x of mp3)","~39MB for 3min song","Takes fair amount of disk space but gives amazing experience"
+        )
+        Console().print(table)
+        Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
+
+        print('\nIf you are confused on what to select, select mp3 (which is default)')
+        z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
+
         total_songs = len(plLinks)
         for i in plLinks:
-            cm.download_song(i,"",'')
+            if sys.platform=='win32' or os.name=='nt':
+                os.system("cls")
+            elif sys.platform=='linux' or os.name=='posix':
+                os.system("clear")
+            Console().print("[bold][green]Downloaded songs:[/green][/bold]")
+            Console().print(Columns([Panel(user+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
+            cm.download_song(i,"",'',z)
+            time.sleep(1)
         downloaded_songs = len(os.listdir())
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
+
         print("\n\n")
-        print("\t","="*100)
-        Console().print(f"\n\n\t     Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop \n")
-        print("\t","="*100)
+        Console().print(Columns([Panel(f"\n     Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop     \n")]))
         print("\n\n")
+
         op = input("Would you like to open the the playlist? (Y/N) ")
         if op.lower() == "y":
             if sys.platform=='win32' or os.name=='nt':
