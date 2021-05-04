@@ -1,16 +1,6 @@
-try:
-    import pafy
-except:
-    print("install 'pafy' library with 'pip install pafy'")
-
-import os, urllib.request, re, subprocess, sys
+import os, urllib.request, re, subprocess, sys, pafy
 from rich.console import Console
-from rich.table import Table
-try:
-    from youtube_title_parse import get_artist_title 
-except:
-    print("install 'youtube_title_parse' using 'pip install youtube_title_parse'")
-
+from youtube_title_parse import get_artist_title
 from urllib.parse import quote
 
 class common():
@@ -71,7 +61,7 @@ class common():
             os.remove(old)
 
     # Download the song
-    def download_song(self,url, albart, sponame): 
+    def download_song(self,url, albart, sponame, z): 
         """
         Download the song by passing the video URL as a parameter
         """
@@ -89,27 +79,6 @@ class common():
 
         dirs = os.listdir()
 
-        print("Would you like an mp3 or flac conversion?")
-        print("\t\t **** Here's a quick comparison on both codec ****")
-        print("\n\n")
-
-        table = Table(show_header=True, header_style="bold magenta")
-        table.add_column("Avaliable Codec")
-        table.add_column("Bit-rate")
-        table.add_column("File Size")
-        table.add_column("Opinion")
-        table.add_row(
-            "mp3", "320kbps (fixed)","~7.3MB for 3min song","Standard codec with normal experience"
-        )
-        table.add_row()
-        table.add_row(
-            "flac", "usually >800kbps (1713kbps while testing, 5x of mp3)","~39MB for 3min song","Takes fair amount of disk space but gives amazing experience"
-        )
-        Console().print(table)
-
-        print('\nIf you are confused on what to select, select mp3 (which is default)')
-        z = input("\tEnter\n\t1 - mp3\n\t2 - flac : ")
-
         try:
 
             if self.spo:
@@ -120,33 +89,33 @@ class common():
             for i in dirs:
                 if sys.platform=='win32' or os.name=='nt':
                     if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:                    
-
-                        if z == "1" or z == "mp3" or z == "mp" or z == "m":
-                            track_name = title+" - "+artist+".mp3"
-                            track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                            print(f" Converting the audio format to mp3")
-                            self.convert(i, track_name, albart)
-
-                        elif z == "2" or z == "flac" or z == "f":
+                        
+                        if z == "1" or z == "flac" or z == "f":
                             track_name = title+" - "+artist+".flac"
                             track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
                             print(f" Converting the audio format to flac")
                             self.convert(i, track_name, albart, flac=True)
+
+                        else:
+                            track_name = title+" - "+artist+".mp3"
+                            track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
+                            print(f" Converting the audio format to mp3")
+                            self.convert(i, track_name, albart)
 
                 elif sys.platform=='linux' or os.name=='posix':
                     if name in i:
 
-                        if z == "1" or z == "mp3" or z == "mp" or z == "m":
-                            track_name = title+" - "+artist+".mp3"
-                            track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
-                            print(f" Converting the audio format to mp3")
-                            self.convert(i, track_name, albart)
-
-                        elif z == "2" or z == "flac" or z == "f":
+                        if z == "1" or z == "flac" or z == "f":
                             track_name = title+" - "+artist+".flac"
                             track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
                             print(f" Converting the audio format to flac")
                             self.convert(i, track_name, albart, flac=True)
+                        
+                        else:
+                            track_name = title+" - "+artist+".mp3"
+                            track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
+                            print(f" Converting the audio format to mp3")
+                            self.convert(i, track_name, albart)
 
             for i in os.listdir():
                 if "_" in i:
@@ -164,15 +133,15 @@ class common():
                     ext = i[ind1:]
                     if ext in i:
 
-                        if z == "1" or z == "mp3" or z == "mp" or z == "m":
-                            track_name = name[:ind1]+".mp3"
-                            print(f" Converting the audio format to mp3")
-                            self.convert(i, track_name, albart)
-
-                        elif z == "2" or z == "flac" or z == "f":
+                        if z == "1" or z == "flac" or z == "f":
                             track_name = name[:ind1]+".flac"
                             print(f" Converting the audio format to flac")
                             self.convert(i, track_name, albart, flac=True)
+
+                        else:
+                            track_name = name[:ind1]+".mp3"
+                            print(f" Converting the audio format to mp3")
+                            self.convert(i, track_name, albart)
 
             for i in os.listdir():
                 if "_" in i:
