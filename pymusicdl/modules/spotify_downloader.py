@@ -1,15 +1,10 @@
-import json, base64, os, requests, time, sys, subprocess
+import json, base64, os, requests, time, sys, subprocess, spotipy
 from rich.console import Console
+from spotipy.oauth2 import SpotifyClientCredentials
 try:
-    import spotipy 
-    from spotipy.oauth2 import SpotifyClientCredentials
-except ImportError:
-    print("Install spotipy library using 'pip install spotipy'")
-
-try:
-    from common import common # type: ignore
-except ImportError:
-    from .common import common # type: ignore
+    from .common import common
+except:
+    from common import common
 
 destination = os.getcwd()+'/sec.json'
 class spotify_downloader():
