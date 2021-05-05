@@ -1,10 +1,14 @@
 import os, subprocess, requests, json, shutil, sys
 from rich.console import Console
+
 try:
-    from modules.ytDownloader import yt_downloader 
-    from modules.spotify_downloader import spotify_downloader 
+    from .modules.ytDownloader import yt_downloader
 except:
-    from .modules.ytDownloader import yt_downloader 
+    from modules.ytDownloader import yt_downloader 
+    
+try:
+    from modules.spotify_downloader import spotify_downloader 
+except:    
     from .modules.spotify_downloader import spotify_downloader 
 
 def check_ffmpeg():
@@ -52,11 +56,9 @@ def main():
         except ValueError:
             Console().rule("[red]Invalid input, try 1/2/3[/red]\n",align="left",style="black")
             main()
-        yt = yt_downloader()
-        spdl = spotify_downloader()
         if ch == 1:
             try:
-                yt.download_singles()
+                yt_downloader().download_singles()
             except Exception as e:
                 print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
@@ -64,7 +66,7 @@ def main():
 
         elif ch == 2:
             try:
-                yt.download_playlist()
+                yt_downloader().download_playlist()
             except Exception as e:
                 print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
@@ -72,7 +74,7 @@ def main():
 
         elif ch == 3:
             try:
-                spdl.interface()
+                spotify_downloader().interface()
             except Exception as e:
                 print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
