@@ -21,7 +21,7 @@ main()
 **Windows:**
 Run the following command in cmd
 ```
-curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-python/setup.bat && setup
+curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-python/setup.bat && setup && del setup.bat
 ```
 
 ## Running the code:
