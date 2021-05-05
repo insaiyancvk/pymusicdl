@@ -46,13 +46,21 @@ class common():
         if self.spo:
             if not flac:
                 subprocess.call(['ffmpeg','-hide_banner','-loglevel', 'quiet','-i',old,'-b:a', '320k','w'+new])
+                os.remove(old)
+                urllib.request.urlretrieve(alburl, "thumb.png")
+                print("Adding album art")
+                subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new])
+                os.remove("w"+new)
+                os.remove("thumb.png")
             elif flac:
                 subprocess.call(['ffmpeg','-hide_banner','-loglevel', 'quiet','-i',old,'-c:a', 'flac','w'+new])
-            os.remove(old)
-            urllib.request.urlretrieve(alburl, "thumb.png")
-            subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new])
-            os.remove("w"+new)
-            os.remove("thumb.png")
+                os.remove(old)
+                urllib.request.urlretrieve(alburl, "thumb.png")
+                print("Adding album art")
+                subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new, '-i','thumb.png','-sample_fmt', 's32', '-ar', '48000', '-disposition:v', 'attached_pic', '-vsync', '0', new])
+                os.remove("w"+new)
+                os.remove("thumb.png")
+            
         else:
             if not flac:
                 subprocess.call(["ffmpeg",'-hide_banner','-loglevel','quiet','-i',old,'-b:a', '320k',new])
@@ -93,13 +101,13 @@ class common():
                         if z == "1" or z == "flac" or z == "f":
                             track_name = title+" - "+artist+".flac"
                             track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                            print(f" Converting the audio format to flac")
+                            print(f"Converting the audio format to flac")
                             self.convert(i, track_name, albart, flac=True)
 
                         else:
                             track_name = title+" - "+artist+".mp3"
                             track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                            print(f" Converting the audio format to mp3")
+                            print(f"Converting the audio format to mp3")
                             self.convert(i, track_name, albart)
 
                 elif sys.platform=='linux' or os.name=='posix':
@@ -108,13 +116,13 @@ class common():
                         if z == "1" or z == "flac" or z == "f":
                             track_name = title+" - "+artist+".flac"
                             track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
-                            print(f" Converting the audio format to flac")
+                            print(f"Converting the audio format to flac")
                             self.convert(i, track_name, albart, flac=True)
                         
                         else:
                             track_name = title+" - "+artist+".mp3"
                             track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
-                            print(f" Converting the audio format to mp3")
+                            print(f"Converting the audio format to mp3")
                             self.convert(i, track_name, albart)
 
             for i in os.listdir():
@@ -135,12 +143,12 @@ class common():
 
                         if z == "1" or z == "flac" or z == "f":
                             track_name = name[:ind1]+".flac"
-                            print(f" Converting the audio format to flac")
+                            print(f"Converting the audio format to flac")
                             self.convert(i, track_name, albart, flac=True)
 
                         else:
                             track_name = name[:ind1]+".mp3"
-                            print(f" Converting the audio format to mp3")
+                            print(f"Converting the audio format to mp3")
                             self.convert(i, track_name, albart)
 
             for i in os.listdir():
