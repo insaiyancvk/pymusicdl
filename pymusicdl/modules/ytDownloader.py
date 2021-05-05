@@ -198,7 +198,7 @@ class yt_downloader():
             elif sys.platform=='linux' or os.name=='posix':
                 os.system("clear")
             Console().print("[bold][green]Downloaded songs:[/green][/bold]")
-            Console().print(Columns([Panel(user+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
+            Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
             cm.download_song(i,"",'',z)
             time.sleep(1)
         downloaded_songs = len(os.listdir())
