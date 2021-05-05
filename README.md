@@ -26,8 +26,6 @@ curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-p
 
 ## Running the code:
 
-* Make a `musicdl.py` file and add the above code.
-
 * If you are on linux you can place that file in `~/.local/bin` and run `python3 musicdl.py` in terminal. You might find the following code helpful.
 ```
 cat > musicdl.py
@@ -51,12 +49,12 @@ pip install pymusicdl -U
 
 ## Planned features:
 Will mark those if it's implemented.
-- [ ] Add flac support
+- [x] Add flac support
     - [x] Implement for single downloads
     - [x] Implement for youtube playlist download
-    - [ ] Implement for spotify downloads
-- [ ] Update the list of downloaded songs while downloading
+    - [x] Implement for spotify downloads
+- [x] Update the list of downloaded songs while downloading
     - [x] Implement for youtube playlist download
-    - [ ] Implement for spotify downloads
+    - [x] Implement for spotify downloads
 - [ ] Revamp the UI to make it interactive
-
+    - [ ] Replace menu driven inputs with tab selection system.
