@@ -1,7 +1,15 @@
 import os, subprocess, requests, json, shutil, sys
 from rich.console import Console
-from .modules.ytDownloader import yt_downloader 
-from .modules.spotify_downloader import spotify_downloader 
+
+try:
+    from .modules.ytDownloader import yt_downloader
+except:
+    from modules.ytDownloader import yt_downloader 
+    
+try:
+    from modules.spotify_downloader import spotify_downloader 
+except:    
+    from .modules.spotify_downloader import spotify_downloader 
 
 def check_ffmpeg():
     ffmpeg_available = True
@@ -13,7 +21,6 @@ def check_ffmpeg():
             subprocess.check_output(['where', 'ffmpeg'])
 
     except Exception as e:
-        print(e)
         ffmpeg_available = False
     return ffmpeg_available
     
@@ -31,6 +38,11 @@ def create_dir():
 
 path = os.getcwd()+'/'
 def main():
+    if sys.platform=='win32' or os.name=='nt':
+        os.system("cls")
+    elif sys.platform=='linux' or os.name=='posix':
+        os.system("clear")
+        
     Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
     if check_ffmpeg():
 
@@ -44,11 +56,9 @@ def main():
         except ValueError:
             Console().rule("[red]Invalid input, try 1/2/3[/red]\n",align="left",style="black")
             main()
-        yt = yt_downloader()
-        spdl = spotify_downloader()
         if ch == 1:
             try:
-                yt.download_singles()
+                yt_downloader().download_singles()
             except Exception as e:
                 print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
@@ -56,7 +66,7 @@ def main():
 
         elif ch == 2:
             try:
-                yt.download_playlist()
+                yt_downloader().download_playlist()
             except Exception as e:
                 print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
@@ -64,7 +74,7 @@ def main():
 
         elif ch == 3:
             try:
-                spdl.interface()
+                spotify_downloader().interface()
             except Exception as e:
                 print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
@@ -81,6 +91,10 @@ def main():
     else:
         print("Please install FFMPEG and add it to your environment variable")  
         if sys.platform=='win32' or os.name=='nt':
-            print("You can download FFMPEG.exe from insaiyancvk/pymusicdl repository and add it to your path")
+            print("ffmpeg.exe not found.")
+
         elif sys.platform=='linux' or os.name=='posix':
             print("Use \n\tsudo apt install ffmpeg\nif you're on debian")
+
+if __name__ == "__main__":
+    main()

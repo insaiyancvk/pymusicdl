@@ -9,33 +9,34 @@ pip install pymusicdl
 ```
 
 ## Usage:
-On Linux:
 
+**Linux:**
 ```python
 #!/usr/bin/python3
 from pymusicdl.musicDL import main
 
 main()
 ```
-On Windows:
-```python
 
-from pymusicdl.musicDL import main
-
-main()
+**Windows:**
+Run the following command in cmd
+```
+curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-python/setup.bat && setup && del setup.bat
 ```
 
 ## Running the code:
 
-* Make a `musicdl.py` file and add the above code.
-
-* For **Linux** run the following commands:
-```    
-    mv musicdl.py ~/.local/bin
-    chmod +x musicdl.py
-    musicdl.py
+* If you are on linux you can place that file in `~/.local/bin` and run `python3 musicdl.py` in terminal. You might find the following code helpful.
 ```
-* For **Windows** you can place the file in `C:/Program Files/Python3.x/Scripts` and run `py musicdl.py` in command prompt
+cat > musicdl.py
+* paste the linux code *
+* ctrl+c *
+chmod +x musicdl.py
+mv musicdl.py ~/.local/bin
+musicdl.py
+```
+
+* If you are on windows just type `musicdl` in cmd.
 
 ## Updating the package:
 ```
@@ -45,3 +46,15 @@ pip install pymusicdl -U
 * or you can use `python3 -m pip install pymusicdl -U` if you are on linux
 
 * and `py -m pip install pymusicdl -U` if you are on windows
+
+## Planned features:
+Will mark those if it's implemented.
+- [x] Add flac support
+    - [x] Implement for single downloads
+    - [x] Implement for youtube playlist download
+    - [x] Implement for spotify downloads
+- [x] Update the list of downloaded songs while downloading
+    - [x] Implement for youtube playlist download
+    - [x] Implement for spotify downloads
+- [ ] Revamp the UI to make it interactive
+    - [ ] Replace menu driven inputs with tab selection system.
