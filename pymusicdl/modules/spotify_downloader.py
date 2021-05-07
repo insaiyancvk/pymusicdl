@@ -4,6 +4,7 @@ from rich.columns import Columns
 from rich.table import Table
 from rich.panel import Panel
 from spotipy.oauth2 import SpotifyClientCredentials
+
 try:
     from .common import common
 except:
@@ -143,9 +144,9 @@ class spotify_downloader():
         table.add_column("Avaliable Codec")
         table.add_column("Bit-rate")
         table.add_column("File Size")
-        table.add_column("Opinion")
+        table.add_column("Remarks")
         table.add_row(
-            "mp3", "320kbps (fixed)","~7.3MB for 3min song","Standard codec with normal experience"
+            "mp3", "320kbps (default)","~7.3MB for 3min song","Standard codec with normal experience"
         )
         table.add_row()
         table.add_row(
@@ -154,7 +155,7 @@ class spotify_downloader():
         Console().print(table)
         Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
 
-        print('\nIf you are confused on what to select, select mp3 (which is default)')
+        print('\nIf you are confused on what to select, select mp3 (default)')
         z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
 
         for i,j,k in zip(urls, alburl, sponame):
