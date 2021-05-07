@@ -6,3 +6,4 @@ spotipy
 urllib3
 youtube-dl
 youtube-title-parse
+curses
