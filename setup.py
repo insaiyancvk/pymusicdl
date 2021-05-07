@@ -7,13 +7,13 @@ with open("README.md","r") as f:
 setuptools.setup(
     name = 'pymusicdl',
     packages = setuptools.find_packages(),
-    version = '0.0.2',
+    version = '0.0.3',
     license='MIT',
     description = 'Download spotify and youtube playlists!',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author = 'C Vamshi Krishna',
-    author_email = 'cvamshik1@gmai.com',
+    author_email = 'cvamshik1@gmail.com',
     url = 'https://github.com/insaiyancvk/pymusicdl/tree/pure-python',
     keywords = [
     'spotify', 
@@ -32,7 +32,8 @@ setuptools.setup(
       'spotipy',
       'urllib3',
       'youtube-dl',
-      'youtube-title-parse'
+      'youtube-title-parse',
+      'curses'
       ],
     classifiers=[
       'Development Status :: 5 - Production/Stable',
