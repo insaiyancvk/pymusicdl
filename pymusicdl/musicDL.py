@@ -1,4 +1,4 @@
-import os, subprocess, requests, json, shutil, sys
+import os, subprocess, sys
 from rich.console import Console
 
 try:
@@ -10,6 +10,12 @@ try:
     from modules.spotify_downloader import spotify_downloader 
 except:    
     from .modules.spotify_downloader import spotify_downloader 
+
+try:
+    from modules.picker import Picker
+except:
+    from .modules.picker import Picker
+
 
 def check_ffmpeg():
     ffmpeg_available = True
@@ -43,19 +49,20 @@ def main():
     elif sys.platform=='linux' or os.name=='posix':
         os.system("clear")
         
-    Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
     if check_ffmpeg():
 
         os.chdir(path)
-        
+
+        picker = Picker(["Download a single song","Download a YouTube Playlist","Download from Spotify"],"Select your choice using arrow keys or press q to quit", indicator=" => ")
+        picker.register_custom_handler(ord('q'), lambda picker: exit())
+        picker.register_custom_handler(ord('Q'), lambda picker: exit())
+        _,ch = picker.start()
+
+        Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
         create_dir()
         print()
-        print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
-        try:
-            ch = int(input("\n  Enter the serial number: "))
-        except ValueError:
-            Console().rule("[red]Invalid input, try 1/2/3[/red]\n",align="left",style="black")
-            main()
+        ch+=1
+        
         if ch == 1:
             try:
                 yt_downloader().download_singles()

@@ -11,6 +11,11 @@ try:
 except:
     from .common import common
 
+try:
+    from .modules.picker import Picker
+except:
+    from modules.picker import Picker
+
 class yt_downloader():
 
     def get_playlist_url(self,plLink):
@@ -37,27 +42,32 @@ class yt_downloader():
             os.chdir("singles")
 
         Console().print(Columns([Panel("\ntip:\n  [bold white]* give the name of song and the artist for better search results)\n  * you could paste the youtube video url itself if you're looking for a specific song.[/bold white]\n")]))
-        s = input("Enter the song name: ")
-        print(f"\nHere are the top 7 search results for {s}. Enter the serial number to download it.\n")
+        s = input("\nEnter the song name: ")
+        print(f"\nLoading search results for {s}...\n")
         s = s.replace(" ","+")
 
         # Get top 7 video URLs
         video_url = cm.get_url(s)
         j=1
+        names = []
         for i in video_url:
             if len(video_url) == 0:
                 print("\nThere were no results :(\nmaybe try checking the spelling of the song\n")
                 quit()
             try:
                 t = pafy.new(i)
-                print(f"{j} - {t.title}  ({t.duration})")
+                names.append(f"{j} - {t.title}  ({t.duration})")
                 j+=1
             except:
                 j+=1
                 continue
-        c = int(input("\nEnter the serial number: "))
         
-        Console().print(Columns([Panel(f"\nDownload size: [green]{int((pafy.new(video_url[c-1]).getbestaudio().get_filesize()/1048576)*100)/100} MB[/green]\n")]))
+        picker = Picker(names,"Select your choice using arrow keys or press q to quit", indicator=" => ")
+        picker.register_custom_handler(ord('q'), lambda picker: exit())
+        picker.register_custom_handler(ord('Q'), lambda picker: exit())
+        op,c = picker.start()
+        
+        Console().print(Columns([Panel(f"\nDownload size: [green]{int((pafy.new(video_url[c]).getbestaudio().get_filesize()/1048576)*100)/100} MB[/green]\n")]))
         print()
         
         print("\nWould you like an mp3 or flac conversion?\n")
@@ -68,9 +78,9 @@ class yt_downloader():
         table.add_column("Avaliable Codec")
         table.add_column("Bit-rate")
         table.add_column("File Size")
-        table.add_column("Opinion")
+        table.add_column("Remarks")
         table.add_row(
-            "mp3", "320kbps (fixed)","~7.3MB for 3min song","Standard codec with normal experience"
+            "mp3", "320kbps (default)","~7.3MB for 3min song","Standard codec with normal experience"
         )
         table.add_row()
         table.add_row(
@@ -79,21 +89,27 @@ class yt_downloader():
         Console().print(table)
         Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
 
-        print('\nIf you are confused on what to select, select mp3 (which is default)')
+        print('\nIf you are confused on what to select, select mp3 (default)')
         z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
 
-        cm.download_song(video_url[c-1],'','',z)
+        cm.download_song(video_url[c],'','',z)
         print("\n\n")
-        Console().print(Columns([Panel(f"\n    Your song is downloaded in \"[bold]/musicDL downloads/singles[/bold]\" folder on desktop    \n")]))
+        Console().print(Columns([Panel(f"\n    Your song is downloaded in \"[bold cyan]/musicDL downloads/singles[/bold cyan]\" folder on desktop    \n")]))
         print("\n\n")
-        op = input("Enter:\n  1 - open the folder where the song is downloaded\n  2 - open the song that's downloaded\n  3 - exit : ")
-        if op == '1':
+        time.sleep(3)
+
+        picker = Picker(["Open the song directory","Open the song itself"],"Select your choice using arrow keys or press q to quit", indicator=" => ")
+        picker.register_custom_handler(ord('q'), lambda picker: 'qq')
+        picker.register_custom_handler(ord('Q'), lambda picker: 'QQ')
+        _,op = picker.start()
+
+        if op == 0:
             if sys.platform=='win32' or os.name=='nt':
                 os.startfile(".")
             elif sys.platform=='linux' or os.name=='posix':
                 subprocess.call(['xdg-open','.'])
 
-        elif op == '2':
+        elif op == 1:
             file = pafy.new(video_url[c-1]).title
             a,t = get_artist_title(file)
 
@@ -177,9 +193,9 @@ class yt_downloader():
         table.add_column("Avaliable Codec")
         table.add_column("Bit-rate")
         table.add_column("File Size")
-        table.add_column("Opinion")
+        table.add_column("Remarks")
         table.add_row(
-            "mp3", "320kbps (fixed)","~7.3MB for 3min song","Standard codec with normal experience"
+            "mp3", "320kbps (default)","~7.3MB for 3min song","Standard codec with normal experience"
         )
         table.add_row()
         table.add_row(
@@ -188,7 +204,7 @@ class yt_downloader():
         Console().print(table)
         Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
 
-        print('\nIf you are confused on what to select, select mp3 (which is default)')
+        print('\nIf you are confused on what to select, select mp3 (default)')
         z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
 
         total_songs = len(plLinks)
