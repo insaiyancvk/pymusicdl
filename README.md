@@ -56,5 +56,5 @@ Will mark those if it's implemented.
 - [x] Update the list of downloaded songs while downloading
     - [x] Implement for youtube playlist download
     - [x] Implement for spotify downloads
-- [ ] Revamp the UI to make it interactive
-    - [ ] Replace menu driven inputs with tab selection system.
+- [x] Revamp the UI to make it interactive
+    - [x] Replace menu driven inputs with tab selection system.
