@@ -1,29 +1,35 @@
-Download youtube playlist, spotify playlist/album or a single song.
+# Features
+* Download single song
+* Download Youtube Playlist
+* Download Spotify playlist/album
 
 # Setup
 
-## Installation:
+## Installation and usage:
+
+### **Windows:**
+
+* Run the following command in Command prompt
 
 ```
-pip install pymusicdl
+curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-python/setup.bat && setup && del setup.bat
 ```
 
-## Usage:
+* Everytime you want to download music just type `musicdl` in cmd :)
 
-**Linux:**
+**Note:**
+* Make sure Python is added to your Path.
+    * You can check it by typing `py --version` in cmd.
+* Make sure PIP is added to your Path.
+    * You can check it by typing `pip --version` or `py -m pip --version` in cmd.
+
+### **Linux:**
 ```python
 #!/usr/bin/python3
 from pymusicdl.musicDL import main
 
 main()
 ```
-
-**Windows:**
-Run the following command in cmd
-```
-curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-python/setup.bat && setup && del setup.bat
-```
-
 ## Running the code:
 
 * If you are on linux you can place that file in `~/.local/bin` and run `python3 musicdl.py` in terminal. You might find the following code helpful.
@@ -35,8 +41,6 @@ chmod +x musicdl.py
 mv musicdl.py ~/.local/bin
 musicdl.py
 ```
-
-* If you are on windows just type `musicdl` in cmd.
 
 ## Updating the package:
 ```
