@@ -1,20 +1,8 @@
 import os, subprocess, sys
 from rich.console import Console
-
-try:
-    from .modules.ytDownloader import yt_downloader
-except:
-    from modules.ytDownloader import yt_downloader 
-    
-try:
-    from modules.spotify_downloader import spotify_downloader 
-except:    
-    from .modules.spotify_downloader import spotify_downloader 
-
-try:
-    from modules.picker import Picker
-except:
-    from .modules.picker import Picker
+from .modules.ytDownloader import yt_downloader
+from .modules.spotify_downloader import spotify_downloader 
+from .modules.picker import Picker
 
 
 def check_ffmpeg():

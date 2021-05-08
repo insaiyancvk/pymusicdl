@@ -5,16 +5,8 @@ from rich.console import Console
 from rich.columns import Columns
 from rich.table import Table
 from rich.panel import Panel
-
-try:
-    from common import common
-except:
-    from .common import common
-
-try:
-    from .modules.picker import Picker
-except:
-    from modules.picker import Picker
+from .common import common
+from .modules.picker import Picker
 
 class yt_downloader():
 

@@ -4,11 +4,7 @@ from rich.columns import Columns
 from rich.table import Table
 from rich.panel import Panel
 from spotipy.oauth2 import SpotifyClientCredentials
-
-try:
-    from .common import common
-except:
-    from common import common
+from .common import common
 
 destination = os.getcwd()+'/sec.json'
 class spotify_downloader():
