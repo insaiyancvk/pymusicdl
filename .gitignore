@@ -3,3 +3,4 @@ build/
 dist/
 pymusicdl.egg-info/
 dl/
+settings.json
