@@ -1,7 +1,11 @@
+A simple music downloading app which doesn't require any API keys.
+
+---
 # Features
 * Download single song
 * Download Youtube Playlist
 * Download Spotify playlist/album
+---
 
 # Setup
 
@@ -23,6 +27,7 @@ curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-p
 * Make sure PIP is added to your Path.
     * You can check it by typing `pip --version` or `py -m pip --version` in cmd.
 
+---
 ### **Linux:**
 
 * Install the pymusicdl.
@@ -41,24 +46,13 @@ curl -o ~/.local/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymus
 ```
 
 * Everytime you want to download music just type `musicdl` in terminal :)
-
+---
 ## Updating the package:
+
 ```
 pip install pymusicdl -U
 ```
 
-* or you can use `python3 -m pip install pymusicdl -U` if you are on linux
+* or you can use `python3 -m pip install pymusicdl -U` if you are on **linux**
 
-* and `py -m pip install pymusicdl -U` if you are on windows
-
-## Planned features:
-Will mark those if it's implemented.
-- [x] Add flac support
-    - [x] Implement for single downloads
-    - [x] Implement for youtube playlist download
-    - [x] Implement for spotify downloads
-- [x] Update the list of downloaded songs while downloading
-    - [x] Implement for youtube playlist download
-    - [x] Implement for spotify downloads
-- [x] Revamp the UI to make it interactive
-    - [x] Replace menu driven inputs with tab selection system.
+* and `py -m pip install pymusicdl -U` if you are on **windows**
