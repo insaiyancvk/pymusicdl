@@ -17,30 +17,30 @@ curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-p
 
 * Everytime you want to download music just type `musicdl` in cmd :)
 
-**Note:**
+#### **Note:**
 * Make sure Python is added to your Path.
     * You can check it by typing `py --version` in cmd.
 * Make sure PIP is added to your Path.
     * You can check it by typing `pip --version` or `py -m pip --version` in cmd.
 
 ### **Linux:**
-```python
-#!/usr/bin/python3
-from pymusicdl.musicDL import main
 
-main()
+* Install the pymusicdl.
 ```
-## Running the code:
+pip install pymusicdl
+```
+* Install FFMPEG based on the distro.
+    * Debian/Ubuntu - `sudo apt install ffmpeg`
+    * Fedora/RHEL - `sudo dnf install ffmpeg`
+    * Arch - `sudo pacman -S ffmpeg`
 
-* If you are on linux you can place that file in `~/.local/bin` and run `python3 musicdl.py` in terminal. You might find the following code helpful.
+    Referred from [ubuntupit](https://www.ubuntupit.com/how-to-install-and-use-ffmpeg-on-linux-distros-beginners-guide/)
+* Download "musicdl" to ~/.local/bin, make it executable.
 ```
-cat > musicdl.py
-* paste the linux code *
-* ctrl+c *
-chmod +x musicdl.py
-mv musicdl.py ~/.local/bin
-musicdl.py
+curl -o ~/.local/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-python/musicdl && chmod +x ~/.local/bin/musicdl && clear && echo -e '\n\nType \033[1m\033[3mmusicdl\033[0m in your terminal to download music :)\n\n'
 ```
+
+* Everytime you want to download music just type `musicdl` in terminal :)
 
 ## Updating the package:
 ```
