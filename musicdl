@@ -1,0 +1,5 @@
+#!/bin/bash
+pyscript='from pymusicdl.musicDL import main
+main()'
+
+python3 -c "$pyscript"
