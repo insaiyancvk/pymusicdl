@@ -5,8 +5,16 @@ from rich.console import Console
 from rich.columns import Columns
 from rich.table import Table
 from rich.panel import Panel
-from .common import common
-from .modules.picker import Picker
+
+try:
+    from .common import common
+except:
+    from common import common
+
+try:
+    from .picker import Picker
+except:
+    from picker import Picker
 
 class yt_downloader():
 
@@ -66,7 +74,7 @@ class yt_downloader():
         Console().rule("[bold]**** Here's a quick comparison on both codec ****[bold]", style="black", align="center")
         print("\n")
 
-        table = Table(show_header=True, header_style="bold magenta")
+        table = Table(show_header=True, header_style="bold cyan")
         table.add_column("Avaliable Codec")
         table.add_column("Bit-rate")
         table.add_column("File Size")
@@ -181,7 +189,7 @@ class yt_downloader():
         Console().rule("[bold]**** Here's a quick comparison on both codec ****[bold]", style="black", align="center")
         print("\n")
 
-        table = Table(show_header=True, header_style="bold magenta")
+        table = Table(show_header=True, header_style="bold cyan")
         table.add_column("Avaliable Codec")
         table.add_column("Bit-rate")
         table.add_column("File Size")
