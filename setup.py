@@ -6,10 +6,10 @@ with open("README.md","r") as f:
 
 setuptools.setup(
     name = 'pymusicdl',
-    packages = setuptools.find_packages(),
+    packages = ['pymusicdl'],
     version = '0.0.3',
     license='MIT',
-    description = 'Download spotify and youtube playlists!',
+    description = 'Download spotify and youtube playlists without having to enter any API keys!',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author = 'C Vamshi Krishna',
@@ -33,7 +33,7 @@ setuptools.setup(
       'urllib3',
       'youtube-dl',
       'youtube-title-parse',
-      'curses'
+      'windows-curses; platform_system=="Windows"'
       ],
     classifiers=[
       'Development Status :: 5 - Production/Stable',
