@@ -16,7 +16,8 @@ A simple music downloading app which doesn't require any API keys.
 
 <details>
    <summary><b>Note</b></summary>
-   
+
+**Read the instructions carefully**
 * Make sure Python is added to your Path.
     * You can check it by typing `py --version` in cmd.
       * Consider running this piece of code (in cmd) for installing python (if you don't have python installed): 
