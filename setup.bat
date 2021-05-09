@@ -1,6 +1,12 @@
 @echo off & py -x "%~f0" %* & goto :eof
 
-import os,sys,subprocess, requests
+import os,sys,subprocess
+try:
+    import requests
+except:
+    subprocess.call(['py', '-m', 'pip', 'install', 'requests'])
+    import requests
+    
 try:
     import pymusicdl.musicDL
 except ImportError:
