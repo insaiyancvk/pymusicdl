@@ -1,6 +1,7 @@
 @echo off & py -x "%~f0" %* & goto :eof
 
 import os,sys,subprocess
+
 try:
     import requests
 except:
