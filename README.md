@@ -5,6 +5,7 @@ A simple music downloading app which doesn't require any API keys.
 * Download single song
 * Download Youtube Playlist
 * Download Spotify playlist/album
+* Convert downloaded songs to mp3 or flac
 ---
 
 # Setup
