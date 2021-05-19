@@ -52,20 +52,10 @@ class common():
                 subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new])
                 os.remove("w"+new)
                 os.remove("thumb.png")
-            elif flac:
-                subprocess.call(['ffmpeg','-hide_banner','-loglevel', 'quiet','-i',old,'-c:a', 'flac','w'+new])
-                os.remove(old)
-                urllib.request.urlretrieve(alburl, "thumb.png")
-                print("Adding album art")
-                subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new, '-i','thumb.png','-sample_fmt', 's32', '-ar', '48000', '-disposition:v', 'attached_pic', '-vsync', '0', new])
-                os.remove("w"+new)
-                os.remove("thumb.png")
             
         else:
             if not flac:
                 subprocess.call(["ffmpeg",'-hide_banner','-loglevel','quiet','-i',old,'-b:a', '320k',new])
-            elif flac:
-                subprocess.call(["ffmpeg",'-hide_banner','-loglevel','quiet','-i',old,'-c:a', 'flac',new])
             os.remove(old)
 
     # Download the song
