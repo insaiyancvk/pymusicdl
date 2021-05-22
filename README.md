@@ -5,6 +5,7 @@ Considering you reading this, I assume you're here to download some songs 😏 W
 * Single songs.
 * YouTube Playlists (the public ones).
 * Spotify Playlists/Albums.
+* Also added auto update feature.
 
 ## Why did I make it ❓
 #### Come on, let's be honest here, we all wanted to listen to that one playlist(or album) to which we've been adding songs over a long time on spotify or youtube but we've tons of annoying ads. And we wanna listen to those songs offline too! but don't wanna pay 😬 so that's when I decided to make this app.
