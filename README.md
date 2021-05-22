@@ -31,6 +31,8 @@ Here are the libraries that I used:
     * [download executable file](https://github.com/insaiyancvk/music_downloader#get-the-stuff)
     * [install `setup.exe`](https://github.com/insaiyancvk/music_downloader#step-1-install-setupexe)
     * [run `musicDL.exe`](https://github.com/insaiyancvk/music_downloader#step-2-check-musicdlexe-inside-setup-folder)
+* OS Independent setup: check [pure-python](https://github.com/insaiyancvk/pymusicdl/tree/pure-python)
+> If the windows setup doesn't work then go for `pure-python`
 * [Dev Setup](https://github.com/insaiyancvk/music_downloader#setup-for-devs)
 * [Run the software](https://github.com/insaiyancvk/music_downloader#start-the-code)
 * [The options](https://github.com/insaiyancvk/music_downloader#so-there-are-3-options)
