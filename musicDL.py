@@ -3,6 +3,7 @@ from rich.console import Console
 from send2trash import send2trash
 from modules.ytDownloader import yt_downloader 
 from modules.spotify_downloader import spotify_downloader 
+from modules.picker import Picker
 
 ffmpeg = str(os.getcwd())+"/ffmpeg.exe"
 
@@ -51,14 +52,17 @@ def main():
                 send2trash('deleteme')
         except:
             pass
+    print()
+    os.system("cls")
+    picker = Picker(["Download a single song","Download a YouTube Playlist","Download from Spotify"],"Select your choice using arrow keys or press q to quit", indicator=" => ")
+    picker.register_custom_handler(ord('q'), lambda picker: exit())
+    picker.register_custom_handler(ord('Q'), lambda picker: exit())
+    _,ch = picker.start()
+
+    Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
     create_dir()
     print()
-    print(f"\n Enter \n\n 1 - download a song \n 2 - download a YouTube Playlist\n 3 - download from Spotify")    
-    try:
-        ch = int(input("\n  Enter the serial number: "))
-    except ValueError:
-        Console().rule("[red]Invalid input, try 1/2/3[/red]\n",align="left",style="black")
-        main()
+    ch+=1
     yt = yt_downloader(ffmpeg)
     spdl = spotify_downloader(ffmpeg)
     if ch == 1:

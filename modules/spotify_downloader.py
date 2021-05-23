@@ -1,5 +1,8 @@
-import json, base64, os, requests, time, sys
+import json, base64, os, requests, time, pafy
 from rich.console import Console
+from rich.columns import Columns
+from rich.table import Table
+from rich.panel import Panel
 try:
     import spotipy 
     from spotipy.oauth2 import SpotifyClientCredentials
@@ -129,9 +132,42 @@ class spotify_downloader():
 
         self.create_PLdir(plName)
         c=1
+        data = 0.0
+        print("\nCalculating total download size...\n")
+        for i in urls:
+            data += pafy.new(i).getbestaudio().get_filesize()
+        data = int((data/1048576)*100)/100
+        
+        Console().print(Columns([Panel(f"\nDownload size: [green]{data} MB[/green]\n")]))
+        print()
+        
+        print("\nWould you like an mp3 or flac conversion?\n")
+        Console().rule("[bold]**** Here's a quick comparison on both codec ****[bold]", style="black", align="center")
+        print("\n")
+
+        table = Table(show_header=True, header_style="bold cyan")
+        table.add_column("Avaliable Codec")
+        table.add_column("Bit-rate")
+        table.add_column("File Size")
+        table.add_column("Remarks")
+        table.add_row(
+            "mp3", "320kbps (default)","~7.3MB for 3min song","Standard codec with normal experience"
+        )
+        table.add_row()
+        table.add_row(
+            "flac", "usually >800kbps (1713kbps while testing, 5x of mp3)","~39MB for 3min song","Takes fair amount of disk space but gives amazing experience"
+        )
+        Console().print(table)
+        Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
+
+        print('\nIf you are confused on what to select, select mp3 (default)')
+        z = input("\tEnter\n\tf - flac\n\tany key - mp3 : ")
+
         for i,j,k in zip(urls, alburl, sponame):
-            print(c)
-            self.ytd.download_song(i, j, k)
+            os.system("cls")
+            Console().print("[bold][green]Downloaded songs:[/green][/bold]")
+            Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
+            self.ytd.download_song(i, j, k, z)
             c+=1
 
     def interface(self):      
@@ -168,11 +204,7 @@ class spotify_downloader():
         downloaded_songs = len(os.listdir())
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
-        print("\n\n")
-        print("\t","="*100)
-        Console().print(f"\n\n\t    Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop\n\n")
-        print("\t","="*100)
-        print("\n\n")
+        Console().print(Columns([Panel(f"\n     Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop     \n")]))
         op = input("Would you like to open the the playlist? (Y/N) ")
         if op.lower() == "y":
             os.startfile(".")
