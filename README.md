@@ -1,4 +1,4 @@
-<div style="text-align:center"><img src="assets/banner.png" /></div>
+<div style="text-align:center"><img width="1000" height="325" src="assets/banner.png" /></div>
 
 
 A simple music downloading app which doesn't require any API keys.
