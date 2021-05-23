@@ -1,3 +1,6 @@
+![](assets/banner.png)
+
+
 A simple music downloading app which doesn't require any API keys.
 
 ---
@@ -7,6 +10,9 @@ A simple music downloading app which doesn't require any API keys.
 * Download Spotify playlist/album
 * Convert downloaded songs to mp3 or flac
 ---
+
+# The final result
+![https://open.spotify.com/playlist/4WtqLI6gaRFaWB4g6mDnAX](assets/downloads.jfif)
 
 # Setup
 
