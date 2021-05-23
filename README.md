@@ -1,4 +1,4 @@
-![](assets/banner.png)
+<div style="text-align:center"><img src="assets/banner.png" /></div>
 
 
 A simple music downloading app which doesn't require any API keys.
