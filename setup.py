@@ -5,7 +5,7 @@ with open("README.md","r") as f:
     long_description = f.read()
 
 setuptools.setup(
-    name = 'pymusicdl-termux',
+    name = 'pymusicdl_termux',
     packages = setuptools.find_packages(),
     version = '0.0.2',
     license='MIT',

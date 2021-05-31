@@ -4,7 +4,7 @@ echo "installing python" &&
 pkg install python && 
 echo "successfully installed python" &&
 echo "installing the termux version of pymusicdl" && 
-pip install pymusicdl-termux && 
+pip install pymusicdl_termux && 
 echo "successfully installed pymusicdl" &&
 echo "installing FFMPEG" && 
 apt install ffmpeg && 
