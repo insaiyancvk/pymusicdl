@@ -1,6 +1,5 @@
-import os, time, glob, sys, subprocess, pafy
+import os, time, pafy
 from pytube import Playlist
-from youtube_title_parse import get_artist_title
 from rich.console import Console
 from rich.columns import Columns
 from rich.table import Table
@@ -62,7 +61,7 @@ class yt_downloader():
                 j+=1
                 continue
         
-        picker = Picker(names,"Select your choice using arrow keys or press q to quit", indicator=" => ")
+        picker = Picker(names,"Use arrow keys to select\nor press q to quit", indicator=" => ")
         picker.register_custom_handler(ord('q'), lambda picker: exit())
         picker.register_custom_handler(ord('Q'), lambda picker: exit())
         op,c = picker.start()
@@ -94,49 +93,8 @@ class yt_downloader():
 
         cm.download_song(video_url[c],'','',z)
         print("\n\n")
-        Console().print(Columns([Panel(f"\n    Your song is downloaded in \"[bold cyan]/musicDL downloads/singles[/bold cyan]\" folder on desktop    \n")]))
+        Console().print(Columns([Panel(f"\n    Your song is downloaded in \"[bold cyan]/music/singles[/bold cyan]\" folder in internal storage    \n")]))
         print("\n\n")
-        time.sleep(3)
-
-        picker = Picker(["Open the song directory","Open the song itself"],"Select your choice using arrow keys or press q to quit", indicator=" => ")
-        picker.register_custom_handler(ord('q'), lambda picker: 'qq')
-        picker.register_custom_handler(ord('Q'), lambda picker: 'QQ')
-        _,op = picker.start()
-
-        if op == 0:
-            if sys.platform=='win32' or os.name=='nt':
-                os.startfile(".")
-            elif sys.platform=='linux' or os.name=='posix':
-                subprocess.call(['xdg-open','.'])
-
-        elif op == 1:
-            file = pafy.new(video_url[c-1]).title
-            a,t = get_artist_title(file)
-
-            if file+".mp3" in os.listdir():
-
-                if sys.platform=='win32' or os.name=='nt':
-                    os.startfile(file+".mp3")
-
-                elif sys.platform=='linux' or os.name=='posix':
-                    subprocess.call(['xdg-open',file+".mp3"])
-                
-            elif t+" - "+a+".mp3" in os.listdir():
-                if sys.platform=='win32' or os.name=='nt':
-                    os.startfile(t+" - "+a+".mp3")
-
-                elif sys.platform=='linux' or os.name=='posix':
-                    subprocess.call(['xdg-open',t+" - "+a+".mp3"])
-                
-            else:
-                files = glob.glob("./*")
-                song = max(files, key = os.path.getctime)
-                if sys.platform=='win32' or os.name=='nt':
-                    os.startfile(song)
-                elif sys.platform=='linux' or os.name=='posix':
-                    subprocess.call(['xdg-open',song])
-        else:
-            return
         
     
     def download_playlist(self):
@@ -205,14 +163,11 @@ class yt_downloader():
         Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
 
         print('\nIf you are confused on what to select, select mp3 (default)')
-        z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
+        z = input("\tEnter\n\tf for flac\n\tany key for mp3 : ")
 
         total_songs = len(plLinks)
         for i in plLinks:
-            if sys.platform=='win32' or os.name=='nt':
-                os.system("cls")
-            elif sys.platform=='linux' or os.name=='posix':
-                os.system("clear")
+            os.system("clear")
             Console().print("[bold][green]Downloaded songs:[/green][/bold]")
             Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
             cm.download_song(i,"",'',z)
@@ -222,14 +177,4 @@ class yt_downloader():
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
 
         print("\n\n")
-        Console().print(Columns([Panel(f"\n     Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop     \n")]))
-        print("\n\n")
-
-        op = input("Would you like to open the the playlist? (Y/N) ")
-        if op.lower() == "y":
-            if sys.platform=='win32' or os.name=='nt':
-                os.startfile(".")
-            elif sys.platform=='linux' or os.name=='posix':
-                subprocess.call(['xdg-open','.'])
-        else:
-            return
+        Console().print(Columns([Panel(f"\n     Your playlist is downloaded in \"[bold]/music/Playlists/{plName}[/bold]\" folder in internal storage     \n")]))

@@ -95,35 +95,20 @@ class common():
                 artist, title = get_artist_title(name)
 
             for i in dirs:
-                if sys.platform=='win32' or os.name=='nt':
-                    if name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_") in i:                    
-                        
-                        if z == "1" or z == "flac" or z == "f":
-                            track_name = title+" - "+artist+".flac"
-                            track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                            print(f"Converting the audio format to flac")
-                            self.convert(i, track_name, albart, flac=True)
+                
+                if name in i:
 
-                        else:
-                            track_name = title+" - "+artist+".mp3"
-                            track_name = track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-                            print(f"Converting the audio format to mp3")
-                            self.convert(i, track_name, albart)
-
-                elif sys.platform=='linux' or os.name=='posix':
-                    if name in i:
-
-                        if z == "1" or z == "flac" or z == "f":
-                            track_name = title+" - "+artist+".flac"
-                            track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
-                            print(f"Converting the audio format to flac")
-                            self.convert(i, track_name, albart, flac=True)
-                        
-                        else:
-                            track_name = title+" - "+artist+".mp3"
-                            track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
-                            print(f"Converting the audio format to mp3")
-                            self.convert(i, track_name, albart)
+                    if z == "1" or z == "flac" or z == "f":
+                        track_name = title+" - "+artist+".flac"
+                        track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
+                        print(f"Converting the audio format to flac")
+                        self.convert(i, track_name, albart, flac=True)
+                    
+                    else:
+                        track_name = title+" - "+artist+".mp3"
+                        track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
+                        print(f"Converting the audio format to mp3")
+                        self.convert(i, track_name, albart)
 
             for i in os.listdir():
                 if "_" in i:
