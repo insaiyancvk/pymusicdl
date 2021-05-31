@@ -37,7 +37,9 @@ curl -o  ~/../usr/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymu
 
 > Will make a shell script to install all the required stuff since it's tough to copy the commands and paste in a phone. So it'll be down to copying and pasting a single command
 
-* Everytime you want to download music just type `musicdl` in terminal :)
+> curl -o setup.sh https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/setup.sh && ./setup.sh
+
+* Everytime you want to download music just type `musicdl` in termux :)
 ---
 ## Updating the package:
 
@@ -45,6 +47,4 @@ curl -o  ~/../usr/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymu
 pip install pymusicdl-termux -U
 ```
 
-* or you can use `python3 -m pip install pymusicdl -U` if you are on **linux**
-
-* and `py -m pip install pymusicdl -U` if you are on **windows**
+* or you can use `python3 -m pip install pymusicdl -U` in Termux
