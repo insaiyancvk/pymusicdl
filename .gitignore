@@ -4,3 +4,4 @@ dist/
 pymusicdl.egg-info/
 dl/
 settings.json
+sec.json
