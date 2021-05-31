@@ -5,23 +5,24 @@ with open("README.md","r") as f:
     long_description = f.read()
 
 setuptools.setup(
-    name = 'pymusicdl',
+    name = 'pymusicdl-termux',
     packages = setuptools.find_packages(),
-    version = '0.0.3',
+    version = '0.0.1',
     license='MIT',
-    description = 'Download spotify and youtube playlists without having to enter any API keys!',
+    description = 'Download spotify and youtube playlists on Termux',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author = 'C Vamshi Krishna',
     author_email = 'cvamshik1@gmail.com',
-    url = 'https://github.com/insaiyancvk/pymusicdl/tree/pure-python',
+    url = 'https://github.com/insaiyancvk/pymusicdl/tree/pymusicdl-termux',
     keywords = [
     'spotify', 
     'youtube', 
     'music download',
     'music',
     'youtube download',
-    'spotify download'
+    'spotify download',
+    'termux'
     ],
     include_package_data=True,
     install_requires=[
@@ -32,8 +33,7 @@ setuptools.setup(
       'spotipy',
       'urllib3',
       'youtube-dl',
-      'youtube-title-parse',
-      'windows-curses; platform_system=="Windows"'
+      'youtube-title-parse'
       ],
     classifiers=[
       'Development Status :: 5 - Production/Stable',
