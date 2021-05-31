@@ -1,4 +1,4 @@
-import os, subprocess, sys
+import os, subprocess
 from rich.console import Console
 
 try:
