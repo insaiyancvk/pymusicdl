@@ -1,6 +1,4 @@
-# **STILL UNDER DEVELOPMENT**
-
-<div style="text-align:center"><img width="800" height="300" src="assets/banner.png" /></div>
+<div style="text-align:center"><img width="800" height="300" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/main/assets/banner.png" /></div>
 
 
 A simple music downloading app which doesn't require any API keys.

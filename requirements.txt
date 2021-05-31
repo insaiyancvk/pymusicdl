@@ -6,4 +6,3 @@ spotipy
 urllib3
 youtube-dl
 youtube-title-parse
-windows-curses; platform_system=="Windows"
