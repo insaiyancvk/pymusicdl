@@ -22,6 +22,7 @@ A simple music downloading app which doesn't require any API keys.
 
 <details>
    <summary>Detailed installation</summary>
+   
 * Install the pymusicdl.
 ```
 pip install pymusicdl-termux
