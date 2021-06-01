@@ -6,10 +6,10 @@ function download(){
 }
 cd /data/data/com.termux/files &&
 termux-setup-storage &&
-echo 'Downloading the Tape Archive file which has all permissions and files already setup\n' &&
+echo -e 'Downloading the Tape Archive file which has all permissions and files already setup\n' &&
 download 1Z1Kme61ITzQB5aBMTltnIm1F_hSZfnfS termux.tar.gz && 
 clear &&
-echo 'Setting up\n Python\nFFMPEG\n and musicdl\n' &&
+echo -e 'Setting up\n Python\nFFMPEG\n and musicdl\n' &&
 tar -zxf termux.tar.gz --recursive-unlink --preserve-permissions &&
 rm -rf termux.tar.gz &&
 clear && 
