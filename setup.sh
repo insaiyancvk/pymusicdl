@@ -1,10 +1,10 @@
 apt update &&
-echo y | apt upgrade &&
+echo -e 'y\n' | apt upgrade &&
 echo "installing python" && 
-echo y | apt install python && 
+echo -e 'y\n' | apt install python && 
 echo "successfully installed python" &&
 echo "installing FFMPEG" && 
-echo y | apt install ffmpeg &&
+echo -e 'y\n' | apt install ffmpeg &&
 echo "Downloading and setting up musicdl" && 
 curl -sS -o  ~/../usr/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/musicdl && 
 chmod +x  ~/../usr/bin/musicdl &&
