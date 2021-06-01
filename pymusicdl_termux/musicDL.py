@@ -1,5 +1,8 @@
 import os, subprocess
 from rich.console import Console
+from rich.columns import Columns
+from rich.table import Table
+from rich.panel import Panel
 
 try:
     from .modules.ytDownloader import yt_downloader
@@ -50,7 +53,8 @@ def main():
         picker.register_custom_handler(ord('Q'), lambda picker: exit())
         _,ch = picker.start()
 
-        Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
+        Console().rule("", style="black", align="center")
+        Console().print(Columns([Panel("\n[bold]Note that you can always quit the program \nusing \"ctrl+c\" shortcut [bold]")]))
         create_dir()
         print()
         
@@ -85,3 +89,4 @@ def main():
     else:
         print("Please install FFMPEG")  
         print("Use \n\tapt install ffmpeg\n")
+        subprocess.call(['apt','install','ffmpeg'])
