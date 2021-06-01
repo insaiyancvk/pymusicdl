@@ -1,7 +1,7 @@
 apt update &&
 apt upgrade &&
 echo "installing python" && 
-pkg install python && 
+apt install python && 
 echo "successfully installed python" &&
 echo "installing FFMPEG" && 
 apt install ffmpeg &&
