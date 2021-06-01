@@ -1,5 +1,4 @@
 function download(){
-  echo "https://drive.google.com/uc?export=download&id=$1"
   mkdir -p .tmp
   curl -c .tmp/$1cookies "https://drive.google.com/uc?export=download&id=$1" > .tmp/$1intermezzo.html;
   code=$(egrep -o "confirm=(.+)&amp;id=" .tmp/$1intermezzo.html | cut -d"=" -f2 | cut -d"&" -f1)
