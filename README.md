@@ -14,8 +14,10 @@ A simple music downloading app which doesn't require any API keys.
 # The final result
 
 ### Before the download starts:
-<img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/sample1.jpeg" />
-<img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/sample2.jpeg" />
+<div>
+   <img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/sample1.jpeg" />
+   <img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/sample2.jpeg" />
+</div>
 <br>
 
 ### While It's downloading
