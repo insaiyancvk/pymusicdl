@@ -12,7 +12,22 @@ A simple music downloading app which doesn't require any API keys.
 ---
 
 # The final result
->Yet to be done
+
+### Before the download starts:
+<img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/sample1.jpeg" />
+<img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/sample2.jpeg" />
+<br>
+
+### While It's downloading
+<img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/sample3.jpeg" />
+<br>
+
+### In the music player
+<img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/downloaded.jpeg" />
+<br>
+
+### And ofcourse the metadata :)
+<img height="540" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/assets/metadata.jpeg" />
 
 # Setup
 
@@ -20,6 +35,14 @@ A simple music downloading app which doesn't require any API keys.
 
 ### **Termux:**
 
+* Download Termux.
+   - If you have Android version >=7, then [click here](https://f-droid.org/repo/com.termux_113.apk) to directly download termux apk
+   - Otherwise, download [F-Droid apk](https://f-droid.org/F-Droid.apk) and install it. Then install Termux from it.
+
+* Run the below command for installing everything automatically.
+```
+curl -o setup.sh https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/setup.sh && ./setup.sh
+```
 <details>
    <summary>Detailed installation</summary>
    
@@ -36,11 +59,6 @@ apt install ffmpeg
 curl -o  ~/../usr/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/musicdl && chmod +x  ~/../usr/bin/musicdl && clear && echo -e '\n\nType \033[1m\033[3mmusicdl\033[0m in your terminal to download music :)\n\n'
 ```
 </details>
-
-* Run the command below for installing everything automatically.
-```
-curl -o setup.sh https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/setup.sh && ./setup.sh
-```
 
 * Everytime you want to download music just type `musicdl` in termux :)
 ---
