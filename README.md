@@ -43,7 +43,7 @@ A simple music downloading app which doesn't require any API keys.
 
 * Run the below command for installing everything automatically.
 ```
-curl -o setup.sh https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/setup.sh && ./setup.sh
+curl -o setup.sh https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/setup.sh && chmod +x setup.sh && ./setup.sh
 ```
 <details>
    <summary>Detailed installation</summary>
