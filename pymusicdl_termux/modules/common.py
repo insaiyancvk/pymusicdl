@@ -40,7 +40,7 @@ class common():
                     continue
             return urls
 
-    def convert(self, old, new, alburl, flac=False):
+    def convert(self, old, new, alburl, flac=False, art='', artist=''):
         """ converts any file format to .mp3 or flac with the help of ffmpeg """
         
         if self.spo:
@@ -48,16 +48,16 @@ class common():
                 subprocess.call(['ffmpeg','-hide_banner','-loglevel', 'quiet','-i',old,'-b:a', '320k','w'+new])
                 os.remove(old)
                 urllib.request.urlretrieve(alburl, "thumb.png")
-                print("Adding album art")
-                subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new])
+                print("Adding metadata")
+                subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new,'-i','thumb.png','-map','0:0','-map','1:0','-codec','copy','-id3v2_version','3','-metadata:s:v','title="Album cover"','-metadata:s:v','comment="Cover (front)"',new,'-metadata','title='+art,'-metadata','artist='+artist])
                 os.remove("w"+new)
                 os.remove("thumb.png")
             elif flac:
                 subprocess.call(['ffmpeg','-hide_banner','-loglevel', 'quiet','-i',old,'-c:a', 'flac','w'+new])
                 os.remove(old)
                 urllib.request.urlretrieve(alburl, "thumb.png")
-                print("Adding album art")
-                subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new, '-i','thumb.png','-sample_fmt', 's32', '-ar', '48000', '-disposition:v', 'attached_pic', '-vsync', '0', new])
+                print("Adding metadata")
+                subprocess.call(['ffmpeg','-hide_banner','-loglevel','quiet','-i','w'+new, '-i','thumb.png','-sample_fmt', 's32', '-ar', '48000', '-disposition:v', 'attached_pic', '-vsync', '0', new,'-metadata','title='+art,'-metadata','artist='+artist])
                 os.remove("w"+new)
                 os.remove("thumb.png")
             
@@ -71,7 +71,7 @@ class common():
     # Download the song
     def download_song(self,url, albart, sponame, z): 
         """
-        Download the song by passing the video URL as a parameter
+        Download the song by passing the video URL, albumart url, z (for flac/mp3) as parameters
         """
 
         try:
@@ -90,7 +90,7 @@ class common():
         try:
 
             if self.spo:
-                artist, title = get_artist_title(sponame)   
+                artist, title = get_artist_title(sponame)
             else:
                 artist, title = get_artist_title(name)
 
@@ -102,7 +102,7 @@ class common():
                         track_name = title+" - "+artist+".flac"
                         track_name = track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ")
                         print(f"Converting the audio format to flac")
-                        self.convert(i, track_name, albart, flac=True)
+                        self.convert(i, track_name, albart, flac=True, art=title, artist=artist)
                     
                     else:
                         track_name = title+" - "+artist+".mp3"
