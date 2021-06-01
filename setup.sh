@@ -1,10 +1,11 @@
+apt install root-repo &&
 apt update &&
-echo -e 'y\n' | apt upgrade &&
+apt upgrade &&
 echo "installing python" && 
-echo -e 'y\n' | apt install python && 
+apt install python && 
 echo "successfully installed python" &&
 echo "installing FFMPEG" && 
-echo -e 'y\n' | apt install ffmpeg &&
+apt install ffmpeg &&
 echo "Downloading and setting up musicdl" && 
 curl -sS -o  ~/../usr/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/musicdl && 
 chmod +x  ~/../usr/bin/musicdl &&
