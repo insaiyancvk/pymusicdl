@@ -1,21 +1,13 @@
-<<<<<<< HEAD:pymusicdl/modules/spotify_downloader.py
-import json, base64, os, requests, time, sys, subprocess, spotipy, pafy
-=======
-import json, base64, os, requests, time, pafy
->>>>>>> e559bf37772054d0eea20862838b878ed6bf8eaa:modules/spotify_downloader.py
+import json, base64, os, requests, time, pafy, sys
 from rich.console import Console
 from rich.columns import Columns
 from rich.table import Table
 from rich.panel import Panel
-<<<<<<< HEAD:pymusicdl/modules/spotify_downloader.py
-from spotipy.oauth2 import SpotifyClientCredentials
-=======
 try:
     import spotipy 
     from spotipy.oauth2 import SpotifyClientCredentials
 except ImportError:
     print("Install spotipy library using 'pip install spotipy'")
->>>>>>> e559bf37772054d0eea20862838b878ed6bf8eaa:modules/spotify_downloader.py
 
 try:
     from .common import common
@@ -168,20 +160,10 @@ class spotify_downloader():
         Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
 
         print('\nIf you are confused on what to select, select mp3 (default)')
-<<<<<<< HEAD:pymusicdl/modules/spotify_downloader.py
-        z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
-
-        for i,j,k in zip(urls, alburl, sponame):
-            if sys.platform=='win32' or os.name=='nt':
-                os.system("cls")
-            elif sys.platform=='linux' or os.name=='posix':
-                os.system("clear")
-=======
         z = input("\tEnter\n\tf - flac\n\tany key - mp3 : ")
 
         for i,j,k in zip(urls, alburl, sponame):
             os.system("cls")
->>>>>>> e559bf37772054d0eea20862838b878ed6bf8eaa:modules/spotify_downloader.py
             Console().print("[bold][green]Downloaded songs:[/green][/bold]")
             Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
             self.ytd.download_song(i, j, k, z)
