@@ -13,6 +13,6 @@ echo -e 'Setting up\n Python\n FFMPEG\n and musicdl\n' &&
 tar -zxf termux.tar.gz --recursive-unlink --preserve-permissions &&
 rm -rf termux.tar.gz &&
 clear && 
-echo -e '\n\nType \033[1m\033[3mmusicdl\033[0m in your terminal to download music :)\n\n' &&
+echo -e '\n\nType \033[1m"musicdl"\033[0m in \033[1mTermux\033[0m to download music :)\n\n' &&
 cd &&
 rm setup.sh
