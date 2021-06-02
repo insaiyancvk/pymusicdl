@@ -7,6 +7,7 @@ echo "successfully installed python" &&
 echo "installing FFMPEG" && 
 apt install ffmpeg &&
 echo "Downloading and setting up musicdl" && 
+pip install pymusicdl_termux &&
 curl -sS -o  ~/../usr/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/musicdl && 
 chmod +x  ~/../usr/bin/musicdl &&
 termux-setup-storage &&
