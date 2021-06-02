@@ -37,7 +37,8 @@ A simple music downloading app which doesn't require any API keys.
 
 ### **Termux:**
 
-* Download Termux.
+* Download Termux. 
+   > **DO NOT DOWNLOAD IT FROM PLAYSTORE**, for more info check [this](https://www.xda-developers.com/termux-terminal-linux-google-play-updates-stopped/)
    - If you have Android version >=7, then [click here](https://f-droid.org/repo/com.termux_113.apk) to directly download termux apk
    - Otherwise, download [F-Droid apk](https://f-droid.org/F-Droid.apk) and install it. Then install Termux from it.
 
