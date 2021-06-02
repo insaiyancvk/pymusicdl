@@ -89,7 +89,7 @@ class yt_downloader():
         Console().rule("\n[bold]Note: this step [red]does not use internet[/red] [bold]\n", style="black", align="center")
 
         print('\nIf you are confused on what to select, select mp3 (default)')
-        z = input("\tEnter\n\t1/flac/f - flac\n\tany key - mp3 : ")
+        z = input("\tEnter\n\tf for flac\n\tany key for mp3 : ")
 
         cm.download_song(video_url[c],'','',z)
         print("\n\n")
