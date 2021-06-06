@@ -18,7 +18,9 @@ A simple music downloading app which doesn't require any API keys.
 
 ## Installation and usage:
 
-### **Windows:**
+<br>
+<details>
+   <summary><b>Windows</b></summary>
 
 <details>
    <summary><b>Note</b></summary>
@@ -46,9 +48,11 @@ curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-p
 ```
 
 * Everytime you want to download music just type `musicdl` in cmd :)
+</details>
+<br>
 
----
-### **Linux:**
+<details>
+   <summary><b>Linux</b></summary>
 
 * Install the pymusicdl.
 ```
@@ -66,7 +70,38 @@ curl -o ~/.local/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymus
 ```
 
 * Everytime you want to download music just type `musicdl` in terminal :)
+</details>
+<br>
+
+<details>
+   <summary><b>Android</b></summary>
+<br>
+
+[Check this pymusicdl-termux for sample images](https://github.com/insaiyancvk/pymusicdl/tree/pymusicdl-termux)
+
+* Download Termux. 
+   > **DO NOT DOWNLOAD IT FROM PLAYSTORE**, for more info check [here](https://www.xda-developers.com/termux-terminal-linux-google-play-updates-stopped/)
+   - If you have Android version >=7, then [click here](https://f-droid.org/repo/com.termux_113.apk) to directly download termux apk
+   - Otherwise, download [F-Droid apk](https://f-droid.org/F-Droid.apk) and install it. Then install Termux from it.
+
+* Run the below command for installing everything automatically.
+```
+curl -sS -o setup.sh https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pymusicdl-termux/setup.sh && chmod +x setup.sh && ./setup.sh
+```
+
+* Everytime you want to download music just type `musicdl` in termux :)
 ---
+## Updating the package:
+
+```
+pip install pymusicdl_termux -U
+```
+
+* or you can use `python3 -m pip install pymusicdl -U` in Termux
+</details>
+
+<br>
+
 ## Updating the package:
 
 ```
