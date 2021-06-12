@@ -1,4 +1,4 @@
-<div style="text-align:center"><img width="800" height="300" src="assets/banner.png" /></div>
+<div style="text-align:center"><img width="800" height="300" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/main/assets/banner.png" /></div>
 
 
 A simple music downloading app which doesn't require any API keys.
@@ -12,7 +12,7 @@ A simple music downloading app which doesn't require any API keys.
 ---
 
 # The final result
-![https://open.spotify.com/playlist/4WtqLI6gaRFaWB4g6mDnAX](assets/downloads.jfif)
+![https://open.spotify.com/playlist/4WtqLI6gaRFaWB4g6mDnAX](https://github.com/insaiyancvk/pymusicdl/raw/main/assets/downloads.jfif)
 
 # Setup
 
