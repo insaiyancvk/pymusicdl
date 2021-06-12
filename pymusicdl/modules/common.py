@@ -40,7 +40,7 @@ class common():
                     continue
             return urls
 
-    def convert(self, old, new, alburl, art, artist, flac=False,):
+    def convert(self, old, new, alburl, art, artist, flac=False):
         """ converts any file format to .mp3 or flac with the help of ffmpeg """
         
         if self.spo:
