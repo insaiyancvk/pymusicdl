@@ -7,14 +7,14 @@ with open("README.md","r") as f:
 setuptools.setup(
     name = 'pymusicdl',
     packages = setuptools.find_packages(),
-    version = '0.0.3',
+    version = '0.0.4',
     license='MIT',
     description = 'Download spotify and youtube playlists without having to enter any API keys!',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author = 'C Vamshi Krishna',
     author_email = 'cvamshik1@gmail.com',
-    url = 'https://github.com/insaiyancvk/pymusicdl/tree/pure-python',
+    url = 'https://github.com/insaiyancvk/pymusicdl/',
     keywords = [
     'spotify', 
     'youtube', 
