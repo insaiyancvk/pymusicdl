@@ -44,7 +44,7 @@ A simple music downloading app which doesn't require any API keys.
 * Run the following command in Command prompt
 
 ```
-curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/pure-python/setup.bat && setup && del setup.bat
+curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/main/setup.bat && setup && del setup.bat
 ```
 
 * Everytime you want to download music just type `musicdl` in cmd :)
