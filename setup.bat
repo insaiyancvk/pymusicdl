@@ -44,9 +44,6 @@ def download_file_from_google_drive(id, destination):
     save_response_content(response, destination)   
     print("\nffmpeg downloaded\n")
 
-if sys.executable.replace("python.exe","Scripts") not in os.environ["PATH"]:
-    os.environ["PATH"] = os.environ["PATH"]+sys.executable.replace("python.exe","Scripts")
-
 os.chdir(sys.executable.replace("python.exe","/Scripts"))
 ff = False
 try:
