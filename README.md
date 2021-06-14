@@ -16,6 +16,10 @@ A simple music downloading app which doesn't require any API keys.
 
 # Setup
 
+Check it out on YouTube!
+
+<a href="https://www.youtube.com/watch?v=1_BmOtZoo1o"><img width="400" src="https://img.youtube.com/vi/1_BmOtZoo1o/maxresdefault.jpg"></a>
+
 ## Installation and usage:
 
 <br>
