@@ -173,6 +173,7 @@ class spotify_downloader():
         
         self.get_json()
         sponame = []
+        print("\n\tConnecting to spotify...\n")
         sp = self.get_credentials()
         plLink = input("\nEnter the Spotify playlist/album URL: ")
         plName = input("\nGive a name to your playlist: ")
