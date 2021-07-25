@@ -1,4 +1,4 @@
-import json, base64, os, requests, time, pafy, sys
+import json, base64, os, requests, time, pafy, sys, subprocess
 from rich.console import Console
 from rich.columns import Columns
 from rich.table import Table
@@ -86,7 +86,7 @@ class spotify_downloader():
         urls = []
         for key in tracks.keys():
             try:
-                got_url = (key+"+"+tracks[key]).replace(' ','+')
+                got_url = (key+"+audio+"+tracks[key]).replace(' ','+')
                 print(f"Fetching the details of {key} - {tracks[key]}")
                 urls.append(self.ytd.get_url(got_url)[0])
             except Exception as e:
