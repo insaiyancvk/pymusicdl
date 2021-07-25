@@ -163,7 +163,10 @@ class spotify_downloader():
         z = input("\tEnter\n\tf - flac\n\tany key - mp3 : ")
 
         for i,j,k in zip(urls, alburl, sponame):
-            os.system("cls")
+            if os.name == "nt":
+                os.system("cls")
+            elif os.name == "posix":
+                os.system("clear")
             Console().print("[bold][green]Downloaded songs:[/green][/bold]")
             Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
             self.ytd.download_song(i, j, k, z)
