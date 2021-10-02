@@ -115,3 +115,5 @@ pip install pymusicdl -U
 * or you can use `python3 -m pip install pymusicdl -U` if you are on **linux**
 
 * and `py -m pip install pymusicdl -U` if you are on **windows**
+
+### Fun fact: I did this project when I got covid :)
