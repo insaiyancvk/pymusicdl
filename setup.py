@@ -7,7 +7,7 @@ with open("README.md","r") as f:
 setuptools.setup(
     name = 'pymusicdl_termux',
     packages = setuptools.find_packages(),
-    version = '0.1.0',
+    version = '0.1.0.1',
     license='MIT',
     description = 'Download spotify and youtube playlists on Termux',
     long_description=long_description,
