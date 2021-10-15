@@ -215,7 +215,10 @@ class yt_downloader():
                 os.system("clear")
             Console().print("[bold][green]Downloaded songs:[/green][/bold]")
             Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
-            cm.download_song(i,"",'',z)
+            try:
+                cm.download_song(i,"",'',z)
+            except:
+                continue
             time.sleep(1)
         downloaded_songs = len(os.listdir())
         if total_songs-downloaded_songs!=0:
