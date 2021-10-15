@@ -130,7 +130,10 @@ class spotify_downloader():
         data = 0.0
         print("\nCalculating total download size...\n")
         for i in urls:
-            data += pafy.new(i).getbestaudio().get_filesize()
+            try:
+                data += pafy.new(i).getbestaudio().get_filesize()
+            except:
+                continue
         data = int((data/1048576)*100)/100
         
         Console().print(Columns([Panel(f"\nDownload size: [green]{data} MB[/green]\n")]))
@@ -162,7 +165,10 @@ class spotify_downloader():
             os.system("clear")
             Console().print("[bold][green]Downloaded songs:[/green][/bold]")
             Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
-            self.ytd.download_song(i, j, k, z)
+            try:
+                self.ytd.download_song(i, j, k, z)
+            except:
+                continue
             c+=1
 
     def interface(self):      
