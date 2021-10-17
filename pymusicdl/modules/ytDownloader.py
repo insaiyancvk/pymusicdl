@@ -1,4 +1,5 @@
 import os, time, glob, sys, subprocess, pafy
+# import traceback
 from pytube import Playlist
 from youtube_title_parse import get_artist_title
 from rich.console import Console
@@ -60,6 +61,8 @@ class yt_downloader():
                 j+=1
             except:
                 j+=1
+                # print(traceback.format_exc())
+                # time.sleep(2)
                 continue
         
         picker = Picker(names,"Select your choice using arrow keys or press q to quit", indicator=" => ")
@@ -179,7 +182,12 @@ class yt_downloader():
         data = 0.0
         print("\nCalculating total download size...\n")
         for i in plLinks:
-            data += pafy.new(i).getbestaudio().get_filesize()
+            try:
+                data += pafy.new(i).getbestaudio().get_filesize()
+            except:
+                # print(traceback.format_exc())
+                # time.sleep(2)
+                continue
         data = int((data/1048576)*100)/100
         
         Console().print(Columns([Panel(f"\nDownload size: [green]{data} MB[/green]\n")]))
@@ -217,7 +225,9 @@ class yt_downloader():
             Console().print(Columns([Panel(''.join(list(''.join(iz + '\n' * (N % 3 == 2) for N, iz in enumerate([ii+" " for ii in user.split()]))))+"\n[b][green]Downloaded[/green][/b]", expand=True) for user in os.listdir()]))
             try:
                 cm.download_song(i,"",'',z)
-            except:
+            except Exception:
+                # print(traceback.format_exc())
+                # time.sleep(2)
                 continue
             time.sleep(1)
         downloaded_songs = len(os.listdir())
