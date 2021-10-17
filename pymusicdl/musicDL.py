@@ -1,5 +1,9 @@
-import os, subprocess, sys
+import os, subprocess, sys, logging
+import traceback
 from rich.console import Console
+
+LOG_FILE = os.path.expanduser("~/Desktop/musicDL downloads/logger.log")
+logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
 
 try:
     from .modules.ytDownloader import yt_downloader
@@ -25,7 +29,7 @@ def check_ffmpeg():
         if sys.platform=='win32' or os.name=='nt':
             subprocess.check_output(['where', 'ffmpeg'])
 
-    except Exception as e:
+    except Exception:
         ffmpeg_available = False
     return ffmpeg_available
     
@@ -66,7 +70,9 @@ def main():
             try:
                 yt_downloader().download_singles()
             except Exception as e:
-                print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
+                logging.exception(e)
+                print(f"\n\nLooks like something went wrong :(\n{traceback.format_exc()}\n\n")
+                print("The error has been logged to logger.log file in 'musicDL downloads' on Desktop for reference")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
                 pass
 
@@ -74,7 +80,9 @@ def main():
             try:
                 yt_downloader().download_playlist()
             except Exception as e:
-                print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
+                logging.exception(e)
+                print(f"\n\nLooks like something went wrong :(\n{traceback.format_exc()}\n\n")
+                print("The error has been logged to logger.log file in 'musicDL downloads' on Desktop for reference")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
                 pass
 
@@ -82,7 +90,9 @@ def main():
             try:
                 spotify_downloader().interface()
             except Exception as e:
-                print(f"\n\nLooks like something went wrong :(\n{e}\n\n")
+                logging.exception(e)
+                print(f"\n\nLooks like something went wrong :(\n{traceback.format_exc()}\n\n")
+                print("The error has been logged to logger.log file in 'musicDL downloads' on Desktop for reference")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
                 pass
 
