@@ -1,4 +1,5 @@
 import json, base64, os, requests, time, pafy, sys, subprocess
+# import traceback
 from rich.console import Console
 from rich.columns import Columns
 from rich.table import Table
@@ -87,7 +88,7 @@ class spotify_downloader():
         for key in tracks.keys():
             try:
                 got_url = (key+"+lyrics+"+tracks[key]).replace(' ','+')
-                print(f"Fetching the details of {key} - {tracks[key]}")
+                print(f"Fetching youtube URL of {key} - {tracks[key]}")
                 urls.append(self.ytd.get_url(got_url)[0])
             except Exception as e:
                 print(f"\nCould not fetch the link for \"{key} {tracks[key]}\" because: {e}\nmaybe download it as a single")
@@ -137,6 +138,8 @@ class spotify_downloader():
             try:
                 data += pafy.new(i).getbestaudio().get_filesize()
             except:
+                # print(traceback.format_exc())
+                # time.sleep(2)
                 continue
         data = int((data/1048576)*100)/100
         
@@ -175,6 +178,8 @@ class spotify_downloader():
             try:
                 self.ytd.download_song(i, j, k, z)
             except:
+                # print(traceback.format_exc())
+                # time.sleep(2)
                 continue
             c+=1
 
@@ -184,8 +189,10 @@ class spotify_downloader():
         sponame = []
         print("\n\tConnecting to spotify...\n")
         sp = self.get_credentials()
+
         plLink = input("\nEnter the Spotify playlist/album URL: ")
         plName = input("\nGive a name to your playlist: ")
+
         if "playlist" in plLink:    
             plID = self.get_id(plLink)
             tracks,alburls = self.get_playlist_tracks(sp, plID)
@@ -195,13 +202,14 @@ class spotify_downloader():
         else: 
             print("Invalid link, exiting")
             return
+
         start_time = time.time()
         Console().print(f"\n[bold]Fetching all the relevant URLs[/bold]")
         urls = self.get_yt_urls(tracks)
         end_time = time.time()
         print(f"Time taken to fetch the URLs from Youtube: %.2f secs\n"%(end_time-start_time))
-        Console().print("\n[green]Downloading the songs[/green]\n")
 
+        Console().print("\n[green]Downloading the songs[/green]\n")
         for i in tracks.keys():
             sponame.append(tracks[i]+" - "+i)
 
@@ -213,6 +221,7 @@ class spotify_downloader():
         downloaded_songs = len(os.listdir())
         if total_songs-downloaded_songs!=0:
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
+        
         Console().print(Columns([Panel(f"\n     Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop     \n")]))
         op = input("Would you like to open the the playlist? (Y/N) ")
         if op.lower() == "y":
