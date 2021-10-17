@@ -71,4 +71,4 @@ curl -o  ~/../usr/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymu
 pip install pymusicdl_termux -U
 ```
 
-* or you can use `python3 -m pip install pymusicdl -U` in Termux
+* or you can use `python3 -m pip install pymusicdl_termux -U` in Termux
