@@ -3,7 +3,7 @@ import traceback
 from rich.console import Console
 
 LOG_FILE = os.path.expanduser("~/Desktop/musicDL downloads/logger.log")
-logging.basicConfig(filename=LOG_FILE, level=logging.ERROR)
+logging.basicConfig(filename=LOG_FILE, level=logging.ERROR, force= True)
 
 try:
     from .modules.ytDownloader import yt_downloader
