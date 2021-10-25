@@ -3,6 +3,8 @@
 
 A simple music downloading app which doesn't require any API keys.
 
+Check [pymusicdl-termux](https://github.com/insaiyancvk/pymusicdl-termux) for android setup.
+
 ---
 # Features
 * Download single song
