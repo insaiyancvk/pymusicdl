@@ -2,8 +2,7 @@ import os, subprocess, sys, logging
 import traceback
 from rich.console import Console
 
-LOG_FILE = os.path.expanduser("~/Desktop/musicDL downloads/logger.log")
-logging.basicConfig(filename=LOG_FILE, level=logging.ERROR, force= True)
+
 
 try:
     from .modules.ytDownloader import yt_downloader
@@ -44,6 +43,9 @@ def create_dir():
     except:
         os.mkdir("musicDL downloads")
         os.chdir("musicDL downloads")
+    
+    LOG_FILE = os.path.expanduser("~/Desktop/musicDL downloads/logger.log")
+    logging.basicConfig(filename=LOG_FILE, level=logging.ERROR)
 
 path = os.getcwd()+'/'
 def main():
