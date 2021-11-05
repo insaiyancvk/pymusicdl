@@ -43,9 +43,6 @@ def create_dir():
     except:
         os.mkdir("musicDL downloads")
         os.chdir("musicDL downloads")
-    
-    LOG_FILE = os.path.expanduser("~/Desktop/musicDL downloads/logger.log")
-    logging.basicConfig(filename=LOG_FILE, level=logging.ERROR)
 
 path = os.getcwd()+'/'
 def main():
@@ -65,6 +62,8 @@ def main():
 
         Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
         create_dir()
+        LOG_FILE = os.path.expanduser("~/Desktop/musicDL downloads/logger.log")
+        logging.basicConfig(filename=LOG_FILE, level=logging.ERROR)
         print()
         ch+=1
         
