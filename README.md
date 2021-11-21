@@ -1,3 +1,5 @@
+# *NOTE*: AFTER YOUTUBE REMOVED THE DISLIKE COUNT, THE CORE OF THE CODE SEEMS TO BE BROKEN. I'M REVAMPING THE BACKEND. HANG ON TIGHT TILL I RELEASE A NEW PATCH :)
+
 <div style="text-align:center"><img width="800" height="300" src="https://raw.githubusercontent.com/insaiyancvk/pymusicdl/main/assets/banner.png" /></div>
 
 
