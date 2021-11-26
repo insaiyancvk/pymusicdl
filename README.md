@@ -84,7 +84,7 @@ curl -o ~/.local/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymus
    <summary><b>Android</b></summary>
 <br>
 
-[Check this pymusicdl-termux for sample images](https://github.com/insaiyancvk/pymusicdl/tree/pymusicdl-termux)
+[Check pymusicdl-termux for sample images](https://github.com/insaiyancvk/pymusicdl-termux)
 
 * Download Termux. 
    > **DO NOT DOWNLOAD IT FROM PLAYSTORE**, for more info check [here](https://www.xda-developers.com/termux-terminal-linux-google-play-updates-stopped/)
