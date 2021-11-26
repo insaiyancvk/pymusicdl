@@ -63,7 +63,7 @@ curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/main/s
 * Install the pymusicdl.
 ```
 pip install pymusicdl
-pip install git+https://github.com/mps-youtube/pafy.git#egg=pafy
+pip install https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip
 ```
 * Install FFMPEG based on the distro.
     * Debian/Ubuntu - `sudo apt install ffmpeg`
