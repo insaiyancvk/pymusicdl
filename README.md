@@ -63,7 +63,7 @@ curl -o setup.bat https://raw.githubusercontent.com/insaiyancvk/pymusicdl/main/s
 * Install the pymusicdl.
 ```
 pip install pymusicdl
-pip install git+https://github.com/mps-youtube/pafy.git#egg=pafy
+pip install https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip
 ```
 * Install FFMPEG based on the distro.
     * Debian/Ubuntu - `sudo apt install ffmpeg`
@@ -84,7 +84,7 @@ curl -o ~/.local/bin/musicdl https://raw.githubusercontent.com/insaiyancvk/pymus
    <summary><b>Android</b></summary>
 <br>
 
-[Check this pymusicdl-termux for sample images](https://github.com/insaiyancvk/pymusicdl/tree/pymusicdl-termux)
+[Check pymusicdl-termux for sample images](https://github.com/insaiyancvk/pymusicdl-termux)
 
 * Download Termux. 
    > **DO NOT DOWNLOAD IT FROM PLAYSTORE**, for more info check [here](https://www.xda-developers.com/termux-terminal-linux-google-play-updates-stopped/)

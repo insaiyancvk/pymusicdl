@@ -11,7 +11,7 @@ except:
 try:
     import pafy
 except:
-    subprocess.call([f'{sys.executable}', '-m', 'pip', 'install', 'git+https://github.com/mps-youtube/pafy.git#egg=pafy'])
+    subprocess.call([f'{sys.executable}', '-m', 'pip', 'install', 'https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip'])
 
 try:
     import pymusicdl.musicDL
