@@ -37,7 +37,11 @@ def create_dir():
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
     """
     
-    os.chdir(os.path.expanduser("~/Desktop"))
+    if os.path.isdir(os.path.expanduser("~/Desktop")):
+        os.chdir(os.path.expanduser("~/Desktop"))
+        
+    elif os.path.isdir(os.path.expanduser("~/OneDrive/Desktop")):
+        os.chdir(os.path.expanduser("~/OneDrive/Desktop"))
     try:
         os.chdir("musicDL downloads")
     except:
