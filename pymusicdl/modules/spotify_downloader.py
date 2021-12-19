@@ -104,12 +104,17 @@ class spotify_downloader():
         offset = 0
         total = sp.playlist_tracks(plID)['total']
         while total-offset>=0:
+            
             playlist = sp.playlist_tracks(plID,offset=offset)
-            for i in range(len(playlist['items'])):
-                if len(playlist['items'][i]['track']['album']['images']) == 0:
-                    together[playlist['items'][i]['track']['name']] = [playlist['items'][i]['track']['artists'][0]['name'],'https://virginradio.co.uk/sites/virginradio.co.uk/files/song_cover/20160626/coverart_1.png']
-                else:
-                    together[playlist['items'][i]['track']['name']] = [playlist['items'][i]['track']['artists'][0]['name'],playlist['items'][i]['track']['album']['images'][1]['url']]
+            try:
+                for i in range(len(playlist['items'])):
+                    if len(playlist['items'][i]['track']['album']['images']) == 0:
+                        together[playlist['items'][i]['track']['name']] = [playlist['items'][i]['track']['artists'][0]['name'],'https://virginradio.co.uk/sites/virginradio.co.uk/files/song_cover/20160626/coverart_1.png']
+                    else:
+                        together[playlist['items'][i]['track']['name']] = [playlist['items'][i]['track']['artists'][0]['name'],playlist['items'][i]['track']['album']['images'][1]['url']]
+            except:
+                continue
+
             offset +=100
         for key in together.keys():
             tracks[key] = together[key][0]
