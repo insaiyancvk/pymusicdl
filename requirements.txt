@@ -1,4 +1,3 @@
-https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip
 pytube
 requests
 rich
@@ -6,4 +5,5 @@ spotipy
 urllib3
 youtube-dl
 youtube-title-parse
+https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip
 windows-curses; platform_system=="Windows"
