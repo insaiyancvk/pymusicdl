@@ -129,3 +129,6 @@ pip install pymusicdl -U
 * and `py -m pip install pymusicdl -U` if you are on **windows**
 
 ### Fun fact: I did this project when I got covid :)
+
+<a href="https://www.buymeacoffee.com/insaiyancvk" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
