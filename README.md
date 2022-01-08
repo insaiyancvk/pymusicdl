@@ -18,9 +18,7 @@ Check [pymusicdl-termux](https://github.com/insaiyancvk/pymusicdl-termux) for an
 
 # Setup
 
-Check it out on YouTube!
-
-<a href="https://www.youtube.com/watch?v=1_BmOtZoo1o"><img width="400" src="https://img.youtube.com/vi/1_BmOtZoo1o/maxresdefault.jpg"></a>
+~~Check it out on YouTube!~~ youtube decided to remove the video and I didn't back it up anywhere :p
 
 ## Installation and usage:
 
