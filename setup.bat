@@ -5,14 +5,14 @@ import os,sys,subprocess
 try:
     import requests
 except:
-    subprocess.call(['py', '-m', 'pip', 'install', 'requests'])
+    subprocess.call([sys.executable, '-m', 'pip', 'install', 'requests'])
     import requests
 
 try:
     import pymusicdl.musicDL
 except ImportError:
     print("pymusicdl not found. installing pymusicdl.")
-    subprocess.call(['py', '-m', 'pip', 'install', 'pymusicdl'])
+    subprocess.call([sys.executable, '-m', 'pip', 'install', 'pymusicdl'])
 
 try:
     import pafy
