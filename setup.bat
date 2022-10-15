@@ -9,15 +9,16 @@ except:
     import requests
 
 try:
-    import pafy
-except:
-    subprocess.call([f'{sys.executable}', '-m', 'pip', 'install', 'https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip'])
-
-try:
     import pymusicdl.musicDL
 except ImportError:
     print("pymusicdl not found. installing pymusicdl.")
     subprocess.call(['py', '-m', 'pip', 'install', 'pymusicdl'])
+
+try:
+    import pafy
+except:
+    subprocess.call([f'{sys.executable}', '-m', 'pip', 'install', 'https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip'])
+
 def download_file_from_google_drive(id, destination):
     def get_confirm_token(response):
         for key, value in response.cookies.items():
