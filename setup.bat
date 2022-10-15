@@ -64,7 +64,7 @@ if ff:
     download_file_from_google_drive("140PFz74Ncwb4-Ja_3s7HE6iOii3TDo4A","ffmpeg.exe")
 if "musicdl.bat" not in os.listdir():
     mdl = open(r"musicdl.bat","w+")
-    mdl.write('@echo off & py -x "%~f0" %* & goto :eof\n\nfrom pymusicdl.musicDL import main, check_ffmpeg\n\nif check_ffmpeg():\n    main()')
+    mdl.write(f'@echo off & {sys.executable} -x "%~f0" %* & goto :eof\n\nfrom pymusicdl.musicDL import main, check_ffmpeg\n\nif check_ffmpeg():\n    main()')
     mdl.close()
     os.system("cls")
     print("Type 'musicdl' in cmd to download music :)")
