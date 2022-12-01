@@ -1,8 +1,9 @@
 import os, subprocess, sys, logging
 import traceback
 from rich.console import Console
-
-
+import tkinter as tk
+from tkinter import filedialog
+from pathlib import Path
 
 try:
     from .modules.ytDownloader import yt_downloader
@@ -37,18 +38,33 @@ def create_dir():
     Creates "musicDL downloads" directory on desktop when called. Takes no parameters.
     """
     
-    if os.path.isdir(os.path.expanduser("~/Desktop")):
-        os.chdir(os.path.expanduser("~/Desktop"))
+    # if os.path.isdir(os.path.expanduser("~/Desktop")):
+    #     os.chdir(os.path.expanduser("~/Desktop"))
         
-    elif os.path.isdir(os.path.expanduser("~/OneDrive/Desktop")):
-        os.chdir(os.path.expanduser("~/OneDrive/Desktop"))
-    try:
-        os.chdir("musicDL downloads")
-    except:
-        os.mkdir("musicDL downloads")
-        os.chdir("musicDL downloads")
+    # elif os.path.isdir(os.path.expanduser("~/OneDrive/Desktop")):
+    #     os.chdir(os.path.expanduser("~/OneDrive/Desktop"))
+    # try:
+    #     os.chdir("musicDL downloads")
+    # except:
+    #     os.mkdir("musicDL downloads")
+    #     os.chdir("musicDL downloads")
+    root = tk.Tk() # create a tkinter object
+    root.attributes('-topmost',1)
+    root.withdraw() # close the pop up created by tkinter
+    
+    file_path = filedialog.askdirectory(
+        title = 'Select the download directory')
+        
+    if file_path != '':
+        os.chdir(file_path)
+    else:
+        print('Invalid path, exiting')
+        quit()
+    # TODO: Give the user a pop up menu to select a folder
 
 path = os.getcwd()+'/'
+scripts = str(Path(sys.executable).parent)+'\Scripts'
+
 def main():
     if sys.platform=='win32' or os.name=='nt':
         os.system("cls")
@@ -66,7 +82,7 @@ def main():
 
         Console().rule("\n[bold]Note that you can always quit the program using \"ctrl+c\" shortcut [bold]", style="black", align="center")
         create_dir()
-        LOG_FILE = os.path.expanduser("~/Desktop/musicDL downloads/logger.log")
+        LOG_FILE = scripts+'\LOGGER.log'
         logging.basicConfig(filename=LOG_FILE, level=logging.ERROR)
         print()
         ch+=1
@@ -77,8 +93,9 @@ def main():
             except Exception as e:
                 logging.exception(e)
                 print(f"\n\nLooks like something went wrong :(\n{traceback.format_exc()}\n\n")
-                print("The error has been logged to logger.log file in 'musicDL downloads' on Desktop for reference")
+                print(f"The error has been logged to LOGGER.log file at {scripts} for reference")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
+                # ask user if they want to open the folder
                 pass
 
         elif ch == 2:
@@ -87,7 +104,7 @@ def main():
             except Exception as e:
                 logging.exception(e)
                 print(f"\n\nLooks like something went wrong :(\n{traceback.format_exc()}\n\n")
-                print("The error has been logged to logger.log file in 'musicDL downloads' on Desktop for reference")
+                print(f"The error has been logged to LOGGER.log file in {scripts} for reference")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
                 pass
 
@@ -97,7 +114,7 @@ def main():
             except Exception as e:
                 logging.exception(e)
                 print(f"\n\nLooks like something went wrong :(\n{traceback.format_exc()}\n\n")
-                print("The error has been logged to logger.log file in 'musicDL downloads' on Desktop for reference")
+                print("The error has been logged to LOGGER.log file in {scripts} for reference")
                 print("Take a screenshort and raise an issue in github or send it to the devs\n")
                 pass
 

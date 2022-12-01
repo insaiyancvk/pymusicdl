@@ -76,6 +76,15 @@ class common():
         Download the song by passing the video URL as a parameter
         """
 
+        # Ditch pafy
+        # Use yt_dlp instead
+        '''
+        Helper code
+        options = {'format': 'bestaudio/best', 'forceprint': {}, 'print_to_file': {}}
+        ydl = yt_dlp.YoutubeDL(op)
+        info = ydl.extract_info(link, False)
+        '''
+        
         try:
             v = pafy.new(url)
         except Exception as e:
