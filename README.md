@@ -18,9 +18,7 @@ Check [pymusicdl-termux](https://github.com/insaiyancvk/pymusicdl-termux) for an
 
 # Setup
 
-Check it out on YouTube!
-
-<a href="https://www.youtube.com/watch?v=1_BmOtZoo1o"><img width="400" src="https://img.youtube.com/vi/1_BmOtZoo1o/maxresdefault.jpg"></a>
+~~Check it out on YouTube!~~ youtube decided to remove the video and I didn't back it up anywhere :p
 
 ## Installation and usage:
 
@@ -114,7 +112,7 @@ pip install pymusicdl_termux -U
 
    (run the following command in command prompt)
    
-   ``` pip uninstall pafy && pip install git+https://github.com/mps-youtube/pafy.git#egg=pafy ```
+   ``` pip uninstall pafy && pip install https://github.com/mps-youtube/pafy/archive/refs/heads/develop.zip ```
 
 ---
 
@@ -129,3 +127,6 @@ pip install pymusicdl -U
 * and `py -m pip install pymusicdl -U` if you are on **windows**
 
 ### Fun fact: I did this project when I got covid :)
+
+<a href="https://www.buymeacoffee.com/insaiyancvk" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
