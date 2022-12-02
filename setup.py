@@ -7,7 +7,7 @@ with open("README.md","r") as f:
 setuptools.setup(
     name = 'pymusicdl',
     packages = setuptools.find_packages(),
-    version = '1.0.0',
+    version = '1.1.1',
     license='MIT',
     description = 'Download spotify and youtube playlists without having to enter any API keys!',
     long_description=long_description,
@@ -32,6 +32,7 @@ setuptools.setup(
       'urllib3',
       'youtube-dl',
       'youtube-title-parse',
+      'yt-dlp',
       'windows-curses; platform_system=="Windows"'
       ],
     classifiers=[

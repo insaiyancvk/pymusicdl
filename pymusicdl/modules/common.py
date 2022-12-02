@@ -1,4 +1,4 @@
-import os, urllib.request, re, subprocess, sys, pafy, time
+import os, urllib.request, re, subprocess, sys, pafy, time, yt_dlp
 from rich.console import Console
 from youtube_title_parse import get_artist_title
 from urllib.parse import quote
@@ -75,59 +75,64 @@ class common():
         """
         Download the song by passing the video URL as a parameter
         """
-
+        
         try:
             v = pafy.new(url)
         except Exception as e:
             print(f"\nSome error occurred while fetching the details of the song : {e}\n")
             return
+        options = {'format': 'bestaudio/best'}
+        with yt_dlp.YoutubeDL(options) as ydl:
+            info = ydl.extract_info(url, False)
+            name = ydl.prepare_filename(info).replace(f" [{info['display_id']}]",'')
+            
+            check_track_name = ''
 
-        name = v.title
-        audio = v.getbestaudio()
-        check_track_name = ''
+            # ---------- GET THE PROCESSED TRACK NAME FOR CHECKING IF IT ALREADY EXISTS IN THE DIRECTORY ----------
+            try:
 
-        # ---------- GET THE PROCESSED TRACK NAME FOR CHECKING IF IT ALREADY EXISTS IN THE DIRECTORY ----------
-        try:
+                if self.spo:
+                    artist, title = get_artist_title(sponame)   
+                else:
+                    artist, title = get_artist_title(name)
 
-            if self.spo:
-                artist, title = get_artist_title(sponame)   
-            else:
-                artist, title = get_artist_title(name)
+                for i in os.listdir():
+                    if sys.platform=='win32' or os.name=='nt':
+                            
+                        check_track_name = title+" - "+artist
+                        check_track_name = check_track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
+            
+                    elif sys.platform=='linux' or os.name=='posix':
+                        check_track_name = title+" - "+artist
+                        check_track_name = check_track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ") 
+            except TypeError:
+                for i in os.listdir():
+                    if name in i:
+                        check_track_name = name[:len(i) - 1 - i[::-1].index('.')]
 
-            for i in os.listdir():
-                if sys.platform=='win32' or os.name=='nt':
-                        
-                    check_track_name = title+" - "+artist
-                    check_track_name = check_track_name.replace("\\","_").replace("/","_").replace(":","_").replace("*","_").replace("?","_").replace("\"","_").replace("<","_").replace(">","_").replace("|","_")
-         
-                elif sys.platform=='linux' or os.name=='posix':
-                    check_track_name = title+" - "+artist
-                    check_track_name = check_track_name.replace("\\"," ").replace("/"," ").replace(":"," ").replace("*"," ").replace("?"," ").replace("\""," ").replace("<"," ").replace(">"," ").replace("|"," ") 
-        except TypeError:
-            for i in os.listdir():
-                if name in i:
-                    check_track_name = name[:len(i) - 1 - i[::-1].index('.')]
+            if "_" in check_track_name:
+                check_track_name = check_track_name.replace("_"," ")
 
-        if "_" in check_track_name:
-            check_track_name = check_track_name.replace("_"," ")
+            # ----------  ----------  ----------  ----------  ----------  ----------  ----------  ----------  ---------- 
+            # CHECK IF THE TRACK EXISTS OR NOT
 
-        # ----------  ----------  ----------  ----------  ----------  ----------  ----------  ----------  ---------- 
-        # CHECK IF THE TRACK EXISTS OR NOT
+            if any(check_track_name in i for i in os.listdir()):
+                exist_track = [string for string in os.listdir() if check_track_name in string][0]
+                if ".part" not in exist_track:
+                    Console().print(f"\n[bold cyan]{name} track already exists. Skipping the track[/bold cyan]")
+                    time.sleep(1)
+                    return
+                elif ".part" in exist_track:
+                    Console().print(f"\n[bold green]{name} track is partly downloaded.[/bold green]")
 
-        if any(check_track_name in i for i in os.listdir()):
-            exist_track = [string for string in os.listdir() if check_track_name in string][0]
-            if ".part" not in exist_track:
-                Console().print(f"\n[bold cyan]{name} track already exists. Skipping the track[/bold cyan]")
-                time.sleep(1)
-                return
-            elif ".part" in exist_track:
-                Console().print(f"\n[bold green]{name} track is partly downloaded.[/bold green]")
+            # ----------  ----------   END OF CHECKING   ----------  ----------
 
-        # ----------  ----------   END OF CHECKING   ----------  ----------
+            Console().print(f"\n[bold green]Downloading {name}[/bold green]")
+            ydl.download(url)
+            os.rename(ydl.prepare_filename(info), ydl.prepare_filename(info).replace(f" [{info['display_id']}]",''))
 
-        Console().print(f"\n[bold green]Downloading {name}[/bold green]")
-        audio.download()
-
+        # audio.download()
+        
         dirs = os.listdir()
 
         # ----------  ----------   CONVERT THE DOWNLOADED TRACKS TO MP3 OR FLAC   ----------  ----------

@@ -5,3 +5,4 @@ from pymusicdl.modules import (
     ytDownloader
 )
 from pymusicdl.musicDL import main
+__version__ = "1.1.1"

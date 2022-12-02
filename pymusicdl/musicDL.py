@@ -1,8 +1,9 @@
 import os, subprocess, sys, logging
-import traceback
+import traceback, requests
 from rich.console import Console
 
-
+current_version = ""
+latest_version = requests.get(f'https://pypi.org/pypi/pymusicdl/json').json()['info']['version']
 
 try:
     from .modules.ytDownloader import yt_downloader
