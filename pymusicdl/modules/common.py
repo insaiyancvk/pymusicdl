@@ -1,4 +1,4 @@
-import os, urllib.request, re, subprocess, sys, pafy, time, yt_dlp
+import os, urllib.request, re, subprocess, sys, time, yt_dlp
 from rich.console import Console
 from youtube_title_parse import get_artist_title
 from urllib.parse import quote
@@ -21,10 +21,11 @@ class common():
         video_ids = re.findall(r"watch\?v=(\S{11})", html.decode())
         
         urls = []
+
         if self.spo:
             for i in video_ids:
                 try:
-                    pafy.new(baseurl+i)
+                    # pafy.new(baseurl+i)
                     urls.append(baseurl+i)
                     return urls
                 except:
@@ -33,7 +34,7 @@ class common():
             j = 0
             for i in video_ids:
                 try:
-                    pafy.new(baseurl+i)
+                    # pafy.new(baseurl+i)
                     urls.append(baseurl+i)
                     j+=1
                     if j==7:
@@ -76,11 +77,6 @@ class common():
         Download the song by passing the video URL as a parameter
         """
         
-        try:
-            v = pafy.new(url)
-        except Exception as e:
-            print(f"\nSome error occurred while fetching the details of the song : {e}\n")
-            return
         options = {'format': 'bestaudio/best'}
         with yt_dlp.YoutubeDL(options) as ydl:
             info = ydl.extract_info(url, False)
@@ -159,7 +155,7 @@ class common():
                             print(f"Converting the audio format to mp3")
                             self.convert(i, track_name, albart, art=title, artist=artist)
 
-                elif sys.platform=='linux' or os.name=='posix':
+                elif sys.platform in ['linux', 'darwin'] or os.name=='posix':
                     if name in i:
 
                         if z == "1" or z == "flac" or z == "f":

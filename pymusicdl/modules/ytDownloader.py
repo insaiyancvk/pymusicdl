@@ -101,7 +101,14 @@ class yt_downloader():
         print("\n\n")
         time.sleep(3)
 
-        picker = Picker(["Open the song directory","Open the song itself"],"Select your choice using arrow keys or press q to quit", indicator=" => ")
+        picker = Picker(
+            [
+                "Open the song directory",
+                "Open the song itself"
+            ],
+            "Select your choice using arrow keys or press q to quit", 
+            indicator=" => "
+        )
         picker.register_custom_handler(ord('q'), lambda picker: 'qq')
         picker.register_custom_handler(ord('Q'), lambda picker: 'QQ')
         _,op = picker.start()
@@ -109,8 +116,11 @@ class yt_downloader():
         if op == 0:
             if sys.platform=='win32' or os.name=='nt':
                 os.startfile(".")
-            elif sys.platform=='linux' or os.name=='posix':
-                subprocess.call(['xdg-open','.'])
+            elif os.name=='posix':
+                if sys.platform=='linux':
+                    subprocess.call(['xdg-open','.'])
+                elif sys.platform=='darwin':
+                    subprocess.call(['open','.'])
 
         elif op == 1:
             file = pafy.new(video_url[c-1]).title
@@ -136,12 +146,16 @@ class yt_downloader():
                 song = max(files, key = os.path.getctime)
                 if sys.platform=='win32' or os.name=='nt':
                     os.startfile(song)
-                elif sys.platform=='linux' or os.name=='posix':
-                    subprocess.call(['xdg-open',song])
+
+                elif os.name=='posix':
+                    if sys.platform=='linux':
+                        subprocess.call(['xdg-open','.'])
+                    elif sys.platform=='darwin':
+                        subprocess.call(['open','.'])
         else:
             return
-        
-    
+
+
     def download_playlist(self):
         """
         Downloads a playlist of songs given the URL
@@ -179,18 +193,18 @@ class yt_downloader():
         end_time = time.time()
         print(f"\nTime taken to fetch the URLs from Youtube: %.2f secs"%(end_time-start_time))
 
-        data = 0.0
-        print("\nCalculating total download size...\n")
-        for i in plLinks:
-            try:
-                data += pafy.new(i).getbestaudio().get_filesize()
-            except:
-                # print(traceback.format_exc())
-                # time.sleep(2)
-                continue
-        data = int((data/1048576)*100)/100
+        # data = 0.0
+        # print("\nCalculating total download size...\n")
+        # for i in plLinks:
+        #     try:
+        #         data += pafy.new(i).getbestaudio().get_filesize()
+        #     except:
+        #         # print(traceback.format_exc())
+        #         # time.sleep(2)
+        #         continue
+        # data = int((data/1048576)*100)/100
         
-        Console().print(Columns([Panel(f"\nDownload size: [green]{data} MB[/green]\n")]))
+        # Console().print(Columns([Panel(f"\nDownload size: [green]{data} MB[/green]\n")]))
         print()
         
         print("\nWould you like an mp3 or flac conversion?\n")
@@ -235,14 +249,16 @@ class yt_downloader():
             print(f"\n{total_songs-downloaded_songs}/{total_songs} songs were not downloaded due to some error")
 
         print("\n\n")
-        Console().print(Columns([Panel(f"\n     Your playlist is downloaded in \"[bold]/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop     \n")]))
+        Console().print(Columns([Panel(f"\n     Your playlist is downloaded in \"[bold]Desktop/musicDL downloads/Playlists/{plName}[/bold]\" folder on desktop     \n")]))
         print("\n\n")
 
         op = input("Would you like to open the the playlist? (Y/N) ")
         if op.lower() == "y":
             if sys.platform=='win32' or os.name=='nt':
                 os.startfile(".")
-            elif sys.platform=='linux' or os.name=='posix':
+            elif sys.platform=='linux' and os.name=='posix':
                 subprocess.call(['xdg-open','.'])
+            elif sys.platform == "darwin" and os.name == "posix":
+                subprocess.call(['open', '.'])
         else:
             return
